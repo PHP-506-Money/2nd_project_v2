@@ -3,6 +3,7 @@
 @section('title', 'Registration')
 
 @section('contents')
+    <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     <h1>REGISTRATION</h1>
     <p></p>
     @include('layout.errorsvalidate')
@@ -28,19 +29,28 @@
         <label for="phone">휴대폰</label>
         <input type="tel" name="phone" id="phone">
         <p></p>
-        <label for="character">나의 모핀이 선택</label>
-            <div>
+            <div id="menu">
+                <label for="character">나의 모핀이 선택</label>
                 <div>
-                    <img src="{{ asset('/img/rabbit.png') }}" alt="rabbit">
-                    <input type="radio" name="character" value="1">        
+                    <span id="chara">
+                        <img src="{{ asset('/img/rabbit.png') }}" alt="rabbit">
+                    </span>
+                    <p class="arrow_box">저를 데려가주세요!</p>
+                    <input type="radio" name="character" value="1">
                 </div>
                 <div>
-                    <img src="{{ asset('/img/penguin.png') }}" alt="penguin">
-                    <input type="radio" name="character" value="2">        
+                    <span id="chara">
+                        <img src="{{ asset('/img/penguin.png') }}" alt="penguin">
+                    </span>
+                    <p class="arrow_box">날 데려가면 좋을걸?</p>
+                    <input type="radio" name="character" value="2">
                 </div>
                 <div>
-                    <img src="{{ asset('/img/panda.png') }}" alt="panda">
-                    <input type="radio" name="character" value="3">        
+                    <span id="chara">
+                        <img src="{{ asset('/img/panda.png') }}" alt="panda">
+                    </span>
+                    <p class="arrow_box">날 데려가라!</p>
+                    <input type="radio" name="character" value="2">
                 </div>
             </div>
         <p></p>
