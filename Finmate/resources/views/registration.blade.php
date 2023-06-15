@@ -4,8 +4,6 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
-    <h1>REGISTRATION</h1>
-    <p></p>
     @include('layout.errorsvalidate')
     <form action="{{route('users.registration.post')}}" method="post">
         @csrf
@@ -30,7 +28,7 @@
         <input type="tel" name="phone" id="phone">
         <p></p>
             <div id="menu">
-                <label for="character">나의 모핀이 선택</label>
+                <label for="moffintype">나의 모핀이 선택</label>
                 <div>
                     <span id="chara">
                         <img src="{{ asset('/img/rabbit.png') }}" alt="rabbit">
