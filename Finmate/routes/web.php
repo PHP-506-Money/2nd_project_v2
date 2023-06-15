@@ -35,5 +35,5 @@ Route::post('/users/loginpost', [UserController::class, 'loginpost'])->name('use
 Route::get('/users/registration', [UserController::class, 'registration'])->name('users.registration');
 Route::post('/users/registrationpost', [UserController::class, 'registrationpost'])->name('users.registration.post');
 
-Route::get('/users/findid', [UserController::class, 'idsearch'])->name('users.findid');
-Route::get('/users/findpw', [UserController::class, 'pwsearch'])->name('users.findpw');
+Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
+Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
