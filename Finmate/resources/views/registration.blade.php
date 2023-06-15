@@ -28,7 +28,22 @@
         <label for="phone">휴대폰</label>
         <input type="tel" name="phone" id="phone">
         <p></p>
-
+        <label for="character">나의 모핀이 선택</label>
+            <div>
+                <div>
+                    <img src="{{ asset('/img/rabbit.png') }}" alt="rabbit">
+                    <input type="radio" name="character" value="1">        
+                </div>
+                <div>
+                    <img src="{{ asset('/img/penguin.png') }}" alt="penguin">
+                    <input type="radio" name="character" value="2">        
+                </div>
+                <div>
+                    <img src="{{ asset('/img/panda.png') }}" alt="panda">
+                    <input type="radio" name="character" value="3">        
+                </div>
+            </div>
+        <p></p>
         <button type="submit">가입하기</button>
     </form>
 @endsection
