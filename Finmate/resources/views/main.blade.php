@@ -11,11 +11,13 @@
 <section>
     <div class="box">
         <div class="text-box">
-            <h2>자산관리</h2>
+            <h2>예산관리</h2>
 
-            <div class="subtitle">나도 몰랐던내 돈이 있다고?<br>
-                핀메이트 하나로 끝나는 내 자산 관리!<br>
-                계좌, 카드, 주식까지 한눈에 다 보여드릴게요.</div>
+            <div class="subtitle">오늘은 얼마까지 쓸 수 있지?<br>
+                핀메이트에서 예산을 설정하세요.<br>
+                월 수입과 지출을 입력 하면<br>
+                모핀이가 일일 예산을 계산해줄게요!</div>
+
 
             <a href="#" class="common-btn">사용해보기</a>
 
@@ -24,23 +26,23 @@
 
     <div class="box img">
 
-        <img src="{{ asset('/img/sec1.png') }}" alt="">
+        <img src="{{ asset('/img/section1.png') }}" alt="">
     </div>
 </section>
 <section>
     <div class="box">
-        <img src="{{ asset('/img/sec2.jpg') }}" alt="">
+        <img src="{{ asset('/img/character.png') }}" alt="">
+
 
     </div>
 
     <div class="box">
         <div class="text-box">
-            <h2>가계부관리</h2>
-            <div class="subtitle">가계부 쓰기 귀찮아~<br>
-                괜찮아요, 핀메이트가 내역을 관리해주니까!<br>
-
-                입출금 내역, 카드 소비 기록 모두 자동으로 입력해줄게요.</div>
-
+            <h2>나만의 모핀이 고르기</h2>
+            <div class="subtitle">세 마리의 귀여운 동물중<br>
+                나의 모핀이를 골라보세요!<br>
+                이름도 바꿀 수 있고<br>
+                업적 포인트로 꾸며 줄 수도 있어요.</div>
             <a href="#" class="common-btn">사용해보기</a>
         </div>
     </div>
@@ -48,11 +50,15 @@
 <section>
     <div class="box">
         <div class="text-box">
-            <h2>주식관리</h2>
-            <div class="subtitle">무거운 주식 어플, 복잡한 사이트 필요없어요!<br>
-                핀메이트에서 간편하게 현재가를 검색하고<br>
+            <h2>업적시스템</h2>
+            <div class="subtitle">따분한 자산관리 어려운 자산 관리는 그만!<br>
 
-                관심 주식을 관리해보세요.</div>
+                핀메이트에서 업적을 달성하며 재미있게 관리해 보세요.<br>
+
+                업적에 따른 뱃지와 포인트를 얻을 수 있어요!<br>
+
+                업적에 따른 칭찬과 조언도 있어요!</div>
+
 
 
             <a href="#" class="common-btn">사용해보기</a>
@@ -60,7 +66,7 @@
         </div>
     </div>
     <div class="box">
-    <img src="{{ asset('/img/section2.png') }}" alt="">
+    <img src="{{ asset('/img/char1.png') }}" alt="">
 
         
     </div>
