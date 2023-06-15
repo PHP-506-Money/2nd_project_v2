@@ -1,0 +1,256 @@
+:root {
+    --main-color: #1C3879;
+    --sub-color: #FFFBF0;
+    --btn-color: #607EAA;
+    --active-color: #FF7676;
+}
+
+*{margin: 0; padding: 0; box-sizing: border-box;
+scroll-behavior: smooth;}
+
+ul, ol, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--main-color);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+header {
+    margin: 50px auto;
+    color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 150px;
+}
+
+.headerlogo {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+}
+
+.headerlogo:hover {
+    cursor: pointer;
+}
+.headerlogo img {
+    width: 100px;
+    height: 100px;
+}
+
+.headerlogo p {
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+.headerMain {
+    width: calc(80vw - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nav {
+    margin-top: 20px;
+    display: inline-flex;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    background-color: var(--main-color);
+    padding: 0 20px;
+    border-radius: 40px;
+    box-shadow: 0 10px 40px rgba(159, 162, 177, 0.8);
+}
+
+.nav-item {
+    color: var(--sub-color);
+    padding: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    margin: 0 6px;
+    z-index: 1;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-item:visited {
+    color: var(--sub-color);
+}
+
+.nav-item:before {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: var(--sub-color);
+    border-radius: 8px 8px 0 0;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.nav-item:not(.is-active):hover:before {
+    opacity: 1;
+    bottom: 0;
+}
+
+.nav-item:not(.is-active):hover {
+    color: var(--active-color);
+}
+
+.nav-indicator {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    transition: 0.4s;
+    height: 5px;
+    z-index: 1;
+    border-radius: 8px 8px 0 0;
+}
+
+
+
+footer {
+    background-color: var(--main-color);
+    color: var(--sub-color);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 80px;
+    overflow: hidden;
+}
+
+.footer-top {
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-top .footer-top-left {
+    display: flex;
+}
+
+.footer-top .footer-top-left ul li {
+    padding: 10px;
+}
+
+.footer-top .footer-top-center {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.footer-top .footer-top-right {
+    text-align: center;
+}
+
+.footer-bottom {
+    width: 100%;
+    background-color: #0E255A;
+    text-align: center;
+    padding: 30px;
+}
+
+section {
+    width: 1320px;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    color: var(--main-color);
+}
+
+section:nth-child(odd) {
+    background-color: var(--sub-color);
+}
+
+section .box {
+    width: 50%;
+    /* min-height: 650px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+}
+
+section .box .text-box {
+    text-align: left;
+}
+
+section .box .text-box h2 {
+    margin-bottom: 50px;
+}
+
+section .box .text-box .subtitle {
+    font-size: 20px;
+}
+
+section .common-btn {
+    margin-top: 50px;
+    display: inline-block;
+    width: 180px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    color: var(--sub-color);
+    text-align: center;
+    border-radius: 30px;
+    background: var(--btn-color);
+}
+
+section .common-btn:hover {
+    background: var(--active-color);
+}
+
+section .box img {
+    width: 80%;
+    height: 100%;
+}
+
+section .bottombanner {
+    width: 100%;
+}
+
+section .bottombanner img {
+    margin-top: 10px;
+    width: 70%;
+}
+
+#go-to-top {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    right: 50px;
+    bottom: 50px;
+    border-radius: 50%;
+    z-index: 500;
+    overflow: hidden;
+}
+
+#go-to-top a {
+    opacity: 0.8;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+}
