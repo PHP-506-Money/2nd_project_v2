@@ -37,3 +37,9 @@ Route::post('/users/registrationpost', [UserController::class, 'registrationpost
 
 Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
 Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
+
+//계좌
+Route::get('/Accounts/{name}/{id}', [AccountController::class, 'index']);
+Route::post('/Accounts/{name}/{id}', [AccountController::class, 'store']);
+Route::get('/Accounts/{name}/{id}/{asset}', [AccountController::class, 'show']);
+Route::post('/Accounts/{name}/{id}/{asset}', [AccountController::class, 'update']);
