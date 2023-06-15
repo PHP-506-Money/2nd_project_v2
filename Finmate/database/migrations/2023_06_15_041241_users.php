@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id('userno');
             $table->string('username',20);
             $table->string('userid',12)->unique();
-            $table->string('userpw',100);
+            $table->string('userpw',40);
             $table->string('useremail',50)->unique();
             $table->string('phone',20);
-            $table->timestamps();
-            $table->softDeletes();
             $table->char('moffintype',1);
             $table->integer('point')->default(100);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

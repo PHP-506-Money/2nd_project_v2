@@ -53,11 +53,12 @@ class UserController extends Controller
     function registrationpost(Request $req) {
         //유효성 체크
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
-            'name'      => 'regex:/^[가-힣]+$/' // regex:정규식. 한글 1자 이상 포함 및 글자 수 2~30
-            ,'id'       => 'regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만
-            ,'password' => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,20}$/' //8~20자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
-            // ,'email'    => 'email:rfc,dns'
-            ,'phone'    => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/'
+            'name'          => 'regex:/^[가-힣]+$/' // regex:정규식. 한글 1자 이상 포함 및 글자 수 2~30
+            ,'id'           => 'regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만
+            ,'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,20}$/' //8~20자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
+            ,'email'        => 'email:rfc,dns'
+            ,'phone'        => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/'
+            ,'moffintype'   => 'required'
         ]);
 
         // $data['name'] = $req->input('name'); // 밑의 방법과 동일함.
