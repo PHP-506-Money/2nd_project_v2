@@ -17,5 +17,8 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             return route('login');
         }
+        // $this->assertAuthenticated($guard = null);
+        // $this->assertGuest($guard = null);
+        // $this->assertAuthenticatedAs($user, $guard = null);
     }
 }
