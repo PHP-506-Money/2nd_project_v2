@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('accounts', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->string('userid', 12);
+            $table->integer('tranno');
+            $table->string('name',20);
+            $table->integer('balance');
         });
     }
 
