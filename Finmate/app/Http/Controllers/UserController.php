@@ -30,10 +30,10 @@ class UserController extends Controller
 
         // 유저정보 습득
         $user = User::where('userid', $req->id)->first();
-        if(!$user || !(Hash::check($req->password, $user->password))) {
-            $error = '아이디와 비밀번호를 확인해주세요.';
-            return redirect()->back()->with('error', $error);
-        }
+        // if(!$user || !(Hash::check($req->password, $user->password))) {
+        //     $error = '아이디와 비밀번호를 확인해주세요.';
+        //     return redirect()->back()->with('error', $error);
+        // }
 
         // 유저 인증작업
         Auth::login($user); // 테스트시 비활성화 하고 테스트하면 됨.
@@ -53,15 +53,22 @@ class UserController extends Controller
     function registrationpost(Request $req) {
         //유효성 체크
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
-            'name'        => 'required|regex:/^[가-힣]+$/|min:2|max:30' // regex:정규식. 한글 1자 이상 포함 및 글자 수 2~30
-            ,'email'    => 'required|email|max:100'
-            ,'password'  => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[!@#$%^*-])(?=.*[0-9]).{8,20}$/'
+            'name'          => 'regex:/^[가-힣]+$/' // regex:정규식. 한글 1자 이상 포함 및 글자 수 2~30
+            ,'id'           => 'regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만
+            ,'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,20}$/' //8~20자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
+            ,'email'        => 'email:rfc,dns'
+            ,'phone'        => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/'
+            ,'moffintype'   => 'required'
         ]);
 
         // $data['name'] = $req->input('name'); // 밑의 방법과 동일함.
-        $data['name'] = $req->name;
-        $data['email'] = $req->email;
-        $data['password'] = Hash::make($req->password);
+        $data['username'] = $req->name;
+        $data['userid'] = $req->id;
+        $data['userpw'] = Hash::make($req->password);
+        $data['useremail'] = $req->email;
+        $data['phone'] = $req->phone;
+        $data['moffintype'] = $req->moffintype;
+        
 
         $user = User::create($data); // insert. create ORM 모델
         if(!$user) {

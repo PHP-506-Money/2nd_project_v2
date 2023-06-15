@@ -36,21 +36,21 @@
                         <img src="{{ asset('/img/rabbit.png') }}" alt="rabbit">
                     </span>
                     <p class="arrow_box">저를 데려가주세요!</p>
-                    <input type="radio" name="character" value="1">
+                    <input type="radio" name="moffintype" value="1">
                 </div>
                 <div>
                     <span id="chara">
                         <img src="{{ asset('/img/penguin.png') }}" alt="penguin">
                     </span>
                     <p class="arrow_box">날 데려가면 좋을걸?</p>
-                    <input type="radio" name="character" value="2">
+                    <input type="radio" name="moffintype" value="2">
                 </div>
                 <div>
                     <span id="chara">
                         <img src="{{ asset('/img/panda.png') }}" alt="panda">
                     </span>
                     <p class="arrow_box">날 데려가라!</p>
-                    <input type="radio" name="character" value="2">
+                    <input type="radio" name="moffintype" value="3">
                 </div>
             </div>
         <p></p>
