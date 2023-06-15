@@ -5,7 +5,7 @@
  * File Name    : web.php
  * History      : v001 0613 Subin.No new
  *******************************************/
-
+use App\Http\Controllers\MofinController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +43,10 @@ Route::get('/Accounts/{name}/{id}', [AccountController::class, 'index']);
 Route::post('/Accounts/{name}/{id}', [AccountController::class, 'store']);
 Route::get('/Accounts/{name}/{id}/{asset}', [AccountController::class, 'show']);
 Route::post('/Accounts/{name}/{id}/{asset}', [AccountController::class, 'update']);
+
+//모핀
+Route::get('/mofin/{id}', [MofinController::class,'index'])->name('mofin.index');
+
+// 예산 설정
+Route::get('/budgetset',[BudgetController::class, 'setting'])->name('budget.get');
+Route::post('/budget',[BudgetController::class, 'budget'])->name('budget.post');
