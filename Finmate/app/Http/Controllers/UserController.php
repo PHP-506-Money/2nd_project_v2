@@ -30,10 +30,10 @@ class UserController extends Controller
 
         // 유저정보 습득
         $user = User::where('userid', $req->id)->first();
-        if(!$user || !(Hash::check($req->password, $user->password))) {
-            $error = '아이디와 비밀번호를 확인해주세요.';
-            return redirect()->back()->with('error', $error);
-        }
+        // if(!$user || !(Hash::check($req->password, $user->password))) {
+        //     $error = '아이디와 비밀번호를 확인해주세요.';
+        //     return redirect()->back()->with('error', $error);
+        // }
 
         // 유저 인증작업
         Auth::login($user); // 테스트시 비활성화 하고 테스트하면 됨.
