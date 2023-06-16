@@ -6,29 +6,36 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
 
     @include('layout.errorsvalidate')
-    <form action="{{route('users.registration.post')}}" method="post">
+    <form id="form" action="{{route('users.registration.post')}}" method="post">
         @csrf
-        <label for="name">이름</label>
-        <input type="text" name="name" id="name">
-        <p></p>
-        <label for="id">아이디</label>
-        <input type="text" name="id" id="id">
-        <button type="button" class="button" id="checkDuplicate" onclick="checkDuplicateButton();">중복확인</button>
-        <div id="errMsgId"></div>
-        <p></p>
-        <label for="password">비밀번호</label>
-        <input type="password" name="password" id="password">
-        <p></p>
-        <label for="passwordchk">비밀번호 확인</label>
-        <input type="password" name="passwordchk" id="passwordchk">
-        <p></p>
-        <label for="email">이메일</label>
-        <input type="email" name="email" id="email">
-        <button type="button" class="button" onclick="btn();">인증하기</button>
-        <p></p>
-        <label for="phone">휴대폰</label>
-        <input type="tel" name="phone" id="phone">
-        <p></p>
+        <div class="regist">
+            <div class="label2">
+                <label for="name">이름</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="label2">
+                <label for="id">아이디</label>
+                <input type="text" name="id" id="id">
+                <button type="button" class="button" id="checkDuplicate" onclick="checkDuplicateButton();">중복확인</button>
+                <div id="errMsgId"></div>
+            </div>
+            <div class="label2">
+                <label for="password">비밀번호</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div class="label2">
+                <label for="passwordchk">비밀번호 확인</label>
+                <input type="password" name="passwordchk" id="passwordchk">
+            </div>
+            <div class="label2">
+                <label for="email">이메일</label>
+                <input type="email" name="email" id="email">
+                <button type="button" class="button" onclick="btn();">인증하기</button>
+            </div>
+            <div class="label2">
+                <label for="phone">휴대폰</label>
+                <input type="tel" name="phone" id="phone">
+            </div>
             <div id="menu">
                 <label for="moffintype">나의 모핀이 선택</label>
                 <div>
@@ -53,8 +60,10 @@
                     <input type="radio" name="moffintype" value="3">
                 </div>
             </div>
-        <p></p>
-        <button type="submit" class="button">가입하기</button>
+            <div class="btn">
+                <button type="submit" class="button">가입하기</button>
+            </div>
+        </div>
     </form>
 
 <script src="{{ asset('/js/user.js') }}"></script>
