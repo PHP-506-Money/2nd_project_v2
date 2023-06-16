@@ -47,3 +47,67 @@
 span:hover + p.arrow_box {
     display: block;
 }
+
+#table {
+    width: 500px;
+    height: 300px;
+    background-color: var(--sub-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+label, input {
+    margin: 10px auto;
+    padding: 4px;
+    color: var(--btn-color);
+}
+
+label {
+    display: inline-block;
+	text-align: center;
+    font-weight: bold;
+}
+
+.label > label {
+    width: 80px;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+.bottom {
+    display: flex;
+}
+
+#down {
+    margin: 10px;
+    font-size: small;
+}
+
+.button {
+    background-color: var(--btn-color);
+    color: var(--sub-color);
+    border: none;
+    border-radius: 15px;
+    width: 15%;
+    height: 8%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.button:hover {
+    background-color: var(--active-color);
+}
+
+#id, #password {
+    margin: 10px;
+}
+
+.id, .password {
+    box-sizing : border-box;
+}

@@ -1,10 +1,8 @@
 @extends('layout.layout')
 
-@section('title', 'Login')
+@section('title', 'Findpw')
 
 @section('contents')
-    <h1>LOGIN</h1>
-    <p></p>
     @include('layout.errorsvalidate')
     <div>{!!session()->has('success') ? session('success') : ""!!}</div>
     <form action="" method="post">
