@@ -7,7 +7,10 @@
  *******************************************/
 use App\Http\Controllers\MofinController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AssetController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Asset;
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +42,7 @@ Route::get('/users/findid', [UserController::class, 'findid'])->name('users.find
 Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
 
 //계좌
-Route::get('/Accounts/{name}/{id}', [AccountController::class, 'index']);
-Route::post('/Accounts/{name}/{id}', [AccountController::class, 'store']);
-Route::get('/Accounts/{name}/{id}/{asset}', [AccountController::class, 'show']);
-Route::post('/Accounts/{name}/{id}/{asset}', [AccountController::class, 'update']);
+Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
 
 //모핀
 Route::get('/mofin/{id}', [MofinController::class,'index'])->name('mofin.index');

@@ -7,5 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asset extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'assetno';
+    protected $fillable = [
+        'assetname',
+        'balance'
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'userid'
+    ];
+
 }
