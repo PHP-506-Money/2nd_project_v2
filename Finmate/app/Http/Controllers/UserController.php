@@ -84,17 +84,12 @@ class UserController extends Controller
             ->with('success', '회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.');
     }
 
-    // // 아이디 중복 체크
-    // function checkDuplicate(Request $req)
-    // {
-    //     // 유저 정보 습득
-    //     $user = User::where('userid', $req->id)->first();
-    //     if ($user) {
-    //         return response()->json(['message' => '이미 가입된 ID입니다.'], 409);
-    //     }
-    //     return response()->json(['message' => '사용 가능한 ID입니다.']);
-    // }
-
+    // 로그아웃
+    function logout() {
+        Session::flush(); // 세션 파기
+        Auth::logout(); // 로그아웃
+        return redirect()->route('users.login');
+    }
 
     function findid() {
         return view('findid');

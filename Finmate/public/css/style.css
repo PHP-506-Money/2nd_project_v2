@@ -4,7 +4,7 @@ a {
 }
 
 #menu {
-    margin: 40px auto;
+    margin: 20px auto;
     text-align: center;
 }
 
@@ -63,6 +63,19 @@ span:hover + p.arrow_box {
     align-items: center;
 }
 
+#form {
+    width: 700px;
+    height: 700px;
+    background-color: var(--sub-color);
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.regist {
+    /* text-align: center; */
+}
 
 label, input {
     margin: 10px auto;
@@ -78,6 +91,11 @@ label {
 
 .label > label {
     width: 80px;
+}
+
+.label2 > label {
+    width: 120px;
+    vertical-align: middle;
 }
 
 input {
@@ -99,8 +117,8 @@ input {
     color: var(--sub-color);
     border: none;
     border-radius: 15px;
-    width: 15%;
-    height: 8%;
+    width: 88px;
+    height: 28px;
     margin-top: 15px;
     margin-bottom: 30px;
     cursor: pointer;
@@ -110,10 +128,15 @@ input {
     background-color: var(--active-color);
 }
 
-#id, #password {
+#id, #password, #passwordchk, #name, #email, #phone {
     margin: 10px;
 }
 
 .id, .password {
     box-sizing : border-box;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
 }
