@@ -22,4 +22,6 @@ class Asset extends Model
         'userid'
     ];
 
+    public $timestamps = false;
+
 }
