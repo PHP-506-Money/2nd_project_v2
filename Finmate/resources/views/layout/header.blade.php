@@ -7,11 +7,14 @@
         <h1>@yield('header', 'header')</h1>
         @auth
         <nav class="nav">
-            <a href="" class="nav-item is-active" active-color="#FF7676">main</a>
-            <a href="" class="nav-item is-active" active-color="#FF7676">sign up</a>
-            <a href="" class="nav-item is-active" active-color="#FF7676">login</a>
+            <a href="{{ route('main') }}" class="nav-item {{ Request::is('main') ? 'is-active' : '' }}" active-color="#FF7676">자산</a>
+
+
+            <a href="{{ route('users.registration') }}" class="nav-item {{ Request::is('users/registration') ? 'is-active' : '' }}" active-color="#FF7676">sign up</a>
+            <a href="{{ route('users.login') }}" class="nav-item {{ Request::is('users/login') ? 'is-active' : '' }}" active-color="#FF7676">logout</a>
             <span class="nav-indicator"></span>
         </nav>
+
         @endauth
 
         @guest

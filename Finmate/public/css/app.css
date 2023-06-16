@@ -254,3 +254,48 @@ section .bottombanner img {
     height: 100%;
     background-color: var(--main-color);
 }
+
+.scriptCalendar {
+    text-align: center;
+    background-color: var(--sub-color);
+    color: var(--main-color);
+}
+
+.scriptCalendar>thead>tr>td {
+    width: 50px;
+    height: 50px;
+}
+
+.scriptCalendar>thead>tr:first-child>td {
+    font-weight: bold;
+}
+
+.scriptCalendar>thead>tr:last-child>td {
+    background-color: var(--main-color);
+    color: var(--sub-color);
+}
+
+.scriptCalendar>tbody>tr>td {
+    width: 50px;
+    height: 50px;
+}
+
+.calendarBtn {
+    cursor: pointer;
+}
+
+.listbox {
+    background-color: var(--sub-color);
+    color: var(--main-color);
+    margin: 10px;
+}
+
+.listbox ul {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--main-color);
+    padding: 10px;
+    
+}
+
+

@@ -8,8 +8,6 @@
 
 @section('contents')
 <div>
-    <h3>■ JavaScript 캘린더</h3>
-    <br />
     <table class="scriptCalendar">
         <thead>
             <tr>
@@ -34,54 +32,21 @@
     </table>
 </div>
 
-@foreach($assets as $asset)
 
-    <ul>
-        <li>자산명</li>
-        <li>{{$asset->assetname}}</li>
+<div class="listbox">
+    @foreach($assets as $asset)
 
-    </ul>
-    <ul>
-        <li>잔액</li>
-        <li>{{$asset->balance}}</li>
+        <ul>
+            <li>자산명</li>
+            <li>{{$asset->assetname}}</li>
+            <li>잔액</li>
+            <li>{{$asset->balance}}</li>
+        </ul>
 
-    </ul>
+    @endforeach
+</div>
 
-@endforeach
 
-<style type="text/css">
-    a {
-        color: #000000;
-        text-decoration: none;
-    }
-
-    .scriptCalendar {
-        text-align: center;
-    }
-
-    .scriptCalendar>thead>tr>td {
-        width: 50px;
-        height: 50px;
-    }
-
-    .scriptCalendar>thead>tr:first-child>td {
-        font-weight: bold;
-    }
-
-    .scriptCalendar>thead>tr:last-child>td {
-        background-color: #90EE90;
-    }
-
-    .scriptCalendar>tbody>tr>td {
-        width: 50px;
-        height: 50px;
-    }
-
-    .calendarBtn {
-        cursor: pointer;
-    }
-
-</style>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         buildCalendar();
@@ -185,12 +150,18 @@
 
                     // @details 현재일보다 이전인 경우이면서 현재월에 포함되는 일인경우
                     if (nowDate.getDate() > day && Math.sign(day) == 1) {
-                        column.style.backgroundColor = "#E5E5E5";
+                        column.style.cursor = "pointer";
+                        column.style.color = "#607EAA";
+
+                        column.onclick = function() {
+                        calendarChoiceDay(this);
+                        }
+
                     }
 
                     // @details 현재일보다 이후이면서 현재월에 포함되는 일인경우
                     else if (nowDate.getDate() < day && lastDate.getDate() >= day) {
-                        column.style.backgroundColor = "#FFFFFF";
+
                         column.style.cursor = "pointer";
                         column.onclick = function() {
                             calendarChoiceDay(this);
@@ -199,7 +170,8 @@
 
                     // @details 현재일인 경우
                     else if (nowDate.getDate() == day) {
-                        column.style.backgroundColor = "#FFFFE6";
+                        column.style.backgroundColor = "#FF7676";
+
                         column.style.cursor = "pointer";
                         column.onclick = function() {
                             calendarChoiceDay(this);
@@ -209,14 +181,19 @@
                     // @details 현재월보다 이전인경우
                 } else if (toDay.getMonth() < nowDate.getMonth()) {
                     if (Math.sign(day) == 1 && day <= lastDate.getDate()) {
-                        column.style.backgroundColor = "#E5E5E5";
+                        column.style.cursor = "pointer";
+                        column.style.color = "#607EAA";
+
+                        column.onclick = function() {
+                        calendarChoiceDay(this);
+                        }
+
                     }
                 }
 
                 // @details 현재월보다 이후인경우
                 else {
                     if (Math.sign(day) == 1 && day <= lastDate.getDate()) {
-                        column.style.backgroundColor = "#FFFFFF";
                         column.style.cursor = "pointer";
                         column.onclick = function() {
                             calendarChoiceDay(this);
@@ -228,14 +205,12 @@
             // @details 선택한년도가 현재년도보다 작은경우
             else if (toDay.getFullYear() < nowDate.getFullYear()) {
                 if (Math.sign(day) == 1 && day <= lastDate.getDate()) {
-                    column.style.backgroundColor = "#E5E5E5";
                 }
             }
 
             // @details 선택한년도가 현재년도보다 큰경우
             else {
                 if (Math.sign(day) == 1 && day <= lastDate.getDate()) {
-                    column.style.backgroundColor = "#FFFFFF";
                     column.style.cursor = "pointer";
                     column.onclick = function() {
                         calendarChoiceDay(this);
@@ -262,7 +237,8 @@
 
             // @see 금일이 아닌 경우
             else {
-                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFFFF";
+                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFBF0";
+
             }
             document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");
         }
