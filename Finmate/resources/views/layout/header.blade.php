@@ -7,7 +7,7 @@
         <h1>@yield('header', 'header')</h1>
         @auth
         <nav class="nav">
-            <a href="{{ route('main') }}" class="nav-item {{ Request::is('main') ? 'is-active' : '' }}" active-color="#FF7676">자산</a>
+            <a href="{{url('/assets'.'/'.auth()->user()->userid)}}" class="nav-item {{ Request::is('assets') ? 'is-active' : '' }}" active-color="#FF7676">자산</a>
 
 
             <a href="{{ route('users.registration') }}" class="nav-item {{ Request::is('users/registration') ? 'is-active' : '' }}" active-color="#FF7676">sign up</a>

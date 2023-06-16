@@ -98,8 +98,15 @@
                 핀메이트가 재미있게 해드릴게요!<br>
 
                 업적 시스템으로 게임처럼 재미있게 <br>자산 관리를 시작해 보세요.</div>
+@auth
 
-            <a href="#" class="common-btn">사용해보기</a>
+            <a href="{{url('/assets'.'/'.auth()->user()->userid)}}" class="common-btn">사용해보기</a>
+@endauth
+@guest
+<a href="{{url('/users/login')}}" class="common-btn">사용해보기</a>
+
+@endguest
+
 
         </div>
     </div>
