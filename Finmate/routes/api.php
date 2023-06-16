@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,8 @@ use app\Models\Transaction;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/Accounts/{userid}/assets', [AssetController::class, 'index']);
 
 Route::get('/Accounts/{userid}', function (Request $request, $userid) {
     // 해당 사용자의 자산 목록을 데이터베이스에서 가져오는 로직
