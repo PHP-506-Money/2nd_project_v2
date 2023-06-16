@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('budgets', function (Blueprint $table) {
-            $table->integer('userno')->primary();
-            $table->integer('budgetprice');
-            $table->char('budgetflg',1)->defalut('0');
+            $table->string('userid',12)->primary();
+            $table->integer('budgetprice')->default(0);
+            $table->timestamps();
         });
     }
 
