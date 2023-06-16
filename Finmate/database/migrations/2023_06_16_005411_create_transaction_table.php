@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transaction', function (Blueprint $table) {
-            $table->bigInteger('assetno')->primary();
+            $table->bigInteger('assetno');
             $table->char('type', 1);
             $table->timestamp('trantime')->useCurrent();
             $table->string('payee', 12);
