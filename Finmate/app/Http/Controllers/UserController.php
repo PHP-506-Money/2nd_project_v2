@@ -30,10 +30,10 @@ class UserController extends Controller
 
         // 유저정보 습득
         $user = User::where('userid', $req->id)->first();
-        // if(!$user || !(Hash::check($req->password, $user->password))) {
-        //     $error = '아이디와 비밀번호를 확인해주세요.';
-        //     return redirect()->back()->with('error', $error);
-        // }
+        if(!$user || !(Hash::check($req->password, $user->userpw))) {
+            $error = '아이디와 비밀번호를 확인해주세요.';
+            return redirect()->back()->with('error', $error);
+        }
 
         // 유저 인증작업
         Auth::login($user); // 테스트시 비활성화 하고 테스트하면 됨.
@@ -54,9 +54,9 @@ class UserController extends Controller
         //유효성 체크
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
             'name'          => 'regex:/^[a-zA-Z가-힣]{2,20}$/' // regex:정규식. 한글, 영어만 글자 수 2~20
-            ,'id'           => 'regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만
+            ,'id'           => 'unique:users,userid|regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만. DB users 테이블의 userid가 있는지 여부 체크
             ,'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
-            ,'email'        => 'email:rfc,dns' // 이메일 유효성체크
+            ,'email'        => 'email:rfc,dns|unique:users,useremail' // 이메일 유효성체크
             ,'phone'        => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/' // 휴대폰번호 유효성체크
             ,'moffintype'   => 'required' // 모핀이 체크여부 확인
         ]);
@@ -83,6 +83,18 @@ class UserController extends Controller
             ->route('users.login')
             ->with('success', '회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.');
     }
+
+    // // 아이디 중복 체크
+    // function checkDuplicate(Request $req)
+    // {
+    //     // 유저 정보 습득
+    //     $user = User::where('userid', $req->id)->first();
+    //     if ($user) {
+    //         return response()->json(['message' => '이미 가입된 ID입니다.'], 409);
+    //     }
+    //     return response()->json(['message' => '사용 가능한 ID입니다.']);
+    // }
+
 
     function findid() {
         return view('findid');

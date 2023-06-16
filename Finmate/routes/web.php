@@ -38,6 +38,8 @@ Route::post('/users/loginpost', [UserController::class, 'loginpost'])->name('use
 Route::get('/users/registration', [UserController::class, 'registration'])->name('users.registration');
 Route::post('/users/registrationpost', [UserController::class, 'registrationpost'])->name('users.registration.post');
 
+Route::get('/users/registration/{userid}',[ApiController::class,'getUserChk'])->name('users.registration.check');
+
 Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
 Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
 

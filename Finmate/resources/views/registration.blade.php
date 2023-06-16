@@ -4,6 +4,7 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
+
     @include('layout.errorsvalidate')
     <form action="{{route('users.registration.post')}}" method="post">
         @csrf
@@ -12,7 +13,8 @@
         <p></p>
         <label for="id">아이디</label>
         <input type="text" name="id" id="id">
-        <button type="button">중복확인</button>
+        <button type="button" id="checkDuplicate" onclick="checkDuplicateButton();">중복확인</button>
+        <div id="errMsgId"></div>
         <p></p>
         <label for="password">비밀번호</label>
         <input type="password" name="password" id="password">
@@ -54,4 +56,6 @@
         <p></p>
         <button type="submit">가입하기</button>
     </form>
+
+<script src="{{ asset('/js/user.js') }}"></script>
 @endsection
