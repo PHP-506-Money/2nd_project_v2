@@ -5,7 +5,7 @@
 @section('contents')
 <div>
 <p>이번 달 지출 현황 </p>
-<p>3,500,000</p>
+<p>{{sum($data->amount)}}</p>
 <p>700,000</p>
 </div>
 <p>주간 지출 현황</p>

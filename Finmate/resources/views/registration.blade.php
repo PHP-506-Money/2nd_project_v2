@@ -13,7 +13,7 @@
         <p></p>
         <label for="id">아이디</label>
         <input type="text" name="id" id="id">
-        <button type="button" id="checkDuplicate" onclick="checkDuplicateButton();">중복확인</button>
+        <button type="button" class="button" id="checkDuplicate" onclick="checkDuplicateButton();">중복확인</button>
         <div id="errMsgId"></div>
         <p></p>
         <label for="password">비밀번호</label>
@@ -24,7 +24,7 @@
         <p></p>
         <label for="email">이메일</label>
         <input type="email" name="email" id="email">
-        <button type="button">인증하기</button>
+        <button type="button" class="button" onclick="btn();">인증하기</button>
         <p></p>
         <label for="phone">휴대폰</label>
         <input type="tel" name="phone" id="phone">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         <p></p>
-        <button type="submit">가입하기</button>
+        <button type="submit" class="button">가입하기</button>
     </form>
 
 <script src="{{ asset('/js/user.js') }}"></script>
