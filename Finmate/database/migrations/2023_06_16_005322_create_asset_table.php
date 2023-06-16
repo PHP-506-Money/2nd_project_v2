@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('asset', function (Blueprint $table) {
             $table->string('userid', 12);
-            $table->integer('tranno');
-            $table->string('name',20);
+            $table->string('assetname', 12);
             $table->integer('balance');
+            $table->bigInteger('tranno');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('asset');
     }
 };

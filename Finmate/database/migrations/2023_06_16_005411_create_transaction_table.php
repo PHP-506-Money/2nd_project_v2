@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AccountController;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-
+        Schema::create('transaction', function (Blueprint $table) {
+            $table->bigInteger('tranno')->primary();
+            $table->char('type', 1);
+            $table->timestamp('trantime')->useCurrent();
+            $table->string('payee', 12);
+            $table->integer('amount');
+            $table->string('char', 1);
+        });
     }
 
     /**
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('transaction');
     }
 };
