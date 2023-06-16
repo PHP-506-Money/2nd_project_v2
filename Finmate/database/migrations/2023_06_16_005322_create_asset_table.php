@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('asset', function (Blueprint $table) {
+            $table->bigInteger('assetno')->primary();
             $table->string('userid', 12);
             $table->string('assetname', 12);
             $table->integer('balance');
-            $table->bigInteger('tranno');
         });
     }
 
