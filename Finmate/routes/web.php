@@ -9,6 +9,8 @@ use App\Http\Controllers\MofinController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\StaticController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Asset;
 use App\Models\Transaction;
@@ -52,5 +54,9 @@ Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.
 Route::get('/mofin/{id}', [MofinController::class,'index'])->name('mofin.index');
 
 // 예산 설정
-Route::get('/budgetset',[BudgetController::class, 'setting'])->name('budget.get');
-Route::post('/budget',[BudgetController::class, 'budget'])->name('budget.post');
+Route::get('/budget/{userid}',[BudgetController::class, 'budget'])->name('budget.get');
+Route::get('/budgetset',[BudgetController::class, 'budgetset'])->name('budgetset.get');
+Route::post('/budget',[BudgetController::class, 'setting'])->name('budget.post');
+
+// 통계
+Route::get('/static' , [StaticController::class, 'static']);

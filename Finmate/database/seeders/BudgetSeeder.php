@@ -16,7 +16,7 @@ class BudgetSeeder extends Seeder
     public function run()
     {
         DB::table('budgets')->insert([
-            ['userno' => 2 ]
+            ['userid'=>'aaaa' , 'budgetprice'=>500000]
         ]);
     }
 }
