@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Asset;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Hash;
 
 class AssetController extends Controller
@@ -16,7 +17,17 @@ class AssetController extends Controller
     public function index($userid)
     {
         $assets = Asset::where('userid', $userid)->get();
-        return view('assets', ['assets' => $assets]);
+        // $transactions = Transaction::whereHas('assets', function ($query) use ($userid)
+        // {
+        //     $query->where('userid', $userid);
+        // })->get();
+        // return view('assets', ['assets' => $assets, 'transactions' => $transactions]);
+        // $assets = Asset::where('userid', $userid)->get();
+        $transactions = Transaction::join('assets', 'transactions.assetno', '=' , 'assets.assetno')
+                        ->select('transactions.*')
+                        ->where('assets.userid', $userid)
+                        ->get();
+        return view('assets', ['assets'=>$assets ,'transactions' => $transactions]);
     }
 
     public function link()
