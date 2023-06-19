@@ -9,8 +9,11 @@
 <body>
     <h2>개인정보 수집 및 이용 동의</h2>
     <p>오픈뱅킹 / 통합자산관리서비스 (금융)거래관계 설정에 필요한 개인정보의 수집 및 이용에 동의해 주세요.</p>
-    <form action="{{route('assets.storepost')}}" method="post">
+    <form action="{{route('assets.store.post')}}" method="post">
         @csrf
+        <div>{!!session()->has('error') ? session('error') : ""!!}</div>
+
+
         <input type="checkbox" name="agreement" id="agreement" required>
         <label for="agreement">개인정보 수집 및 이용에 동의합니다.</label>
         <label for="name">이름</label>
