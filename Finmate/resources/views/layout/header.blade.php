@@ -8,8 +8,8 @@
         @auth
         <nav class="nav">
             <a href="{{url('/assets'.'/'.auth()->user()->userid)}}" class="nav-item {{ Request::is('/assets'.'/'.auth()->user()->userid) ? 'is-active' : '' }}" active-color="#FF7676">자산</a>
-
-
+            <a href="{{url('/mofin'.'/'.auth()->user()->userno)}}" class="nav-item {{ Request::is('/assets'.'/'.auth()->user()->userid) ? 'is-active' : '' }}" active-color="#FF7676">모핀</a>
+            <a href="{{url('/goal'.'/'.auth()->user()->userno)}}" class="nav-item {{ Request::is('/assets'.'/'.auth()->user()->userid) ? 'is-active' : '' }}" active-color="#FF7676">목표</a>
 
 
 

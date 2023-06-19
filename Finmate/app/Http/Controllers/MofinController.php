@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class MofinController extends Controller
 {
@@ -20,34 +21,44 @@ class MofinController extends Controller
      */
     public function index($id)
     {
+        // $id = session('userno');
         $result = User::find($id);
         return view('mofin')->with('data',$result);
         // return view('mofin');
     }
 
-    public function point()
+    public function point($id)
     {
-        $id = 1;
+        
         $result = User::find($id);
-        $result->point -= 100;
-        $randompoint = rand(1,199);
-        $result->point += $randompoint;
-        
-        $result->save();
 
-        return view('mofin')->with('data',$result)->with('pt1',$randompoint);
-        
+        if($result->point < 100 ){
+            $errmsg = '포인트가부족합니다!';
+            return view('mofin')->with('data',$result)->with('pt1',$errmsg);
+        }
+
+        else{
+            $result->point -= 100;
+            $randompoint = rand(1,199);
+            $result->point += $randompoint;
+            $result->save();
+            $randompoint = $randompoint."당첨되셨습니다";
+            return view('mofin')->with('data',$result)->with('pt1',$randompoint);
+        }
+
     }
 
-    public function item()
+    public function item($id)
     {
-        $id = 1;
+        $result = User::find($id);
+        $randomitem = rand(1,5);
         $data['userno'] = $id;
-        $data['itemno'] = rand(1,5);
+        $data['itemno'] = $randomitem;
         DB::table('items')->insert($data);
-        // $result->save();
+        $pt1 =  DB::table('iteminfos')->where('itemno', $randomitem)->value('itemname');
+        $pt1 = '축하합니다. '.$pt1.' 아이템 당첨';
+        return view('mofin')->with('data',$result)->with('pt1',$pt1);
 
-        return view('mofin');
         
     }
 

@@ -8,14 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class GoalController extends Controller
 {
-public function index($id)
-{
-    $result = DB::table('goals')->where('userno', $id)->get();
-    return view('goal')->with('data', $result);
-}
-    public function insert(Request $Req)
+    public function index($id)
+    {   
+
+        $result = DB::table('goals')->where('userno', $id)->get();
+        return view('goal')->with('data', $result);
+    }
+
+
+    public function insert($id,Request $Req)
     {
-        $id = 1;
         $data['userno'] = $id;
         $data['title'] = $Req->title;
         $data['amount'] = $Req->amount;
