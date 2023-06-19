@@ -39,7 +39,7 @@ class UserController extends Controller
         Auth::login($user); // 테스트시 비활성화 하고 테스트하면 됨.
         if(Auth::check()) {
             session($user->only('id')); // 세션에 인증된 회원 pk 등록
-            return redirect()->intended(route('users.findid'));
+            return redirect()->intended(url('/assets' . '/' . auth()->user()->userid));
         } else {
             $error = '인증작업 에러';
             return redirect()->back()->with('error', $error);
