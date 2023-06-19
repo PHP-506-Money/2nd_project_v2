@@ -11,9 +11,9 @@
             @foreach ($data as $user)
                 @if ($user->moffintype == 1)
                     <img src="{{ asset('/img/rabbit.png') }}" alt="">
-                @elseif ($user->moffinname == 2)
+                @elseif ($user->moffintype == 2)
                     <img src="{{ asset('/img/panda.png') }}" alt="">
-                @elseif ($user->moffinname == 3)
+                @elseif ($user->moffintype == 3)
                     <img src="{{ asset('/img/penguin.png') }}" alt="">
                 @endif
                 <div>
