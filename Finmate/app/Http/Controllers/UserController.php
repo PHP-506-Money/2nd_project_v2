@@ -98,4 +98,13 @@ class UserController extends Controller
     function findpw() {
         return view('findpw');
     }
+    
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$request->session()->has('url.intended')) {
+            $request->session()->put('url.intended', url()->previous());
+        }
+        return redirect()->intended();
+    }
+
 }

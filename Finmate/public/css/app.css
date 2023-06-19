@@ -255,6 +255,14 @@ section .bottombanner img {
     background-color: var(--main-color);
 }
 
+#go-to-top a .fa-chevron-up {
+    z-index: 600;
+    color: var(--sub-color);
+    position: fixed;
+    right: 72px;
+    bottom: 72px;
+}
+
 .scriptCalendar {
     text-align: center;
     background-color: var(--sub-color);

@@ -34,17 +34,43 @@
 
 
 <div class="listbox">
-    @foreach($assets as $asset)
 
-        <ul>
-            <li>자산명</li>
-            <li>{{$asset->assetname}}</li>
-            <li>잔액</li>
-            <li>{{$asset->balance}}</li>
-        </ul>
+    @if(count($assets) === 0)
+
+    <a href=”#” onclick=”openPopup()”>연동하기</a>
+
+    <table>
+        <tr>
+            <th>연동된 자산이 없습니다.</th>
+            <th>자산을 연동해 주세요.</th>
+        </tr>
+        <tr>
+            <td>연동하기 버튼을 누르면</td>
+            <td>자산을 연동할 수 있습니다.</td>
+        </tr>
+    </table>
+
+    @else
+    <table>
+        <tr>
+            <th>자산명</th>
+            <th>잔액</th>
+        </tr>
+
+    </table>
+
+    @foreach($assets as $asset)
+    <tr>
+        <td>{{$asset->assetname}}</td>
+        <td>{{$asset->balance}}</td>
+    </tr>
 
     @endforeach
+
+    @endif
 </div>
+
+
 
 
 <script type="text/javascript">
