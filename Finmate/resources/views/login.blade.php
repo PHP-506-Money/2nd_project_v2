@@ -10,11 +10,11 @@
         @csrf
         <div class="label">
             <label for="id">아이디</label>
-            <input type="text" name="id" id="id" value="{{ old('id') }}">
+            <input type="text" name="id" id="id" value="{{ old('id') }}" required>
         </div>
         <div class="label">
             <label for="password">비밀번호</label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" required>
         </div>
             <button type="submit" class="button" id="button">로그인</button>
         <div class="bottom">

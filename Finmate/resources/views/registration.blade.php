@@ -10,30 +10,30 @@
         <div class="regist">
             <div class="label2">
                 <label for="name">이름</label>
-                <input type="text" name="name" id="name" value="{{ old('name') }}">
+                <input type="text" name="name" id="name" value="{{ old('name') }}" required>
             </div>
             <div class="label2">
                 <label for="id">아이디</label>
-                <input type="text" name="id" id="id" value="{{ old('id') }}">
+                <input type="text" name="id" id="id" value="{{ old('id') }}" required>
                 <button type="button" class="button" id="btn" onclick="checkDuplicateButton();">중복확인</button>
                 <div id="errMsgId"></div>
             </div>
             <div class="label2">
                 <label for="password">비밀번호</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" required>
             </div>
             <div class="label2">
                 <label for="passwordchk">비밀번호 확인</label>
-                <input type="password" name="passwordchk" id="passwordchk">
+                <input type="password" name="passwordchk" id="passwordchk" required>
             </div>
             <div class="label2">
                 <label for="email">이메일</label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}">
+                <input type="email" name="email" id="email" value="{{ old('email') }}" required>
                 {{-- <button type="button" class="button" id="btn" onclick="btnclick();">인증하기</button> --}}
             </div>
             <div class="label2">
                 <label for="phone">휴대폰</label>
-                <input type="tel" name="phone" id="phone" value="{{ old('phone') }}">
+                <input type="tel" name="phone" id="phone" value="{{ old('phone') }}" required>
             </div>
             <div id="menu">
                 <label for="moffintype">나의 모핀이 선택</label>

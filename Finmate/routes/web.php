@@ -46,6 +46,8 @@ Route::middleware(['guest'])->group(function () {
 
     Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
     Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
+
+    Route::get('/users/myinfo', [UserController::class, 'myinfo'])->name('users.myinfo');
 });
 
 Route::middleware(['auth'])->group(function () {
