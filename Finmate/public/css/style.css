@@ -117,6 +117,12 @@ input {
     display: flex;
 }
 
+.bottom2 {
+    display: flex;
+    margin: 10px;
+    margin-bottom: 0px;
+}
+
 #down {
     margin: 10px;
     font-size: small;
@@ -156,4 +162,33 @@ input {
 
 #btn {
     margin-left: 20px;
+}
+
+#myinfo {
+    width: 400px;
+    height: 400px;
+    background-color: var(--sub-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--btn-color);
+    margin-left: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#moffinname {
+    background-color: transparent;
+    font-size: medium;
+    width: 120px;
+    margin: 5px;
 }

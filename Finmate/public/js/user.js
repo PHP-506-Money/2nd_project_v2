@@ -32,6 +32,6 @@ function checkDuplicateButton() {
         .catch(error=>alert(error.message));
 }
 
-// function btnclick(){
-//     alert('이메일 인증 기능은 3차에 도입할 예정입니다.');
-// }
+function btnclick(){
+    alert('추후 도입 예정입니다.');
+}
