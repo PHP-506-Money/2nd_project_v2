@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Budget extends Model
 {
-
+    protected $primaryKey = 'userid';
     use HasFactory;
 }
