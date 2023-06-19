@@ -249,8 +249,39 @@
                     }
                 }
             }
+            
             dom++;
         }
+        @if(count($transactions) > 0)
+
+        const transactions = @json($transactions);
+
+        function showTransactionAmounts() {
+        let calendarCells = document.querySelectorAll("td");
+        for (let i = 0; i < calendarCells.length; i++) { const cell=calendarCells[i]; const date=new Date(toDay.getFullYear(), toDay.getMonth(), parseInt(cell.innerText)); let depositAmount=0; let withdrawalAmount=0; transactions.forEach(transaction=> {
+            const transactionDate = new Date(transaction.trantime);
+            if (transactionDate.toDateString() === date.toDateString()) {
+            if (transaction.type === '0') {
+            depositAmount += transaction.amount;
+            } else {
+            withdrawalAmount += transaction.amount;
+            }
+            }
+            });
+            if (depositAmount > 0 || withdrawalAmount > 0) {
+            const amounts = document.createElement('div');
+            amounts.innerHTML = `+${depositAmount}<br> -${withdrawalAmount}`;
+            cell.appendChild(amounts);
+            }
+            }
+            }
+
+            showTransactionAmounts();
+
+
+            @endif
+
+
     }
 
     /**
@@ -296,41 +327,6 @@
     }
 
 </script>
-
-@if(count($transactions) > 0)
-<script>
-    const transactions = @json($transactions);
-
-    function showTransactionAmounts() {
-        let calendarCells = document.querySelectorAll("td");
-        for (let i = 0; i < calendarCells.length; i++) {
-            const cell = calendarCells[i];
-            const date = new Date(toDay.getFullYear(), toDay.getMonth(), parseInt(cell.innerText));
-            let depositAmount = 0;
-            let withdrawalAmount = 0;
-            transactions.forEach(transaction => {
-                const transactionDate = new Date(transaction.trantime);
-                if (transactionDate.toDateString() === date.toDateString()) {
-                    if (transaction.type === '0') {
-                        depositAmount += transaction.amount;
-                    } else {
-                        withdrawalAmount += transaction.amount;
-                    }
-                }
-            });
-            if (depositAmount > 0 || withdrawalAmount > 0) {
-                const amounts = document.createElement('div');
-                amounts.innerHTML = `입금: ${depositAmount}<br>출금: ${withdrawalAmount}`;
-                cell.appendChild(amounts);
-            }
-        }
-    }
-
-    showTransactionAmounts();
-
-</script>
-@endif
-
 
 
 
