@@ -26,6 +26,12 @@ class ApiController extends Controller
             $arr['errorcode']="E01";
             $arr['msg'] = "! 이미 가입된 아이디 입니다.";
         }
+        // ID 길이 확인
+        $id_length = strlen($id);
+        if ($id_length < 4 || $id_length > 12) {
+            $arr['errorcode']="E02";
+            $arr['msg'] = "! ID는 영문 대소문자, 숫자로 4~12글자여야 합니다.";
+        }
         return response()->json($arr, Response::HTTP_OK);
     }
 }
