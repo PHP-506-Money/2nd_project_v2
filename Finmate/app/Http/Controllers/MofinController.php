@@ -9,6 +9,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 class MofinController extends Controller
 {
     /**
@@ -22,6 +24,33 @@ class MofinController extends Controller
         return view('mofin')->with('data',$result);
         // return view('mofin');
     }
+
+    public function point()
+    {
+        $id = 1;
+        $result = User::find($id);
+        $result->point -= 100;
+        $randompoint = rand(1,199);
+        $result->point += $randompoint;
+        
+        $result->save();
+
+        return view('mofin')->with('data',$result)->with('pt1',$randompoint);
+        
+    }
+
+    public function item()
+    {
+        $id = 1;
+        $data['userno'] = $id;
+        $data['itemno'] = rand(1,5);
+        DB::table('items')->insert($data);
+        // $result->save();
+
+        return view('mofin');
+        
+    }
+
 
     /**
      * Show the form for creating a new resource.
