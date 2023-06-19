@@ -54,6 +54,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Account
     Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
+    Route::get('/link', [AssetController::class, 'link'])->name('assets.link');
+    Route::get('/assets', [AssetController::class, 'store'])->name('assets.store');
+    Route::get('/assetspost', [AssetController::class, 'store'])->name('assets.store.post');
+
+    
 });
 
 

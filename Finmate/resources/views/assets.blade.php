@@ -37,7 +37,15 @@
 
     @if(count($assets) === 0)
 
-    <a href=”#” onclick=”openPopup()”>연동하기</a>
+    <a onclick="openPopup()">연동하기</a>
+    <script>
+        function openPopup() {
+            window.open('/link','linkAccount', 'width=600,height=400');
+            }
+
+    </script>
+
+
 
     <table>
         <tr>
