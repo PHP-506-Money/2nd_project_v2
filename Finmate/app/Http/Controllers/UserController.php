@@ -103,4 +103,8 @@ class UserController extends Controller
         return view('myinfo');
     }
 
+    function modify() {
+        return view('modify');
+    }
+
 }
