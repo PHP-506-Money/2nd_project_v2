@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->integer('userno');
             $table->integer('itemno');
-            $table->primary(['itemno','userno']);
+            // $table->primary(['itemno','userno']);
 
         });
     }
