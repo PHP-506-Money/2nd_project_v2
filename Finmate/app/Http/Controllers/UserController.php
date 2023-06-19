@@ -99,6 +99,8 @@ class UserController extends Controller
         return view('findpw');
     }
 
-    
+    function myinfo() {
+        return view('myinfo');
+    }
 
 }
