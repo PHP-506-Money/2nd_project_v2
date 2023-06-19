@@ -32,21 +32,44 @@ Route::get('/main', function () {
     return view('main');
 })->name('main');
 
+//미들웨어 권한체크
+Route::middleware(['guest'])->group(function () {
+    // Users
+    Route::get('/users/login', [UserController::class, 'login'])->name('users.login');
+    Route::post('/users/loginpost', [UserController::class, 'loginpost'])->name('users.login.post');
+    
+    Route::get('/users/registration', [UserController::class, 'registration'])->name('users.registration');
+    Route::post('/users/registrationpost', [UserController::class, 'registrationpost'])->name('users.registration.post');
+    Route::get('/users/registration/{userid}', [ApiController::class, 'getUserChk'])->name('users.registration.check');
 
-// Users
-Route::get('/users/login', [UserController::class, 'login'])->name('users.login');
-Route::post('/users/loginpost', [UserController::class, 'loginpost'])->name('users.login.post');
-Route::get('/users/registration', [UserController::class, 'registration'])->name('users.registration');
-Route::post('/users/registrationpost', [UserController::class, 'registrationpost'])->name('users.registration.post');
-Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
+    Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
+    Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
+});
 
-Route::get('/users/registration/{userid}',[ApiController::class,'getUserChk'])->name('users.registration.check');
+Route::middleware(['auth'])->group(function () {
+    // Users
+    Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
 
-Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
-Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
+    // Account
+    Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
+});
 
-//계좌
-Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
+
+
+// // Users
+// Route::get('/users/login', [UserController::class, 'login'])->name('users.login');
+// Route::post('/users/loginpost', [UserController::class, 'loginpost'])->name('users.login.post');
+// Route::get('/users/registration', [UserController::class, 'registration'])->name('users.registration');
+// Route::post('/users/registrationpost', [UserController::class, 'registrationpost'])->name('users.registration.post');
+// Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
+
+// Route::get('/users/registration/{userid}',[ApiController::class,'getUserChk'])->name('users.registration.check');
+
+// Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
+// Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
+
+// //계좌
+// Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
 
 //모핀
 Route::get('/mofin/{id}', [MofinController::class,'index'])->name('mofin.index');

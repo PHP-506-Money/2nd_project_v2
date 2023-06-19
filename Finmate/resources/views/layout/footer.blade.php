@@ -1,6 +1,7 @@
 
 <div id="go-to-top">
-    <a href="#"></a>
+    <a href="#"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
 </div>
 
 <footer>
