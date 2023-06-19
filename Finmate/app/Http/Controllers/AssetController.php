@@ -42,9 +42,9 @@ class AssetController extends Controller
                 $asset->save();
             }
 
-            Return redirect('/')->with('success','연동에 성공했습니다.');
+            Return redirect('/assets/{userid}')->with('success','연동에 성공했습니다.');
         } else {
-            Return redirect('/')->with('error','연동에 실패했습니다. 사용자 정보를 다시 확인해 주세요.');
+            Return redirect('/link')->with('error','연동에 실패했습니다. 사용자 정보를 다시 확인해 주세요.');
         }
     }
 }

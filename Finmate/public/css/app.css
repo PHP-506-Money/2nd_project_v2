@@ -298,12 +298,5 @@ section .bottombanner img {
     margin: 10px;
 }
 
-.listbox ul {
-    display: flex;
-    justify-content: space-around;
-    border-bottom: 1px solid var(--main-color);
-    padding: 10px;
-    
-}
 
 
