@@ -4,8 +4,11 @@
 
 @section('contents')
 
+
+
 <h1>나의 모핀이</h1>
-<span>나의 포인트 : {{$data->point}}</span> <br>
+<h2>나의 포인트 : {{$data->point}}</h2> <br>
+<h2>나의 아이템 : {{$data1}}</h2> <br>
 
 <form action="{{route('mofin.point',[auth()->user()->userno])}}" method="post">
     @csrf
