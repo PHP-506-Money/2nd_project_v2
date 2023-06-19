@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
     // myinfo
     Route::get('/users/myinfo', [UserController::class, 'myinfo'])->name('users.myinfo');
+    Route::post('/users/myinfopost', [UserController::class, 'myinfopost'])->name('users.myinfo.post');
     Route::get('/users/modify', [UserController::class, 'modify'])->name('users.modify');
 });
 
