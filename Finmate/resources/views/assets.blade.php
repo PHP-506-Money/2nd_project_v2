@@ -60,16 +60,18 @@
             <th>자산명</th>
             <th>잔액</th>
         </tr>
+        @foreach($assets as $asset)
+        <tr>
+            <td>{{$asset->assetname}}</td>
+            <td>{{$asset->balance}}</td>
+        </tr>
+
+        @endforeach
+
 
     </table>
 
-    @foreach($assets as $asset)
-    <tr>
-        <td>{{$asset->assetname}}</td>
-        <td>{{$asset->balance}}</td>
-    </tr>
-
-    @endforeach
+    
 
     @endif
 </div>
