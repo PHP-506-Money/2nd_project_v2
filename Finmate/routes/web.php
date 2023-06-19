@@ -88,7 +88,8 @@ Route::middleware(['auth'])->group(function () {
 // 예산 설정
 Route::get('/budget/{userid}',[BudgetController::class, 'budget'])->name('budget.get');
 Route::get('/budgetset',[BudgetController::class, 'budgetset'])->name('budgetset.get');
-Route::post('/budget',[BudgetController::class, 'setting'])->name('budget.post');
+Route::post('/budget/post',[BudgetController::class, 'setting'])->name('budget.post');
+Route::put('/budget/up',[BudgetController::class, 'edit'])->name('budget.put');
 
 // 통계
 Route::get('/static' , [StaticController::class, 'static']);
@@ -96,6 +97,9 @@ Route::get('/static' , [StaticController::class, 'static']);
 //목표
 Route::get('/goal/{userno}', [GoalController::class,'index'])->name('goal.index');
 Route::post('/goal/insert/{userno}', [GoalController::class, 'insert'])->name('goal.insert');
+Route::post('/goal/update/{userno}', [GoalController::class, 'update'])->name('goal.update');
+Route::post('/goal/delete/{userno}', [GoalController::class, 'delete'])->name('goal.delete');
+
 //모핀
 Route::get('/mofin/{userno}', [MofinController::class,'index'])->name('mofin.index');
 Route::post('/mofin/post/{userno}', [MofinController::class,'point'])->name('mofin.point');

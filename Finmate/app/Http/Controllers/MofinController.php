@@ -23,7 +23,13 @@ class MofinController extends Controller
     {
         // $id = session('userno');
         $result = User::find($id);
-        return view('mofin')->with('data',$result);
+        $result1 = DB::table('iteminfos AS info')
+        ->select('info.itemname')
+        ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
+        ->where('tem.userno', 4)
+        ->orderBy('info.itemno', 'ASC')
+        ->get();
+        return view('mofin')->with('data',$result)->with('data1',$result1);
         // return view('mofin');
     }
 
