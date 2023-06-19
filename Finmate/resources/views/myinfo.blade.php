@@ -12,9 +12,9 @@
                 @if ($user->moffintype == 1)
                     <img src="{{ asset('/img/rabbit.png') }}" alt="">
                 @elseif ($user->moffintype == 2)
-                    <img src="{{ asset('/img/panda.png') }}" alt="">
-                @elseif ($user->moffintype == 3)
                     <img src="{{ asset('/img/penguin.png') }}" alt="">
+                @elseif ($user->moffintype == 3)
+                    <img src="{{ asset('/img/panda.png') }}" alt="">
                 @endif
                 <div>
                 {{ $user->username }}님의 {{ $user->moffinname }}
