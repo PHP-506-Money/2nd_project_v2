@@ -4,9 +4,9 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
-    <div>{!!session()->has('success') ? session('success') : ""!!}</div>
     <form id="table" action="{{route('users.login.post')}}" method="post">
         @csrf
+        <div>{!!session()->has('success') ? session('success') : ""!!}</div>
         @include('layout.errorsvalidate')
         <div class="label">
             <label for="id">아이디</label>

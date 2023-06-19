@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class StaticController extends Controller
 {
     function static($id) {
-
+        // SELECT DATE_FORMAT(trantime,'2023-%m') AS DATE ,SUM(amount) FROM transactions GROUP BY date;
         return view('static');
     }
 }

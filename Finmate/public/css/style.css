@@ -67,14 +67,10 @@ span:hover + p.arrow_box {
     width: 700px;
     height: 700px;
     background-color: var(--sub-color);
-    /* display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; */
-}
-
-.regist {
-    /* text-align: center; */
+    align-items: center;
 }
 
 label, input {
@@ -94,8 +90,12 @@ label {
 }
 
 .label2 > label {
-    width: 120px;
+    width: 180px;
     vertical-align: middle;
+}
+
+.label2 > input {
+    width: 250px;
 }
 
 input {
@@ -139,4 +139,8 @@ input {
 .btn {
     display: flex;
     justify-content: center;
+}
+
+#btn {
+    margin-left: 20px;
 }

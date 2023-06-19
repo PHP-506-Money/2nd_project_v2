@@ -8,6 +8,7 @@
     @include('layout.errorsvalidate')
     <form id="form" action="{{route('users.registration.post')}}" method="post">
         @csrf
+        <br>
         <div class="regist">
             <div class="label2">
                 <label for="name">이름</label>
@@ -16,7 +17,7 @@
             <div class="label2">
                 <label for="id">아이디</label>
                 <input type="text" name="id" id="id">
-                <button type="button" class="button" id="checkDuplicate" onclick="checkDuplicateButton();">중복확인</button>
+                <button type="button" class="button" id="btn" onclick="checkDuplicateButton();">중복확인</button>
                 <div id="errMsgId"></div>
             </div>
             <div class="label2">
@@ -30,7 +31,7 @@
             <div class="label2">
                 <label for="email">이메일</label>
                 <input type="email" name="email" id="email">
-                <button type="button" class="button" onclick="btn();">인증하기</button>
+                <button type="button" class="button" id="btn" onclick="btn();">인증하기</button>
             </div>
             <div class="label2">
                 <label for="phone">휴대폰</label>
