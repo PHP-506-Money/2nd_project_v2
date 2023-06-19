@@ -79,6 +79,10 @@ span:hover + p.arrow_box {
     margin-bottom: 30px;
 }
 
+#errMsgId {
+text-align: center;
+}
+
 label, input {
     margin: 10px auto;
     padding: 4px;
@@ -125,9 +129,12 @@ input {
     border-radius: 15px;
     width: 88px;
     height: 28px;
-    margin-top: 15px;
-    margin-bottom: 30px;
     cursor: pointer;
+}
+
+#button {
+    margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 .button:hover {

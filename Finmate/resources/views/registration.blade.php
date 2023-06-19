@@ -7,7 +7,6 @@
     @include('layout.errorsvalidate')
     <form id="form" action="{{route('users.registration.post')}}" method="post">
         @csrf
-        <br>
         <div class="regist">
             <div class="label2">
                 <label for="name">이름</label>
@@ -30,7 +29,7 @@
             <div class="label2">
                 <label for="email">이메일</label>
                 <input type="email" name="email" id="email" value="{{ old('email') }}">
-                <button type="button" class="button" id="btn" onclick="btn();">인증하기</button>
+                {{-- <button type="button" class="button" id="btn" onclick="btnclick();">인증하기</button> --}}
             </div>
             <div class="label2">
                 <label for="phone">휴대폰</label>
@@ -61,7 +60,7 @@
                 </div>
             </div>
             <div class="btn">
-                <button type="submit" class="button">가입하기</button>
+                <button type="submit" class="button" id="button">가입하기</button>
             </div>
         </div>
     </form>

@@ -16,7 +16,7 @@
             <label for="password">비밀번호</label>
             <input type="password" name="password" id="password">
         </div>
-        <button type="submit" class="button">로그인</button>
+            <button type="submit" class="button" id="button">로그인</button>
         <div class="bottom">
             <a href="{{route('users.findid')}}" id="down">아이디 찾기</a>
             <a href="{{route('users.findpw')}}" id="down">비밀번호 찾기</a>

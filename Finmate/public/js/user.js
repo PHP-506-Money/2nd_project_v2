@@ -7,7 +7,7 @@ function checkDuplicateButton() {
     const id = document.getElementById('id');
     const url = "registration/"+id.value;
     if (id.value === '') { 
-        idSpan.innerHTML = "아이디를 입력해 주세요.";
+        idSpan.innerHTML = "! 아이디를 입력해 주세요.";
         idSpan.style.color = "red";
         return;
     }
@@ -32,6 +32,6 @@ function checkDuplicateButton() {
         .catch(error=>alert(error.message));
 }
 
-function btn(){
-    alert('이메일 인증 기능은 3차에 도입할 예정입니다.');
-}
+// function btnclick(){
+//     alert('이메일 인증 기능은 3차에 도입할 예정입니다.');
+// }
