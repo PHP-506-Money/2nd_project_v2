@@ -4,13 +4,13 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
-    <form id="table" action="{{route('users.login.post')}}" method="post">
-        @csrf
         <div>{!!session()->has('success') ? session('success') : ""!!}</div>
         @include('layout.errorsvalidate')
+    <form id="table" action="{{route('users.login.post')}}" method="post">
+        @csrf
         <div class="label">
             <label for="id">아이디</label>
-            <input type="text" name="id" id="id">
+            <input type="text" name="id" id="id" value="{{ old('id') }}">
         </div>
         <div class="label">
             <label for="password">비밀번호</label>

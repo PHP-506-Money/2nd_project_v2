@@ -31,7 +31,7 @@ class UserController extends Controller
         // 유저정보 습득
         $user = User::where('userid', $req->id)->first();
         if(!$user || !(Hash::check($req->password, $user->userpw))) {
-            $error = '아이디와 비밀번호를 확인해주세요.';
+            $error = '<div class="error">아이디와 비밀번호를 다시 확인해주세요.</div>';
             return redirect()->back()->with('error', $error);
         }
 

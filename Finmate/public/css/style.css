@@ -73,6 +73,12 @@ span:hover + p.arrow_box {
     align-items: center;
 }
 
+.error {
+    color: var(--active-color);
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
 label, input {
     margin: 10px auto;
     padding: 4px;

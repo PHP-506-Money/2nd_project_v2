@@ -4,7 +4,6 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
-
     @include('layout.errorsvalidate')
     <form id="form" action="{{route('users.registration.post')}}" method="post">
         @csrf
@@ -12,11 +11,11 @@
         <div class="regist">
             <div class="label2">
                 <label for="name">이름</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" value="{{ old('name') }}">
             </div>
             <div class="label2">
                 <label for="id">아이디</label>
-                <input type="text" name="id" id="id">
+                <input type="text" name="id" id="id" value="{{ old('id') }}">
                 <button type="button" class="button" id="btn" onclick="checkDuplicateButton();">중복확인</button>
                 <div id="errMsgId"></div>
             </div>
@@ -30,12 +29,12 @@
             </div>
             <div class="label2">
                 <label for="email">이메일</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" value="{{ old('email') }}">
                 <button type="button" class="button" id="btn" onclick="btn();">인증하기</button>
             </div>
             <div class="label2">
                 <label for="phone">휴대폰</label>
-                <input type="tel" name="phone" id="phone">
+                <input type="tel" name="phone" id="phone" value="{{ old('phone') }}">
             </div>
             <div id="menu">
                 <label for="moffintype">나의 모핀이 선택</label>
