@@ -6,6 +6,7 @@
  * History      : v001 0613 Subin.No new
  *******************************************/
 use App\Http\Controllers\MofinController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ApiController;
@@ -81,7 +82,7 @@ Route::middleware(['auth'])->group(function () {
 // Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
 
 //모핀
-Route::get('/mofin/{id}', [MofinController::class,'index'])->name('mofin.index');
+// Route::get('/mofin/{id}', [MofinController::class,'index'])->name('mofin.index');
 
 // 예산 설정
 Route::get('/budget/{userid}',[BudgetController::class, 'budget'])->name('budget.get');
@@ -90,3 +91,11 @@ Route::post('/budget',[BudgetController::class, 'setting'])->name('budget.post')
 
 // 통계
 Route::get('/static' , [StaticController::class, 'static']);
+
+//목표
+Route::get('/goal/{userno}', [GoalController::class,'index'])->name('goal.index');
+Route::post('/goal/insert/{userno}', [GoalController::class, 'insert'])->name('goal.insert');
+//모핀
+Route::get('/mofin/{userno}', [MofinController::class,'index'])->name('mofin.index');
+Route::post('/mofin/post/{userno}', [MofinController::class,'point'])->name('mofin.point');
+Route::post('/mofin/item/{userno}', [MofinController::class,'item'])->name('mofin.item');
