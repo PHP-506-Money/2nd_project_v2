@@ -6,7 +6,7 @@
 
 
 @section('contents')
-
+myinfo
 @endsection
 
 
