@@ -8,7 +8,9 @@
 
 <h1>나의 모핀이</h1>
 <h2>나의 포인트 : {{$data->point}}</h2> <br>
-<h2>나의 아이템 : {{$data1}}</h2> <br>
+<h2>나의 아이템 목록</h2> <br>
+<h3>{{$itemname}}</h3>
+<br><br>
 
 <form action="{{route('mofin.point',[auth()->user()->userno])}}" method="post">
     @csrf
