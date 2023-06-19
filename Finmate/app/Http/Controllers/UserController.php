@@ -100,7 +100,11 @@ class UserController extends Controller
     }
 
     function myinfo() {
-        return view('myinfo');
+        $id = auth()->user()->userno; // 현재 로그인한 사용자의 ID를 가져옵니다.
+        $result = User::select(['username', 'moffinname'])
+                        ->where('userno', $id)
+                        ->get();
+        return view('myinfo')->with('data', $result);
     }
 
     function modify() {
