@@ -107,6 +107,25 @@ class UserController extends Controller
         return view('myinfo')->with('data', $result);
     }
 
+    function myinfopost(Request $req) {
+        $id = auth()->user()->userno;
+
+        // 유효성 검사 방법 1
+        $req->validate([ // validate는 자동으로 리다이렉트 해줌.
+            'moffinname'  => 'regex:/^[a-zA-Z가-힣]{1,20}$/' // regex:정규식. 한글, 영어만 글자 수 1~20
+        ]);
+
+        $result = User::find($id);
+        if (!$result) {
+            // 사용자를 찾지 못한 경우에 대한 처리
+            return redirect()->back()->withErrors(['message' => '사용자를 찾을 수 없습니다.']);
+        }    
+        $result->moffinname = $req->moffinname;
+        $result->save();
+
+        return redirect()->route('users.myinfo');
+    }    
+
     function modify() {
         return view('modify');
     }

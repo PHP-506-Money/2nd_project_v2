@@ -6,7 +6,9 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
-    <div id="table">
+    @include('layout.errorsvalidate')
+    <form id="table" action="{{route('users.myinfo.post')}}" method="post">
+        @csrf
         <div>
             @foreach ($data as $user)
                 @if ($user->moffintype == 1)
@@ -17,16 +19,16 @@
                     <img src="{{ asset('/img/panda.png') }}" alt="">
                 @endif
                 <div>
-                {{ $user->username }}님의 {{ $user->moffinname }}
+                {{ $user->username }}님의 <input type="text" name="moffinname" id="moffinname" value="{{ $user->moffinname }}">
                 </div>
             @endforeach
         </div>
         <div>
-            <button type="button" class="button" id="btn">모핀이명 변경</button>
+            <button type="submit" class="button" id="btn">모핀이명 변경</button>
             <button type="button" class="button" id="btn">공유하기</button>
         </div>
         <div class="bottom">
             <a href="{{route('users.modify')}}" id="down">회원정보 수정</a>
         </div>
-    </div>
+    </form>
 @endsection
