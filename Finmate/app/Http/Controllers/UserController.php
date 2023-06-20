@@ -162,8 +162,9 @@ class UserController extends Controller
         return redirect()->route('users.myinfo');
     }
 
+    // 회원탈퇴 기능: softdeletes();를 사용하여 migration을 하였으므로, 로그인시 자동으로 탈퇴한 회원은 로그인 불가능하게 막아줌.
     function withdraw() {
-        $id = session('id');
+        $id = auth()->user()->userno;
         $result = User::destroy($id); // destroy 에러 났을 때 에러 핸들링 써서 예외 처리 하기
         Session::flush(); // 세션 파기
         Auth::logout(); // 로그아웃
