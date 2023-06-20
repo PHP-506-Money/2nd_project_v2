@@ -11,7 +11,9 @@
         @csrf
         <div>
             @foreach ($data as $user)
-                @if ($user->moffintype == 1)
+                @if ($user->moffintype == 0)
+                    <img src="{{ asset('/img/moffin2.png') }}" alt="">
+                @elseif ($user->moffintype == 1)
                     <img src="{{ asset('/img/rabbit.png') }}" alt="">
                 @elseif ($user->moffintype == 2)
                     <img src="{{ asset('/img/penguin.png') }}" alt="">
