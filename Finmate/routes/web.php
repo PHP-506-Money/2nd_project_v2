@@ -28,16 +28,19 @@ use App\Models\Transaction;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
 
-Route::get('/main', function () {
-    return view('main');
-})->name('main');
 
 //미들웨어 권한체크
 Route::middleware(['guest'])->group(function () {
+    
+    Route::get('/', function () {
+        return view('main');
+    });
+
+    Route::get('/main', function () {
+        return view('main');
+    })->name('main');
+
     // Users
     Route::get('/users/login', [UserController::class, 'login'])->name('users.login');
     Route::post('/users/loginpost', [UserController::class, 'loginpost'])->name('users.login.post');
@@ -71,6 +74,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/users/modifypost', [UserController::class, 'modifypost'])->name('users.modify.post');
 });
 
+Route::get('/unauthorized-access', function () {
+    return view('errors.unauthorized');
+});
 
 
 // // Users

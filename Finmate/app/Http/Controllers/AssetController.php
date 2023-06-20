@@ -25,11 +25,18 @@ class AssetController extends Controller
         // })->get();
         // return view('assets', ['assets' => $assets, 'transactions' => $transactions]);
         // $assets = Asset::where('userid', $userid)->get();
+
         $transactions = Transaction::join('assets', 'transactions.assetno', '=' , 'assets.assetno')
                         ->select('transactions.*')
                         ->where('assets.userid', $userid)
                         ->orderby('transactions.trantime', 'desc')
                         ->get();
+
+        $current_user_id = auth()->user()->userid;
+        if ($current_user_id != $userid) {
+            return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
+        }
+
         return view('assets', ['assets'=>$assets ,'transactions' => $transactions]);
     }
 

@@ -9,6 +9,11 @@ class TransactionController extends Controller
 {
     public function index($userid)
     {
+        $current_user_id = auth()->user()->userid;
+        if ($current_user_id != $userid) {
+            return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
+        }
+        
         $transactions = Transaction::join('assets', 'transactions.assetno', '=', 'assets.assetno')
             ->join('categories', 'transactions.char', '=', 'categories.no')
             ->select('transactions.*' , 'assets.assetname', 'categories.name')
