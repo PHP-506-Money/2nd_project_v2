@@ -30,6 +30,7 @@
         
         $num = 0;
     @endphp
+<div class="listbox1" style="background-color : #FFFBF0 ;" >
 @if(isset($data))
     @foreach($data as $goal)
 
@@ -88,6 +89,7 @@
     @endphp
     @endforeach
 @endif
+</div>
 <script>
 
     function toggleForm(goalno) {
