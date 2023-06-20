@@ -2,7 +2,7 @@
 /******************************************
  * Project Name : Finmate
  * Directory    : Controllers
- * File Name    : ApiController.php
+ * File Name    : MofinController.php
  * History      : v001 0615 Choi new
  *******************************************/
 namespace App\Http\Controllers;
