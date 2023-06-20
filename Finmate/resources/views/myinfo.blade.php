@@ -26,7 +26,7 @@
             @endforeach
         </div>
         <div>
-            <button type="button" class="button" id="btn" onclick="moffinnameChan();">모핀이명 변경</button>
+            <button type="button" class="button" id="btn" onclick="moffinnameChan();" autocomplete="off" required>모핀이명 변경</button>
             <button type="button" class="button" id="btn" onclick="btnClick();">공유하기</button>
         </div>
         <div class="bottom2">

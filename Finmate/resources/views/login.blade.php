@@ -10,7 +10,7 @@
         @csrf
         <div class="label">
             <label for="id">아이디</label>
-            <input type="text" name="id" id="id" value="{{ old('id') }}" required>
+            <input type="text" name="id" id="id" value="{{ old('id') }}" autocomplete="off" required>
         </div>
         <div class="label">
             <label for="password">비밀번호</label>

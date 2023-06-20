@@ -23,17 +23,19 @@
                 {{ $data->username }} 님의 {{ $data->moffinname }}
             </div>
 </div>
-
-<form action="{{route('mofin.point',[auth()->user()->userno])}}" method="post">
-    @csrf
-<button onclick="pt()" type="submit">랜덤포인트</button>
-</form>
-<br><br>
-
-<form action="{{route('mofin.item',[auth()->user()->userno])}}" method="post">
-    @csrf
-<button onclick="pt()" type="submit">랜덤아이템</button>
-</form>
+<div>
+    <form action="{{route('mofin.point',[auth()->user()->userno])}}" method="post">
+        @csrf
+    <button onclick="pt()" type="submit"><img src="{{ asset('/img/random.png') }}" alt=""></button>
+    </form>
+    <span>랜덤 포인트</span>
+    <br><br>
+    <form action="{{route('mofin.item',[auth()->user()->userno])}}" method="post">
+        @csrf
+    <button onclick="pt()" type="submit"><img src="{{ asset('/img/randomitem.png') }}" alt=""></button>
+    </form>
+    <span>랜덤 아이템</span>
+</div>
 @if(isset($pt1))
     <script>
         // 페이지가 로드될 때 자동으로 실행되도록 수정

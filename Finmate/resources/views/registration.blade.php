@@ -10,11 +10,11 @@
         <div class="regist">
             <div class="label2">
                 <label for="name">이름</label>
-                <input type="text" name="name" id="name" value="{{ old('name') }}" required>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" autocomplete="off" required>
             </div>
             <div class="label2">
                 <label for="id">아이디</label>
-                <input type="text" name="id" id="id" value="{{ old('id') }}" required>
+                <input type="text" name="id" id="id" value="{{ old('id') }}" autocomplete="off" required>
                 <button type="button" class="button" id="btn" onclick="checkDuplicateButton();">중복확인</button>
                 <div id="errMsgId"></div>
             </div>
@@ -28,12 +28,12 @@
             </div>
             <div class="label2">
                 <label for="email">이메일</label>
-                <input type="email" name="email" id="email" value="{{ old('email') }}" required>
+                <input type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="off" required>
                 {{-- <button type="button" class="button" id="btn" onclick="btnclick();">인증하기</button> --}}
             </div>
             <div class="label2">
                 <label for="phone">휴대폰</label>
-                <input type="tel" name="phone" id="phone" value="{{ old('phone') }}" required>
+                <input type="tel" name="phone" id="phone" value="{{ old('phone') }}" autocomplete="off" required>
             </div>
             <div id="menu">
                 <label for="moffintype">나의 모핀이 선택</label>
