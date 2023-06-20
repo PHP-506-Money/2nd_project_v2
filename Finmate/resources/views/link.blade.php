@@ -12,6 +12,9 @@
     <form action="{{route('assets.store.post')}}" method="post">
         @csrf
         <div>{!!session()->has('error') ? session('error') : ""!!}</div>
+        <div>{!!session()->has('success') ? session('success') : ""!!}</div>
+
+
 
 
         <input type="checkbox" name="agreement" id="agreement" required>

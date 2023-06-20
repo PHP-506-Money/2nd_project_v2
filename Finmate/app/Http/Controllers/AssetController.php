@@ -46,7 +46,7 @@ class AssetController extends Controller
         $balanceMin = 100000;
         $balanceMax = 90000000;
 
-            for ($i = 71; $i <= 75; $i++) {
+            for ($i = 76; $i <= 80; $i++) {
                 $asset = new Asset();
                 $asset->assetno = $i;
                 $asset->userid = $user->userid;
@@ -55,7 +55,7 @@ class AssetController extends Controller
                 $asset->save();
             }
 
-            $assetNos = range(71, 75);
+            $assetNos = range(76, 80);
             $types = ['0', '1'];
             $payeeChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
             ];
