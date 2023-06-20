@@ -20,16 +20,17 @@
                 @elseif ($user->moffintype == 3)
                     <img src="{{ asset('/img/panda.png') }}" alt="">
                 @endif
-                <div id="info">
-                    {{ $user->username }} 님의 <input type="text" name="moffinname" id="moffinname" value="{{ $user->moffinname }}" required>
-                </div>
+        </div>
+        <div id="info">
+            {{-- {{ $user->username }} 님의 <input type="text" name="moffinname" id="moffinname" value="{{ $user->moffinname }}" required> --}}
+            {{ $user->username }} 님의 <textarea name="moffinname" id="moffinname" cols="10" rows="1">{{ $user->moffinname }}</textarea>
             @endforeach
         </div>
-        <div>
+        <div class="bottom2">
             <button type="button" class="button" id="btn" onclick="moffinnameChan();" autocomplete="off" required>모핀이명 변경</button>
             <button type="button" class="button" id="btn" onclick="btnClick();">공유하기</button>
         </div>
-        <div class="bottom2">
+        <div>
             <a href="{{route('users.modify')}}" id="down2">회원정보 수정</a>
         </div>
     </form>

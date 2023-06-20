@@ -9,7 +9,7 @@
     @include('layout.errorsvalidate')
     <form id="modify" action="{{route('users.modify.post')}}" method="post">
         @csrf
-        <div class="regist">
+        <div>
             @foreach ($data as $user)
                 <div class="label3">
                     <label for="name">이름</label>
