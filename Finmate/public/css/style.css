@@ -117,14 +117,15 @@ input {
     display: flex;
 }
 
-.bottom2 {
-    display: flex;
-    margin: 10px;
-    margin-bottom: 0px;
-}
-
 #down {
     margin: 10px;
+    font-size: small;
+}
+
+#down2 {
+    float: right;
+    margin-top: 15px;
+    margin-bottom: 0px;
     font-size: small;
 }
 
@@ -165,8 +166,8 @@ input {
 }
 
 #myinfo {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 350px;
     background-color: var(--sub-color);
     display: flex;
     flex-direction: column;
@@ -181,7 +182,7 @@ input {
     align-items: center;
     text-align: center;
     color: var(--btn-color);
-    margin-left: 20px;
+    margin-left: 60px;
     font-weight: bold;
     padding: 10px;
 }
@@ -189,6 +190,6 @@ input {
 #moffinname {
     background-color: transparent;
     font-size: medium;
-    width: 120px;
+    width: 110px;
     margin: 5px;
 }

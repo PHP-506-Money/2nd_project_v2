@@ -28,6 +28,7 @@ class AssetController extends Controller
         $transactions = Transaction::join('assets', 'transactions.assetno', '=' , 'assets.assetno')
                         ->select('transactions.*')
                         ->where('assets.userid', $userid)
+                        ->orderby('transactions.trantime', 'desc')
                         ->get();
         return view('assets', ['assets'=>$assets ,'transactions' => $transactions]);
     }

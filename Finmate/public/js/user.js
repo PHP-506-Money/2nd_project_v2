@@ -32,6 +32,15 @@ function checkDuplicateButton() {
         .catch(error=>alert(error.message));
 }
 
-function btnclick(){
+function btnClick(){
     alert('추후 도입 예정입니다.');
+}
+
+function moffinnameChan() {
+    if( confirm('모핀이명을 변경하시겠습니까?') ){
+        document.myinfo.submit();
+    } else{
+        window.location.reload();
+        return false;
+    }
 }

@@ -1,10 +1,8 @@
 @extends('layout.layout')
 
-@section('title', 'WELCOME TO FINMATE')
+@section('title', 'MY ASSETS')
 
-
-@section('header', 'WELCOME TO FINMATE')
-
+@section('header', 'MY ASSETS')
 
 @section('contents')
 <div>
@@ -55,6 +53,9 @@
     </table>
 
     @else
+    <a href="{{url('/transactions'.'/'.auth()->user()->userid)}}">내 자산 내역 보러가기</a>
+
+
     <table>
         <tr>
             <th>자산명</th>
@@ -63,7 +64,9 @@
         @foreach($assets as $asset)
         <tr>
             <td>{{$asset->assetname}}</td>
-            <td>{{$asset->balance}}</td>
+            <td>{{number_format($asset->balance)}}원</td>
+
+
         </tr>
 
         @endforeach
@@ -270,7 +273,9 @@
             });
             if (depositAmount > 0 || withdrawalAmount > 0) {
             const amounts = document.createElement('div');
-            amounts.innerHTML = `+${depositAmount}<br> -${withdrawalAmount}`;
+            amounts.innerHTML = `<span style="color: blue">+${depositAmount}</span><br><span style="color: red"> -${withdrawalAmount}</span>`;
+
+
             cell.appendChild(amounts);
             }
             }

@@ -12,6 +12,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\StaticController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Asset;
 use App\Models\Transaction;
@@ -59,6 +60,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/assets', [AssetController::class, 'store'])->name('assets.store');
     Route::post('/assetspost', [AssetController::class, 'store'])->name('assets.store.post');
 
+    //transaction
+    Route::get('/transactions/{userid}', [TransactionController::class, 'index'])->name('transactions.index');
+    
     // myinfo
     Route::get('/users/myinfo', [UserController::class, 'myinfo'])->name('users.myinfo');
     Route::post('/users/myinfopost', [UserController::class, 'myinfopost'])->name('users.myinfo.post');

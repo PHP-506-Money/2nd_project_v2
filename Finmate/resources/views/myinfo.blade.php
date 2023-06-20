@@ -7,11 +7,13 @@
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     @include('layout.errorsvalidate')
-    <form id="myinfo" action="{{route('users.myinfo.post')}}" method="post">
+    <form id="myinfo" name="myinfo" action="{{route('users.myinfo.post')}}" method="post">
         @csrf
         <div>
             @foreach ($data as $user)
-                @if ($user->moffintype == 1)
+                @if ($user->moffintype == 0)
+                    <img src="{{ asset('/img/moffin2.png') }}" alt="">
+                @elseif ($user->moffintype == 1)
                     <img src="{{ asset('/img/rabbit.png') }}" alt="">
                 @elseif ($user->moffintype == 2)
                     <img src="{{ asset('/img/penguin.png') }}" alt="">
@@ -24,11 +26,11 @@
             @endforeach
         </div>
         <div>
-            <button type="submit" class="button" id="btn">모핀이명 변경</button>
-            <button type="button" class="button" id="btn" onclick=btnclick();>공유하기</button>
+            <button type="button" class="button" id="btn" onclick="moffinnameChan();">모핀이명 변경</button>
+            <button type="button" class="button" id="btn" onclick="btnClick();">공유하기</button>
         </div>
         <div class="bottom2">
-            <a href="{{route('users.modify')}}" id="down">회원정보 수정</a>
+            <a href="{{route('users.modify')}}" id="down2">회원정보 수정</a>
         </div>
     </form>
 @endsection
