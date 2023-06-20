@@ -37,10 +37,20 @@ function btnClick(){
 }
 
 function moffinnameChan() {
-    if( confirm('모핀이명을 변경하시겠습니까?') ){
+    if(confirm('모핀이명을 변경하시겠습니까?')){
         document.myinfo.submit();
     } else{
         window.location.reload();
         return false;
     }
 }
+
+function confirmWithdrawal() {
+    if(confirm("정말로 회원탈퇴 하시겠습니까?")) {
+        let withdrawUrl = "/users/withdraw";
+        location.href = withdrawUrl;
+    } else{
+        return false;
+    }
+}
+
