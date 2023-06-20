@@ -8,18 +8,41 @@ use Illuminate\Support\Facades\DB;
 
 class GoalController extends Controller
 {
-    public function index($userid)
+    public function index($id)
     {   
 
-        $result = DB::table('goals')->where('userid', $userid)->where('deleted_at', null)->get();
 
-        $startdate = $result->startperiod;
-        $enddate = $result->endperiod;
         
+        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+        $idsearch = DB::table('users')->where('userno', $id)->first();
+        $userid = $idsearch->userid;
         
+        foreach ($results as $result) {
+            $startdate = $result->startperiod;
+            $enddate = $result->endperiod;
+            $income = DB::table('transactions as tran')
+            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+            ->where('ass.userid', $userid)
+            ->where('tran.type', '0')
+            ->whereBetween('tran.trantime', [ $startdate, $enddate])
+            ->sum('tran.amount');
+    
+            $outcome = DB::table('transactions as tran')
+            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+            ->where('ass.userid', $userid)
+            ->where('tran.type', '1')
+            ->whereBetween('tran.trantime', [ $startdate, $enddate])
+            ->sum('tran.amount');
 
-        return view('goal')->with('data', $result);
+            if ($income - $outcome >= $result->amount) {
+                DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
+
+            }
+            $goalint[] = $income-$outcome ;
     }
+        return view('goal')->with('data', $results)->with('goalint',$goalint);
+    }
+
 
 
     public function insert($id,Request $Req)
@@ -32,10 +55,34 @@ class GoalController extends Controller
         $data['created_at'] = now();    
         DB::table('goals')->insert($data);
     
-        $result = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+        $idsearch = DB::table('users')->where('userno', $id)->first();
+        $userid = $idsearch->userid;
+        
+        foreach ($results as $result) {
+            $startdate = $result->startperiod;
+            $enddate = $result->endperiod;
+            $income = DB::table('transactions as tran')
+            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+            ->where('ass.userid', $userid)
+            ->where('tran.type', '0')
+            ->whereBetween('tran.trantime', [ $startdate, $enddate])
+            ->sum('tran.amount');
     
-        return view('goal')->with('data', $result);
+            $outcome = DB::table('transactions as tran')
+            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+            ->where('ass.userid', $userid)
+            ->where('tran.type', '1')
+            ->whereBetween('tran.trantime', [ $startdate, $enddate])
+            ->sum('tran.amount');
+            $goalint[] = $income-$outcome ;
+        }
+        return view('goal')->with('data', $results)->with('goalint',$goalint);
     }
+
+
+
+
 
     public function update($id, Request $Req)
 {
@@ -51,36 +98,66 @@ class GoalController extends Controller
 
     $upinfo->update($updatedData);
 
-    $result = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+    $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+    $idsearch = DB::table('users')->where('userno', $id)->first();
+    $userid = $idsearch->userid;
+    
+    foreach ($results as $result) {
+        $startdate = $result->startperiod;
+        $enddate = $result->endperiod;
+        $income = DB::table('transactions as tran')
+        ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+        ->where('ass.userid', $userid)
+        ->where('tran.type', '0')
+        ->whereBetween('tran.trantime', [ $startdate, $enddate])
+        ->sum('tran.amount');
 
-    return view('goal')->with('data', $result);
+        $outcome = DB::table('transactions as tran')
+        ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+        ->where('ass.userid', $userid)
+        ->where('tran.type', '1')
+        ->whereBetween('tran.trantime', [ $startdate, $enddate])
+        ->sum('tran.amount');
+        $goalint[] = $income-$outcome ;
+    }
+        return view('goal')->with('data', $results)->with('goalint',$goalint);
 }
+
+
+
+
 
 public function delete($id, Request $Req){
     $delinfo = DB::table('goals')->where('userno', $id)->where('goalno', $Req->goalno);
             $delinfo -> update([
             'deleted_at' => now()
         ]);
-        $result = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
 
-    return view('goal')->with('data', $result);
+        $idsearch = DB::table('users')->where('userno', $id)->first();
+        $userid = $idsearch->userid;
+        
+        foreach ($results as $result) {
+            $startdate = $result->startperiod;
+            $enddate = $result->endperiod;
+            $income = DB::table('transactions as tran')
+            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+            ->where('ass.userid', $userid)
+            ->where('tran.type', '0')
+            ->whereBetween('tran.trantime', [ $startdate, $enddate])
+            ->sum('tran.amount');
+    
+            $outcome = DB::table('transactions as tran')
+            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+            ->where('ass.userid', $userid)
+            ->where('tran.type', '1')
+            ->whereBetween('tran.trantime', [ $startdate, $enddate])
+            ->sum('tran.amount');
+            $goalint[] = $income-$outcome ;
+        }
+        return view('goal')->with('data', $results)->with('goalint',$goalint);
 
 }
-// public function complete($id){
 
-//     $result = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
-//     return view('goal')->with('data', $result);
-
-
-//     $today = date();  // 현재 날짜
-//     $day = date('w');
-//     $currentYear = date('Y'); // 현재 년도
-//     $currentMonth = date('m'); // 현재 달
-
-//     $start = date('Y-m-d', strtotime($today." -".$day."days")); // 이번주 시작요일 계산
-//     $end = date('Y-m-d', strtotime($start." +6days")); // 이번주 마지막날 계산
-//     $startDate =date('m-d',strtotime($start));  // 형태를 월과 요일로 바꾸기
-//     $endDate =date('m-d',strtotime($end));  // 형태를 월과 요일로 바꾸기
-// }
 
 }

@@ -26,9 +26,13 @@
 <br><br>
 <h2>목록</h2>
 
-
+    @php
+        
+        $num = 0;
+    @endphp
 @if(isset($data))
     @foreach($data as $goal)
+
             <div>
                 <div id="view_{{ $goal->goalno }}" style="display: block;" >
                 <form id = "view_form_{{ $goal->goalno }}" action="{{ route('goal.delete',[auth()->user()->userno]) }}" method="post">
@@ -39,6 +43,8 @@
                     {{ '목표금액 : ' . $goal->amount }}
                     {{ '시작일자 : ' . $goal->startperiod }}
                     {{ '마감일자 : ' . $goal->endperiod }}
+                    {{'진행금액 : '. $goalint[$num]}}
+
                     <input type="hidden" name="goalcom" value="{{ $goal->completed_at }}">
                     <button type="button" onclick="toggleForm({{ $goal->goalno }})">수정</button>
                     <button type="submit">삭제</button>
@@ -76,7 +82,10 @@
                     <button type="button"onclick="cancelForm({{ $goal->goalno }})">취소</button>
                 </form>
             </div>
+            @php
         
+        $num++;
+    @endphp
     @endforeach
 @endif
 <script>
