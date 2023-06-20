@@ -128,7 +128,45 @@ class UserController extends Controller
     }
 
     function modify() {
-        return view('modify');
+        $id = auth()->user()->userno; // 현재 로그인한 사용자의 ID를 가져옵니다.
+        $result = User::select(['username', 'userid', 'userpw', 'useremail', 'phone'])
+                        ->where('userno', $id)
+                        ->get();
+        return view('modify')->with('data', $result);
     }
 
+    function modifypost(Request $req) {
+        $id = auth()->user()->userno;
+
+        // 유효성 검사 방법 1
+        $req->validate([ // validate는 자동으로 리다이렉트 해줌.
+            'name'          => 'regex:/^[a-zA-Z가-힣]{2,20}$/' // regex:정규식. 한글, 영어만 글자 수 2~20
+            ,'id'           => 'regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만.
+            ,'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
+            ,'email'        => 'email:rfc,dns' // 이메일 유효성체크
+            ,'phone'        => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/' // 휴대폰번호 유효성체크
+        ]);
+
+        $result = User::find($id);
+        if (!$result) {
+            // 사용자를 찾지 못한 경우에 대한 처리
+            return redirect()->back()->withErrors(['message' => '사용자를 찾을 수 없습니다.']);
+        }    
+
+        $data['userpw'] = Hash::make($req->password);
+        $data['useremail'] = $req->email;
+        $data['phone'] = $req->phone;
+
+        $result->update($data);
+
+        return redirect()->route('users.myinfo');
+    }
+
+    function withdraw() {
+        $id = session('id');
+        $result = User::destroy($id); // destroy 에러 났을 때 에러 핸들링 써서 예외 처리 하기
+        Session::flush(); // 세션 파기
+        Auth::logout(); // 로그아웃
+        return redirect()->route('users.login');
+    }
 }

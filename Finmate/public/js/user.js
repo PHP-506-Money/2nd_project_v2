@@ -24,7 +24,7 @@ function checkDuplicateButton() {
             if(apiData["errorcode"] === "E01"){
                 idSpan.innerHTML = apiData["msg"];
                 idSpan.style.color = "red";
-            }else{
+            } else{
                 idSpan.innerHTML = apiData["msg"];
                 idSpan.style.color = "green";
             }

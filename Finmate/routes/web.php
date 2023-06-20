@@ -53,6 +53,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     // Users
     Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
+    Route::get('/users/withdraw', [UserController::class, 'withdraw'])->name('users.withdraw');
 
     // Account
     Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
