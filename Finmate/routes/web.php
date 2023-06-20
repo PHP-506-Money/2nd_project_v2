@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/assetspost', [AssetController::class, 'store'])->name('assets.store.post');
 
     //transaction
-    Route::get('/transactions/{userid}', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/assets/transactions/{userid}', [TransactionController::class, 'index'])->name('transactions.index');
     
     // myinfo
     Route::get('/users/myinfo', [UserController::class, 'myinfo'])->name('users.myinfo');

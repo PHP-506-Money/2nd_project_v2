@@ -26,7 +26,8 @@
                 <td>토</td>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody class="scriptCalendarVal"></tbody>
+
     </table>
 </div>
 
@@ -53,7 +54,8 @@
     </table>
 
     @else
-    <a href="{{url('/transactions'.'/'.auth()->user()->userid)}}">내 자산 내역 보러가기</a>
+    <a href="{{url('/assets/transactions'.'/'.auth()->user()->userid)}}">내 자산 내역 보러가기</a>
+
 
 
     <table>
@@ -132,6 +134,7 @@
         // @details 이전 캘린더의 출력결과가 남아있다면, 이전 캘린더를 삭제한다.
         while (tbCalendar.rows.length > 0) {
             tbCalendar.deleteRow(tbCalendar.rows.length - 1);
+            // clearTransactionAmounts();
         }
 
         // @param 첫번째 개행
@@ -259,32 +262,40 @@
 
         const transactions = @json($transactions);
 
-        function showTransactionAmounts() {
-        let calendarCells = document.querySelectorAll("td");
-        for (let i = 0; i < calendarCells.length; i++) { const cell=calendarCells[i]; const date=new Date(toDay.getFullYear(), toDay.getMonth(), parseInt(cell.innerText)); let depositAmount=0; let withdrawalAmount=0; transactions.forEach(transaction=> {
-            const transactionDate = new Date(transaction.trantime);
-            if (transactionDate.toDateString() === date.toDateString()) {
-            if (transaction.type === '0') {
-            depositAmount += transaction.amount;
-            } else {
-            withdrawalAmount += transaction.amount;
-            }
-            }
-            });
-            if (depositAmount > 0 || withdrawalAmount > 0) {
-            const amounts = document.createElement('div');
-            amounts.innerHTML = `<span style="color: blue">+${depositAmount}</span><br><span style="color: red"> -${withdrawalAmount}</span>`;
+    function showTransactionAmounts() {
+    if (document.querySelector("tbody.scriptCalendarVal")) {
+
+    let calendarCells = document.querySelectorAll("tbody.scriptCalendarVal > tr > td");
 
 
-            cell.appendChild(amounts);
-            }
-            }
-            }
+    for (let i = 0; i < calendarCells.length; i++) { const cell=calendarCells[i]; const date=new Date(toDay.getFullYear(), toDay.getMonth(), parseInt(cell.innerText)); let depositAmount=0; let withdrawalAmount=0; transactions.forEach(transaction=> {
+        const transactionDate = new Date(transaction.trantime);
 
-            showTransactionAmounts();
+        if (transactionDate.toDateString() === date.toDateString()) {
+        if (transaction.type === '0') {
+        depositAmount += transaction.amount;
+        } else {
+        withdrawalAmount += transaction.amount;
+        }
+        }
+        });
 
+        if (depositAmount > 0 || withdrawalAmount > 0) {
+        const amounts = document.createElement('div');
+        amounts.innerHTML = `<span style="color: blue">+${depositAmount}</span><br><span style="color: red">-${withdrawalAmount}</span>`;
+        cell.appendChild(amounts);
+        }
+        }
+        }
+        }
 
-            @endif
+        // function clearTransactionAmounts() {
+       //  let calendarCells = document.querySelectorAll("td");
+       //  for (let i = 0; i < calendarCells.length; i++) { const cell=calendarCells[i]; const amountsDiv=cell.querySelector('div'); if (amountsDiv) { cell.removeChild(amountsDiv); } } }
+
+        showTransactionAmounts();
+
+        @endif
 
 
     }
