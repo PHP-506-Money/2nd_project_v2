@@ -41,7 +41,7 @@
                 <button type="submit" class="button" id="button">변경하기</button>
             </div>
             <div class="btn2">
-                <button type="button" class="button" id="button2" onclick="location.href='{{route('users.withdraw')}}'">회원탈퇴</button>
+                <button type="button" class="button" id="button2" onclick="confirmWithdrawal()">회원탈퇴</button>
             </div>
         </div>
     </form>
