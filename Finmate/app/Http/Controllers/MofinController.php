@@ -95,7 +95,7 @@ class MofinController extends Controller
     {
         $result = User::find($id);
 
-        if($result->point > 500)
+        if($result->point >= 500)
         {
         $result->point -= 500;
         $result->save();

@@ -13,7 +13,7 @@
     <input type="text" class="" name="title"  id="title" required placeholder="목표">
     
     <label for="amount">금액 : </label>
-    <input type="number" class="" name="amount"  id="amount" required placeholder="목표">
+    <input type="number" min="1" max="1000000000" class="" name="amount"  id="amount" required placeholder="목표">
     
     <label for="startperiod">시작일자 : </label>
     <input type="date" name="startperiod"  id="startperiod" required>
@@ -28,46 +28,59 @@
 
 
 @if(isset($data))
-@foreach($data as $goal)
-<div>
-    <div id="view_{{ $goal->goalno }}" style="display: block;" >
-    <form action="{{ route('goal.delete',[auth()->user()->userno]) }}" method="post">
-    @csrf
-    @method('post')
-        <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
-        {{ '목표 : ' . $goal->title }}
-        {{ '목표금액 : ' . $goal->amount }}
-        {{ '시작일자 : ' . $goal->startperiod }}
-        {{ '마감일자 : ' . $goal->endperiod }}
-        <button type="button" onclick="toggleForm({{ $goal->goalno }})">수정</button>
-        <button type="submit">삭제</button>
-    </form>
-    </div>
+    @foreach($data as $goal)
+            <div>
+                <div id="view_{{ $goal->goalno }}" style="display: block;" >
+                <form id = "view_form_{{ $goal->goalno }}" action="{{ route('goal.delete',[auth()->user()->userno]) }}" method="post">
+                @csrf
+                @method('post')
+                    <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
+                    {{ '목표 : ' . $goal->title }}
+                    {{ '목표금액 : ' . $goal->amount }}
+                    {{ '시작일자 : ' . $goal->startperiod }}
+                    {{ '마감일자 : ' . $goal->endperiod }}
+                    <input type="hidden" name="goalcom" value="{{ $goal->completed_at }}">
+                    <button type="button" onclick="toggleForm({{ $goal->goalno }})">수정</button>
+                    <button type="submit">삭제</button>
 
-    <form action="{{ route('goal.update',[auth()->user()->userno]) }}" method="post" id="form_{{ $goal->goalno }}" style="display: none;">
-        @csrf 
-        @method('post')
-        <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
+            @if($goal->completed_at !== null)
+                <script>
+                    var viewstyle = 'view_form_{{ $goal->goalno }}';
+                    var view1 = document.getElementById(viewstyle);
+                    if (view1) {
+                        view1.style.backgroundColor = "gray";
+                    }
+                </script>
+            @endif
+                </form>
+                </div>
 
-        <label for="title">목표 : </label>
-        <input type="text" name="title" id="title" required placeholder="목표" value="{{ $goal->title }}">
+                <form action="{{ route('goal.update',[auth()->user()->userno]) }}" method="post" id="form_{{ $goal->goalno }}" style="display: none;">
+                    @csrf 
+                    @method('post')
+                    <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
 
-        <label for="amount">금액 : </label>
-        <input type="number" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
+                    <label for="title">목표 : </label>
+                    <input type="text" name="title" id="title" required placeholder="목표" value="{{ $goal->title }}">
 
-        <label for="startperiod">시작일자 : </label>
-        <input type="date" name="startperiod" id="startperiod" required value="{{ $goal->startperiod }}">
+                    <label for="amount">금액 : </label>
+                    <input type="number" min="1" max="1000000000" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
 
-        <label for="endperiod">목표일 : </label>
-        <input type="date" name="endperiod" id="endperiod" required value="{{ $goal->endperiod }}">
+                    <label for="startperiod">시작일자 : </label>
+                    <input type="date" name="startperiod" id="startperiod" required value="{{ $goal->startperiod }}">
 
-        <button type="submit">수정</button>
-        <button type="button"onclick="cancelForm({{ $goal->goalno }})">취소</button>
-    </form>
-</div>
-@endforeach
+                    <label for="endperiod">목표일 : </label>
+                    <input type="date" name="endperiod" id="endperiod" required value="{{ $goal->endperiod }}">
 
+                    <button type="submit">수정</button>
+                    <button type="button"onclick="cancelForm({{ $goal->goalno }})">취소</button>
+                </form>
+            </div>
+        
+    @endforeach
+@endif
 <script>
+
     function toggleForm(goalno) {
         
         var formId = 'form_' + goalno;
@@ -96,6 +109,6 @@
 </script>
 
 
-@endif
+
 
 @endsection
