@@ -120,11 +120,12 @@ class UserController extends Controller
             // 사용자를 찾지 못한 경우에 대한 처리
             return redirect()->back()->withErrors(['message' => '사용자를 찾을 수 없습니다.']);
         }    
+
         $result->moffinname = $req->moffinname;
         $result->save();
 
         return redirect()->route('users.myinfo');
-    }    
+    }
 
     function modify() {
         return view('modify');
