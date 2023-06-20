@@ -29,6 +29,7 @@
         <a href="{{ url('/mofin'.'/' . auth()->user()->userno) }}" class="nav-item {{ Request::is('mofin/*') ? 'is-active' : '' }}" active-color="#FF7676">모핀</a>
         <a href="{{ url('/goal'.'/' . auth()->user()->userno) }}" class="nav-item {{ Request::is('goal/*') ? 'is-active' : '' }}" active-color="#FF7676">목표</a>
         <a href="{{ url('/budget'.'/' . auth()->user()->userid) }}" class="nav-item {{ Request::is('budget/*') ? 'is-active' : '' }}" active-color="#FF7676">예산</a>
+        <a href="{{ url('/static'.'/' . auth()->user()->userid) }}" class="nav-item {{ Request::is('static/*') ? 'is-active' : '' }}" active-color="#FF7676">예산</a>
         <a href="{{ route('users.myinfo') }}" class="nav-item {{ Request::is('users/myinfo') ? 'is-active' : '' }}" active-color="#FF7676">Myinfo</a>
         <a href="{{ route('users.logout') }}" class="nav-item {{ Request::is('users/logout') ? 'is-active' : '' }}" active-color="#FF7676">logout</a>
         <span class="nav-indicator"></span>

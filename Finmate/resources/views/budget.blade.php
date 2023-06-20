@@ -25,4 +25,7 @@
     <p>사용금액 : {{$sumweek}}</p>
     <br>
     </main>
+
+</body>
+
 @endsection
