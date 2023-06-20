@@ -5,12 +5,24 @@
 @section('contents')
 
 
-
 <h1>나의 모핀이</h1>
 <h2>나의 포인트 : {{$data->point}}</h2> <br>
 <h2>나의 아이템 목록</h2> <br>
 <h3>{{$itemname}}</h3>
 <br><br>
+
+<div>
+            @if ($data->moffintype == 1)
+                <img src="{{ asset('/img/rabbit.png') }}" alt="">
+            @elseif ($data->moffintype == 2)
+                <img src="{{ asset('/img/penguin.png') }}" alt="">
+            @elseif ($data->moffintype == 3)
+                <img src="{{ asset('/img/panda.png') }}" alt="">
+            @endif
+            <div id="info">
+                {{ $data->username }} 님의 {{ $data->moffinname }}
+            </div>
+</div>
 
 <form action="{{route('mofin.point',[auth()->user()->userno])}}" method="post">
     @csrf

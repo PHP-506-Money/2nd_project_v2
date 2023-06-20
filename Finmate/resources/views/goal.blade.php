@@ -99,10 +99,3 @@
 @endif
 
 @endsection
-        {{-- {{'목표 : '.$goal->title }}
-        {{'목표금액 : ' .$goal->amount}}
-        {{'시작일자 : '. $goal->startperiod }}
-        {{' 마감일자 : '. $goal->endperiod }}
-        {{'   '}}<button>수정</button>{{'   '}}<button>삭제</button>
-        <br>
-        <br> --}}
