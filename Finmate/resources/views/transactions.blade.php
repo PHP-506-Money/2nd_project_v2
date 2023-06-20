@@ -43,7 +43,8 @@
             @if($tran->type == '0')
             <td>수입</td>
             @else
-            <td>{{$tran->char}}</td>
+            <td>{{$tran->name}}</td>
+
             @endif
 
             @if($tran->type == '0')
