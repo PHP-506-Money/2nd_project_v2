@@ -22,6 +22,7 @@
     <a href="{{url('/assets'.'/'.auth()->user()->userid)}}">내 자산 목록 보러가기</a>
     <table>
         <tr>
+            <th>자산명</th>
             <th>거래구분</th>
             <th>거래처</th>
             <th>카테고리</th>
@@ -30,6 +31,8 @@
         </tr>
         @foreach($transactions as $tran)
         <tr data-month="{{ substr($tran->trantime, 0, 7) }}">
+            <td>{{$tran->assetname}}</td>
+
             @if($tran->type == '0')
             <td>입금</td>
             @else

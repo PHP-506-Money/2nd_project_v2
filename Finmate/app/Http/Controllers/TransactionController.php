@@ -10,7 +10,7 @@ class TransactionController extends Controller
     public function index($userid)
     {
         $transactions = Transaction::join('assets', 'transactions.assetno', '=', 'assets.assetno')
-            ->select('transactions.*')
+            ->select('transactions.*' , 'assets.assetname')
             ->where('assets.userid', $userid)
             ->orderBy('trantime', 'desc') // 거래일시를 기준으로 내림차순 정렬
             ->get();
