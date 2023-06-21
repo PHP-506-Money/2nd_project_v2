@@ -214,24 +214,44 @@ class UserController extends Controller
 
         $results = [];
         foreach ($achievements as $achievement) {
+            $progress = 0;
             $isAchieved = false;
+            $rewardReceived = false;
+
             switch ($achievement->name) {
                 case '로그인 10회':
+                    $progress = ($user->login_count / 10) * 100;
                     $isAchieved = $user->login_count >= 10;
                     break;
+
                 case '포인트 뽑기':
+                    $progress = ($user->point_draw_count / 10) * 100;
                     $isAchieved = $user->point_draw_count >= 10;
                     break;
+
                 case '아이템 뽑기':
+                    $progress = ($user->item_draw_count / 10) * 100;
                     $isAchieved = $user->item_draw_count >= 10;
                     break;
+
                 case '내역 조회':
+                    $progress = ($user->history_check_count / 10) * 100;
                     $isAchieved = $user->history_check_count >= 10;
                     break;
             }
+
+            if ($isAchieved) {
+                // Reward received logic should be implemented here
+                // If the reward has not been received, you should set $rewardReceived = false; instead
+                $rewardReceived = true;
+            }
+
             array_push($results, [
+                'id' => $achievement->id,
                 'name' => $achievement->name,
-                'is_achieved' => $isAchieved
+                'progress' => min(100, (int)$progress),
+                'is_achieved' => $isAchieved,
+                'reward_received' => $rewardReceived
             ]);
         }
 
