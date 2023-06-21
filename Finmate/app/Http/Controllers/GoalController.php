@@ -22,30 +22,37 @@ class GoalController extends Controller
         $idsearch = DB::table('users')->where('userno', $id)->first();
         $userid = $idsearch->userid;
         
-        foreach ($results as $result) {
-            $startdate = $result->startperiod;
-            $enddate = $result->endperiod;
-            $income = DB::table('transactions as tran')
-            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-            ->where('ass.userid', $userid)
-            ->where('tran.type', '0')
-            ->whereBetween('tran.trantime', [ $startdate, $enddate])
-            ->sum('tran.amount');
-    
-            $outcome = DB::table('transactions as tran')
-            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-            ->where('ass.userid', $userid)
-            ->where('tran.type', '1')
-            ->whereBetween('tran.trantime', [ $startdate, $enddate])
-            ->sum('tran.amount');
+        if (count($results) > 0){
 
-            if ($income - $outcome >= $result->amount) {
-                DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
+            
+            foreach ($results as $result) {
+                $startdate = $result->startperiod;
+                $enddate = $result->endperiod;
+                $income = DB::table('transactions as tran')
+                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+                ->where('ass.userid', $userid)
+                ->where('tran.type', '0')
+                ->whereBetween('tran.trantime', [ $startdate, $enddate])
+                ->sum('tran.amount');
+        
+                $outcome = DB::table('transactions as tran')
+                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+                ->where('ass.userid', $userid)
+                ->where('tran.type', '1')
+                ->whereBetween('tran.trantime', [ $startdate, $enddate])
+                ->sum('tran.amount');
 
-            }
-            $goalint[] = $income-$outcome ;
-    }
-        return view('goal')->with('data', $results)->with('goalint',$goalint);
+                if ($income - $outcome >= $result->amount) {
+                    DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
+
+                }
+                $goalint[] = $income-$outcome ;
+                }
+            return view('goal')->with('data', $results)->with('goalint',$goalint);
+        }
+        else{
+            return view('goal')->with('data', $results);
+        }
     }
 
 
@@ -64,25 +71,37 @@ class GoalController extends Controller
         $idsearch = DB::table('users')->where('userno', $id)->first();
         $userid = $idsearch->userid;
         
-        foreach ($results as $result) {
-            $startdate = $result->startperiod;
-            $enddate = $result->endperiod;
-            $income = DB::table('transactions as tran')
-            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-            ->where('ass.userid', $userid)
-            ->where('tran.type', '0')
-            ->whereBetween('tran.trantime', [ $startdate, $enddate])
-            ->sum('tran.amount');
-    
-            $outcome = DB::table('transactions as tran')
-            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-            ->where('ass.userid', $userid)
-            ->where('tran.type', '1')
-            ->whereBetween('tran.trantime', [ $startdate, $enddate])
-            ->sum('tran.amount');
-            $goalint[] = $income-$outcome ;
+        if (count($results) > 0){
+
+            
+            foreach ($results as $result) {
+                $startdate = $result->startperiod;
+                $enddate = $result->endperiod;
+                $income = DB::table('transactions as tran')
+                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+                ->where('ass.userid', $userid)
+                ->where('tran.type', '0')
+                ->whereBetween('tran.trantime', [ $startdate, $enddate])
+                ->sum('tran.amount');
+        
+                $outcome = DB::table('transactions as tran')
+                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+                ->where('ass.userid', $userid)
+                ->where('tran.type', '1')
+                ->whereBetween('tran.trantime', [ $startdate, $enddate])
+                ->sum('tran.amount');
+
+                if ($income - $outcome >= $result->amount) {
+                    DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
+
+                }
+                $goalint[] = $income-$outcome ;
+                }
+            return view('goal')->with('data', $results)->with('goalint',$goalint);
         }
-        return view('goal')->with('data', $results)->with('goalint',$goalint);
+        else{
+            return view('goal')->with('data', $results);
+        }
     }
 
 
@@ -107,41 +126,9 @@ class GoalController extends Controller
     $idsearch = DB::table('users')->where('userno', $id)->first();
     $userid = $idsearch->userid;
     
-    foreach ($results as $result) {
-        $startdate = $result->startperiod;
-        $enddate = $result->endperiod;
-        $income = DB::table('transactions as tran')
-        ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-        ->where('ass.userid', $userid)
-        ->where('tran.type', '0')
-        ->whereBetween('tran.trantime', [ $startdate, $enddate])
-        ->sum('tran.amount');
+    if (count($results) > 0){
 
-        $outcome = DB::table('transactions as tran')
-        ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-        ->where('ass.userid', $userid)
-        ->where('tran.type', '1')
-        ->whereBetween('tran.trantime', [ $startdate, $enddate])
-        ->sum('tran.amount');
-        $goalint[] = $income-$outcome ;
-    }
-        return view('goal')->with('data', $results)->with('goalint',$goalint);
-}
-
-
-
-
-
-public function delete($id, Request $Req){
-    $delinfo = DB::table('goals')->where('userno', $id)->where('goalno', $Req->goalno);
-            $delinfo -> update([
-            'deleted_at' => now()
-        ]);
-        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
-
-        $idsearch = DB::table('users')->where('userno', $id)->first();
-        $userid = $idsearch->userid;
-        
+            
         foreach ($results as $result) {
             $startdate = $result->startperiod;
             $enddate = $result->endperiod;
@@ -158,9 +145,65 @@ public function delete($id, Request $Req){
             ->where('tran.type', '1')
             ->whereBetween('tran.trantime', [ $startdate, $enddate])
             ->sum('tran.amount');
+
+            if ($income - $outcome >= $result->amount) {
+                DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
+
+            }
             $goalint[] = $income-$outcome ;
-        }
+            }
         return view('goal')->with('data', $results)->with('goalint',$goalint);
+    }
+    else{
+        return view('goal')->with('data', $results);
+    }
+}
+
+
+
+
+
+public function delete($id, Request $Req){
+    $delinfo = DB::table('goals')->where('userno', $id)->where('goalno', $Req->goalno);
+            $delinfo -> update([
+            'deleted_at' => now()
+        ]);
+        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+
+        $idsearch = DB::table('users')->where('userno', $id)->first();
+        $userid = $idsearch->userid;
+        
+        if (count($results) > 0){
+
+            
+            foreach ($results as $result) {
+                $startdate = $result->startperiod;
+                $enddate = $result->endperiod;
+                $income = DB::table('transactions as tran')
+                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+                ->where('ass.userid', $userid)
+                ->where('tran.type', '0')
+                ->whereBetween('tran.trantime', [ $startdate, $enddate])
+                ->sum('tran.amount');
+        
+                $outcome = DB::table('transactions as tran')
+                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
+                ->where('ass.userid', $userid)
+                ->where('tran.type', '1')
+                ->whereBetween('tran.trantime', [ $startdate, $enddate])
+                ->sum('tran.amount');
+
+                if ($income - $outcome >= $result->amount) {
+                    DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
+
+                }
+                $goalint[] = $income-$outcome ;
+                }
+            return view('goal')->with('data', $results)->with('goalint',$goalint);
+        }
+        else{
+            return view('goal')->with('data', $results);
+        }
 
 }
 
