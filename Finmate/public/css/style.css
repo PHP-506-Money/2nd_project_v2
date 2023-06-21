@@ -104,12 +104,16 @@ label {
     vertical-align: middle;
 }
 
-.label2 > input {
-    width: 250px;
-}
-
 .label3 > label {
     width: 110px;
+}
+
+.label5 > label {
+    width: 130px;
+}
+
+.label2 > input {
+    width: 250px;
 }
 
 .label3 > input {
@@ -121,6 +125,10 @@ label {
     text-align: center;
 }
 
+.label5 > input {
+    width: 200px;
+    text-align: center;
+}
 
 input {
     border: none;

@@ -2,6 +2,8 @@
 
 @section('title', 'FindID')
 
+@section('header', 'FIND ID')
+
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     @include('layout.errorsvalidate')

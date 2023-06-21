@@ -2,6 +2,8 @@
 
 @section('title', 'Registration')
 
+@section('header', 'SIGN UP TO FINMATE')
+
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     @include('layout.errorsvalidate')

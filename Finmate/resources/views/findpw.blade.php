@@ -1,12 +1,13 @@
 @extends('layout.layout')
 
-@section('title', 'Findpw')
+@section('title', 'FIND PASSWORD')
+
+@section('header', 'FIND PASSWORD')
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
-    <div>{!!session()->has('success') ? session('success') : ""!!}</div>
     @include('layout.errorsvalidate')
-    <form id="table" action="" method="post">
+    <form id="table" action="{{route('users.findpw.post')}}" method="post">
         @csrf
         <div class="label">
             <label for="id">아이디</label>

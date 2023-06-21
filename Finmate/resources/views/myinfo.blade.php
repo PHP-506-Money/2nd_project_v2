@@ -2,7 +2,7 @@
 
 @section('title', 'Myinfo')
 
-@section('header', 'WELCOME TO FINMATE')
+@section('header', 'MYINFO TO FINMATE')
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >

@@ -2,6 +2,8 @@
 
 @section('title', 'Login')
 
+@section('header', 'LOGIN TO FINMATE')
+
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     <div>{!!session()->has('success') ? session('success') : ""!!}</div>

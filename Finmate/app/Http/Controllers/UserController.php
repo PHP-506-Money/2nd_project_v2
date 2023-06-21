@@ -119,6 +119,25 @@ class UserController extends Controller
         return view('findpw');
     }
 
+    function findpwpost(Request $req) {
+        //유효성 체크
+        $req->validate([ // validate는 자동으로 리다이렉트 해줌.
+            'id'           => 'regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만. 
+           ,'email'        => 'email:rfc,dns' // 이메일 유효성체크
+        ]);
+
+       // 폼 데이터에서 이름, 이메일 주소 추출
+        $id = $req->input('id');
+        $email = $req->input('email');
+
+       // 데이터베이스에서 이메일에 해당하는 사용자 조회
+        $user = User::where('userid', $id)
+        ->where('useremail', $email)
+        ->first();
+
+    return view('foundpw', ['user'=>$user]);
+    }
+
     function myinfo() {
         $id = auth()->user()->userno; // 현재 로그인한 사용자의 ID를 가져옵니다.
         $result = User::select(['username', 'moffintype', 'moffinname'])
