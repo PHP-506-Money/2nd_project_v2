@@ -206,8 +206,8 @@ input {
 }
 
 #myinfo {
-    width: 330px;
-    height: 380px;
+    width: 400px;
+    height: 450px;
     background-color: var(--sub-color);
     display: flex;
     flex-direction: column;

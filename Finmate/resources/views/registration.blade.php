@@ -41,21 +41,21 @@
                 <label for="moffintype">나의 모핀이 선택</label>
                 <div>
                     <span id="chara">
-                        <img src="{{ asset('/img/rabbit.png') }}" alt="rabbit">
+                        <img src="{{ asset('/img/rabbit2.png') }}" alt="rabbit">
                     </span>
                     <p class="arrow_box">저를 데려가주세요!</p>
                     <input type="radio" name="moffintype" value="1">
                 </div>
                 <div>
                     <span id="chara">
-                        <img src="{{ asset('/img/penguin.png') }}" alt="penguin">
+                        <img src="{{ asset('/img/penguin2.png') }}" alt="penguin">
                     </span>
                     <p class="arrow_box">날 데려가면 좋을걸?</p>
                     <input type="radio" name="moffintype" value="2">
                 </div>
                 <div>
                     <span id="chara">
-                        <img src="{{ asset('/img/panda.png') }}" alt="panda">
+                        <img src="{{ asset('/img/panda2.png') }}" alt="panda">
                     </span>
                     <p class="arrow_box">날 데려가라!</p>
                     <input type="radio" name="moffintype" value="3">
