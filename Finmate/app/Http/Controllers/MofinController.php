@@ -26,7 +26,7 @@ class MofinController extends Controller
         $item_name = DB::table('iteminfos AS info')
         ->select('info.itemname')
         ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-        ->where('tem.userno', 4)
+        ->where('tem.userno', $id)
         ->orderBy('info.itemno', 'ASC')
         ->pluck('itemname')
         ->toArray();
@@ -51,7 +51,7 @@ class MofinController extends Controller
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-            ->where('tem.userno', 4)
+            ->where('tem.userno', $id)
             ->orderBy('info.itemno', 'ASC')
             ->pluck('itemname')
             ->toArray();
@@ -77,7 +77,7 @@ class MofinController extends Controller
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-            ->where('tem.userno', 4)
+            ->where('tem.userno', $id)
             ->orderBy('info.itemno', 'ASC')
             ->pluck('itemname')
             ->toArray();
@@ -130,7 +130,7 @@ class MofinController extends Controller
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-            ->where('tem.userno', 4)
+            ->where('tem.userno', $id)
             ->orderBy('info.itemno', 'ASC')
             ->pluck('itemname')
             ->toArray();
