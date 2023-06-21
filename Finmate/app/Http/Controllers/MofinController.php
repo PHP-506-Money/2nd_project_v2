@@ -21,34 +21,32 @@ class MofinController extends Controller
      */
     public function index($id)
     {
+        
+        $result  = DB::table('users')
+        ->where('userid', $id)
+        ->first();
+        $item_name = DB::table('iteminfos AS info')
+        ->select('info.itemname')
+        ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
+        ->where('tem.userid', $id)
+        ->orderBy('info.itemno', 'ASC')
+        ->pluck('itemname')
+        ->toArray();
 
-        // $result = User::find($id);
-        // $item_name = DB::table('iteminfos AS info')
-        // ->select('info.itemname')
-        // ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-        // ->where('tem.userno', $id)
-        // ->orderBy('info.itemno', 'ASC')
-        // ->pluck('itemname')
-        // ->toArray();
-
-        $item_name = User::join('items', 'users.userid', '=', 'items.userid')
-        ->join('iteminfos', 'iteminfos.itemno', '=', 'items.itemno')
-        ->select('iteminfos.itemname', 'users.*')
-        ->where('users.userid', $id)
-        ->get();
-
-        // $itemonly = array_unique($item_name);
+        $itemonly = array_unique($item_name);
 
         // $itemonly = implode(',', $itemonly);
         
-        return view('mofin')->with('itemname', $item_name);
+        return view('mofin')->with('data',$result)->with('itemname', $itemonly);
 
     }
 
     public function point($id)
     {
         
-        $result = User::find($id);
+        $result  = DB::table('users')
+        ->where('userid', $id)
+        ->first();
 
         if($result->point < 100 ){
             $errmsg = '포인트가부족합니다!';
@@ -57,7 +55,7 @@ class MofinController extends Controller
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-            ->where('tem.userno', $id)
+            ->where('tem.userid', $id)
             ->orderBy('info.itemno', 'ASC')
             ->pluck('itemname')
             ->toArray();
@@ -72,18 +70,21 @@ class MofinController extends Controller
         }
 
         else{
-            $result->point -= 100;
-            $randompoint = rand(1,199);
-            $result->point += $randompoint;
-            $result->save();
-            $randompoint = $randompoint."당첨되셨습니다";
+        $randompoint = rand(1, 199);
+        $newPoint = $result->point - 100 + $randompoint;
 
+        DB::table('users')
+            ->where('userid', $id)
+            ->update(['point' => $newPoint]);
 
+        $randompoint = $randompoint . " 당첨되셨습니다";
+
+        session()->flash('pt1', $randompoint);
 
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-            ->where('tem.userno', $id)
+            ->where('tem.userid', $id)
             ->orderBy('info.itemno', 'ASC')
             ->pluck('itemname')
             ->toArray();
@@ -91,32 +92,40 @@ class MofinController extends Controller
             $itemonly = array_unique($item_name);
 
             // $itemonly = implode(',', $itemonly);
-            
-            return view('mofin')->with('data',$result)->with('pt1',$randompoint)->with('itemname', $itemonly);
+            return redirect()->route('mofin.index', ['userid' => $id])->with('data', $result)->with('itemname', $itemonly);
         }
 
     }
 
     public function item($id)
     {
-        $result = User::find($id);
+        $result  = DB::table('users')
+        ->where('userid', $id)
+        ->first();
+
 
         if($result->point >= 500)
         {
-        $result->point -= 500;
-        $result->save();
+        $newPoint = $result->point -= 500;
+        
+        DB::table('users')
+        ->where('userid', $id)
+        ->update(['point' => $newPoint]);
 
         $randomitem = rand(1,5);
+        $data['userno'] = $result->userno;
         $data['userid'] = $id;
         $data['itemno'] = $randomitem;
         DB::table('items')->insert($data);
         $pt1 =  DB::table('iteminfos')->where('itemno', $randomitem)->value('itemname');
         $pt1 = '축하합니다. '.$pt1.' 아이템 당첨';
-        
+
+        session()->flash('pt1', $pt1);
+
         $item_name = DB::table('iteminfos AS info')
         ->select('info.itemname')
         ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-        ->where('tem.userno', $id)
+        ->where('tem.userid', $id)
         ->orderBy('info.itemno', 'ASC')
         ->pluck('itemname')
         ->toArray();
@@ -125,7 +134,7 @@ class MofinController extends Controller
 
         // $itemonly = implode(',', $itemonly);
         
-        return view('mofin')->with('data',$result)->with('pt1',$pt1)->with('itemname', $itemonly);
+        return view('mofin')->with('data',$result)->with('itemname', $itemonly);
 
         }
         else
@@ -136,7 +145,7 @@ class MofinController extends Controller
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-            ->where('tem.userno', $id)
+            ->where('tem.userid', $id)
             ->orderBy('info.itemno', 'ASC')
             ->pluck('itemname')
             ->toArray();

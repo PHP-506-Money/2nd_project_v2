@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->increments('goalno');
             $table->integer('userno');
+            $table->string('userid',12);
             $table->string('title', 15);
             $table->integer('amount');
             $table->date('startperiod');

@@ -6,7 +6,7 @@
 
 <h1>나의 목표</h1>
 
-<form action="{{ route('goal.insert',[auth()->user()->userno]) }}" method="post">
+<form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post">
     @method('POST')
     @csrf
     <label for="title">목표 : </label>
@@ -36,7 +36,7 @@
 
             <div>
                 <div id="view_{{ $goal->goalno }}" style="display: block;" >
-                <form id = "view_form_{{ $goal->goalno }}" action="{{ route('goal.delete',[auth()->user()->userno]) }}" method="post">
+                <form id = "view_form_{{ $goal->goalno }}" action="{{ route('goal.delete',[auth()->user()->userid]) }}" method="post">
                 @csrf
                 @method('post')
                     <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
@@ -62,7 +62,7 @@
                 </form>
                 </div>
 
-                <form action="{{ route('goal.update',[auth()->user()->userno]) }}" method="post" id="form_{{ $goal->goalno }}" style="display: none;">
+                <form action="{{ route('goal.update',[auth()->user()->userid]) }}" method="post" id="form_{{ $goal->goalno }}" style="display: none;">
                     @csrf 
                     @method('post')
                     <input type="hidden" name="goalno" value="{{ $goal->goalno }}">

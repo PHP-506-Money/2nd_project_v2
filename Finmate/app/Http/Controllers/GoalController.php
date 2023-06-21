@@ -57,9 +57,13 @@ class GoalController extends Controller
 
 
 
-    public function insert($id,Request $Req)
+    public function insert($userid,Request $Req)
     {
-        $data['userid'] = $id;
+        $userno = User::where('userid', $userid)
+            ->pluck('userno')
+            ->first();
+        $data['userno'] = $userno;
+        $data['userid'] = $userid;
         $data['title'] = $Req->title;
         $data['amount'] = $Req->amount;
         $data['startperiod'] = $Req->startperiod;
@@ -67,8 +71,8 @@ class GoalController extends Controller
         $data['created_at'] = now();    
         DB::table('goals')->insert($data);
     
-        $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->get();
-        $idsearch = DB::table('users')->where('userid', $id)->first();
+        $results = DB::table('goals')->where('userid', $userid)->where('deleted_at', null)->get();
+        $idsearch = DB::table('users')->where('userid', $userid)->first();
         $userid = $idsearch->userid;
         
         if (count($results) > 0){
