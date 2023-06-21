@@ -33,7 +33,7 @@ class MofinController extends Controller
 
         $itemonly = array_unique($item_name);
 
-        $itemonly = implode(',', $itemonly);
+        // $itemonly = implode(',', $itemonly);
         
         return view('mofin')->with('data',$result)->with('itemname', $itemonly);
 
@@ -58,7 +58,7 @@ class MofinController extends Controller
         
             $itemonly = array_unique($item_name);
 
-            $itemonly = implode(',', $itemonly);
+            // $itemonly = implode(',', $itemonly);
             
             
         
@@ -84,7 +84,7 @@ class MofinController extends Controller
         
             $itemonly = array_unique($item_name);
 
-            $itemonly = implode(',', $itemonly);
+            // $itemonly = implode(',', $itemonly);
             
             return view('mofin')->with('data',$result)->with('pt1',$randompoint)->with('itemname', $itemonly);
         }
@@ -117,7 +117,7 @@ class MofinController extends Controller
 
         $itemonly = array_unique($item_name);
 
-        $itemonly = implode(',', $itemonly);
+        // $itemonly = implode(',', $itemonly);
         
         return view('mofin')->with('data',$result)->with('pt1',$pt1)->with('itemname', $itemonly);
 
@@ -137,7 +137,7 @@ class MofinController extends Controller
             
             $itemonly = array_unique($item_name);
 
-            $itemonly = implode(',', $itemonly);
+            // $itemonly = implode(',', $itemonly);
         
             return view('mofin')->with('data', $result)->with('itemname', $itemonly)->with('pt1',$errmsg);
         }
