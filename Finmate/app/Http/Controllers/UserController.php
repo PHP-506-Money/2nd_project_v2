@@ -96,6 +96,29 @@ class UserController extends Controller
         return view('findid');
     }
 
+    function findidpost(Request $req) {
+         //유효성 체크
+         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
+            'name'          => 'regex:/^[a-zA-Z가-힣]{2,20}$/' // regex:정규식. 한글, 영어만 글자 수 2~20
+            ,'email'        => 'email:rfc,dns' // 이메일 유효성체크
+        ]);
+
+        // 폼 데이터에서 이름, 이메일 주소 추출
+        $name = $req->input('username');
+        $email = $req->input('useremail');
+
+        // 데이터베이스에서 이메일에 해당하는 사용자 조회
+        $user = User::where('username', $name)
+        ->where('useremail', $email)
+        ->first();
+
+        // 아이디를 찾았을 경우, 해당 아이디를 뷰로 전달하여 표시할 수 있습니다.
+        $foundId = $user ? $user->id : null;
+
+    return view('foundid', compact('foundId'));
+    }
+
+
     function findpw() {
         return view('findpw');
     }

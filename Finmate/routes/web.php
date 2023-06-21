@@ -51,6 +51,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/users/registration/{userid}', [ApiController::class, 'getUserChk'])->name('users.registration.check');
 
     Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
+    Route::post('/users/findidpost', [UserController::class, 'findidpost'])->name('users.findid.post');
     Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
 });
 
