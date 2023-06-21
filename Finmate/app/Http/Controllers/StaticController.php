@@ -17,8 +17,22 @@ class StaticController extends Controller
         
         // v002 add start
         // 현재 년도
-        $currentYear = date('Y'); 
-        
+        // $currentYear = date('Y'); 
+
+        // v003 add start
+
+        $currentYear = date('Y');
+
+        // if(){
+            
+        // }
+        $currentYear = date('Y', strtotime($currentYear." -"."1 years"));
+
+        // $currentYear = date('Y', strtotime($currentYear." -"."1 years"));
+
+        var_dump($currentYear);
+        // v003 add end
+
         // 월별 입금
         $monthRCStatic = DB::select("
         SELECT DATE_FORMAT(tran.trantime, '%m') AS Month, SUM(tran.amount) AS consumption
@@ -42,7 +56,7 @@ class StaticController extends Controller
         $finMonth = date( 'Y-m-t' );
         
         // 카테고리별 지출
-        $catExpenses = DB::select( " select cat.name, SUM(tran.amount) AS consumption
+        $catExpenses = DB::select( " select cat.name as category, SUM(tran.amount) AS consumption
         FROM assets ass
         INNER JOIN transactions tran ON ass.assetno = tran.assetno
         INNER JOIN categories cat ON tran.char = cat.no
@@ -52,11 +66,15 @@ class StaticController extends Controller
         GROUP BY cat.no , cat.name
         ORDER BY consumption desc ", [$startMonth,$finMonth,$userid]);
 
-        var_dump($catExpenses);
+        // var_dump($catExpenses);
         // var_dump($startMonth);
         // var_dump($finMonth);
 
-        return view('static')->with('monthrc' , $monthRCStatic)->with('catdata',$catExpenses)->with('monthex',$monthEXStatic);
+        // v003 add start
+        $arrResult= [$currentYear];
+        // v003 add end
+
+        return view('static')->with('monthrc' , $monthRCStatic)->with('catdata',$catExpenses)->with('monthex',$monthEXStatic)->with('date',$arrResult);
 
         // v002 add end
     }

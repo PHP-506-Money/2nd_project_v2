@@ -2,23 +2,38 @@
 
 @section('title', 'static')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="{{ asset('/css/test.css')  }}" >
 @section('contents')
 <p>월별 입지출 내역</p>
-<div class = "chart">
+
+<form action="" method="get">
+@csrf
+<button type="submit" > < </button>
+<p>{{$date[0]}}</p>
+<button > > </button>
+</form>
+
+
+
+<div class = "chartB">
 <canvas id="monthChart" ></canvas>
 </div>
 <br>
 <br>
 
 <p>카테고리별 지출 내역</p>
-<div class = "chart">
+<div class = "chartD">
 <canvas id="categoryChart" ></canvas>
 </div>
 
-foreach
+@foreach($catdata as $data)
+    <p>{{$data->category}}</p>
+    <p>{{$data->consumption}}</p>
+@endforeach
+
+<p>최대 지출 카테고리  : {{$catdata[0]->category}}</p>
+
 
 <script>
         let monthrcLabels = [];
@@ -39,7 +54,7 @@ foreach
         let categoryData = [];
 
         @foreach($catdata as $data)
-            categoryLabels.push("{{ $data->name }}");
+            categoryLabels.push("{{ $data->category }}");
             categoryData.push({{ $data->consumption }});
         @endforeach
 
@@ -103,7 +118,7 @@ foreach
     },
     options: {
         responsive: true,
-        cutoutPercentage: 70,
+        cutoutPercentage: 60,
         plugins: {
             legend: {
                 position: 'right'

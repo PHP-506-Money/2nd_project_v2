@@ -14,7 +14,7 @@
         <form action="{{route('budget.put')}}" method="post">
             @csrf
             @method('PUT')
-            <input type="number" name="budgetprice" id="budgetprice" value ="{{old('budgetprice')}}">
+            <input type="number" name="budgetprice" id="budgetprice">
             <button type = "submit">설정</button>
             </form>
         @else

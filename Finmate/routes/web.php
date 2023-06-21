@@ -118,7 +118,7 @@ Route::post('/budget/post',[BudgetController::class, 'setting'])->name('budget.p
 Route::put('/budget/up',[BudgetController::class, 'edit'])->name('budget.put');
 
 // 통계
-Route::get('/static/{userid}' , [StaticController::class, 'static']);
+Route::get('/static/{userid}' , [StaticController::class, 'static'])->name('static.get');
 
 //목표
 Route::get('/goal/{userno}', [GoalController::class,'index'])->name('goal.index');
