@@ -37,7 +37,7 @@ class AssetController extends Controller
             return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
         }
 
-        return view('assets', ['assets'=>$asset]);
+        return view('assets', ['assets'=>$assets]);
     }
 
     public function link()

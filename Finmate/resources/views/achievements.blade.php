@@ -41,6 +41,8 @@
                     @if ($is_achieved && !$achievement->reward_received)
                     {{-- 보상받기 버튼을 사용할 수 있는 조건: 완료되었고, 보상 받지 않음 --}}
                     <button onclick="receiveReward({{ $achievement->id }})">보상받기</button>
+                    @else
+                    <button disabled>보상받기</button>
                     @endif
                 </td>
             </tr>
