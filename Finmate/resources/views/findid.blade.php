@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     <div>{!!session()->has('success') ? session('success') : ""!!}</div>
     @include('layout.errorsvalidate')
-    <form id="table" action="" method="post">
+    <form id="table" action="{{route('users.findid.post')}}" method="post">
         @csrf
         <div class="label">
             <label for="name">이름</label>
