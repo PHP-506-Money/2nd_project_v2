@@ -18,8 +18,8 @@ class GoalController extends Controller
 
 
         
-        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
-        $idsearch = DB::table('users')->where('userno', $id)->first();
+        $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->get();
+        $idsearch = DB::table('users')->where('userid', $id)->first();
         $userid = $idsearch->userid;
         
         if (count($results) > 0){
@@ -59,7 +59,7 @@ class GoalController extends Controller
 
     public function insert($id,Request $Req)
     {
-        $data['userno'] = $id;
+        $data['userid'] = $id;
         $data['title'] = $Req->title;
         $data['amount'] = $Req->amount;
         $data['startperiod'] = $Req->startperiod;
@@ -67,8 +67,8 @@ class GoalController extends Controller
         $data['created_at'] = now();    
         DB::table('goals')->insert($data);
     
-        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
-        $idsearch = DB::table('users')->where('userno', $id)->first();
+        $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->get();
+        $idsearch = DB::table('users')->where('userid', $id)->first();
         $userid = $idsearch->userid;
         
         if (count($results) > 0){
@@ -110,7 +110,7 @@ class GoalController extends Controller
 
     public function update($id, Request $Req)
 {
-    $upinfo = DB::table('goals')->where('userno', $id)->where('goalno', $Req->goalno);
+    $upinfo = DB::table('goals')->where('userid', $id)->where('goalno', $Req->goalno);
 
     $updatedData = [
         'title' => $Req->title,
@@ -122,8 +122,8 @@ class GoalController extends Controller
 
     $upinfo->update($updatedData);
 
-    $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
-    $idsearch = DB::table('users')->where('userno', $id)->first();
+    $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->get();
+    $idsearch = DB::table('users')->where('userid', $id)->first();
     $userid = $idsearch->userid;
     
     if (count($results) > 0){
@@ -164,13 +164,13 @@ class GoalController extends Controller
 
 
 public function delete($id, Request $Req){
-    $delinfo = DB::table('goals')->where('userno', $id)->where('goalno', $Req->goalno);
+    $delinfo = DB::table('goals')->where('userid', $id)->where('goalno', $Req->goalno);
             $delinfo -> update([
             'deleted_at' => now()
         ]);
-        $results = DB::table('goals')->where('userno', $id)->where('deleted_at', null)->get();
+        $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->get();
 
-        $idsearch = DB::table('users')->where('userno', $id)->first();
+        $idsearch = DB::table('users')->where('userid', $id)->first();
         $userid = $idsearch->userid;
         
         if (count($results) > 0){

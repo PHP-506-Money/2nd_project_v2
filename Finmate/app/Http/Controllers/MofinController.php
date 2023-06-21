@@ -101,7 +101,7 @@ class MofinController extends Controller
         $result->save();
 
         $randomitem = rand(1,5);
-        $data['userno'] = $id;
+        $data['userid'] = $id;
         $data['itemno'] = $randomitem;
         DB::table('items')->insert($data);
         $pt1 =  DB::table('iteminfos')->where('itemno', $randomitem)->value('itemname');

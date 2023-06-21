@@ -139,16 +139,27 @@ class UserController extends Controller
     return view('foundpw', ['user'=>$user]);
     }
 
+    function foundpwpost(Request $req) {
+        //유효성 체크
+        $req->validate([ // validate는 자동으로 리다이렉트 해줌.
+            'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
+        ]);
+
+        $data['userpw'] = Hash::make($req->password);
+
+        return redirect()->route('users.login');
+    }
+
     function myinfo() {
-        $id = auth()->user()->userno; // 현재 로그인한 사용자의 ID를 가져옵니다.
+        $id = auth()->user()->userid; // 현재 로그인한 사용자의 ID를 가져옵니다.
         $result = User::select(['username', 'moffintype', 'moffinname'])
-                        ->where('userno', $id)
+                        ->where('userid', $id)
                         ->get();
         return view('myinfo')->with('data', $result);
     }
 
     function myinfopost(Request $req) {
-        $id = auth()->user()->userno;
+        $id = auth()->user()->userid;
 
         // 유효성 검사 방법 1
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
@@ -168,15 +179,15 @@ class UserController extends Controller
     }
 
     function modify() {
-        $id = auth()->user()->userno; // 현재 로그인한 사용자의 ID를 가져옵니다.
+        $id = auth()->user()->userid; // 현재 로그인한 사용자의 ID를 가져옵니다.
         $result = User::select(['username', 'userid', 'userpw', 'useremail', 'phone'])
-                        ->where('userno', $id)
+                        ->where('userid', $id)
                         ->get();
         return view('modify')->with('data', $result);
     }
 
     function modifypost(Request $req) {
-        $id = auth()->user()->userno;
+        $id = auth()->user()->userid;
 
         // 유효성 검사 방법 1
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
@@ -204,7 +215,7 @@ class UserController extends Controller
 
     // 회원탈퇴 기능: softdeletes();를 사용하여 migration을 하였으므로, 로그인시 자동으로 탈퇴한 회원은 로그인 불가능하게 막아줌.
     function withdraw() {
-        $id = auth()->user()->userno;
+        $id = auth()->user()->userid;
         $result = User::destroy($id); // destroy 에러 났을 때 에러 핸들링 써서 예외 처리 하기
         Session::flush(); // 세션 파기
         Auth::logout(); // 로그아웃
