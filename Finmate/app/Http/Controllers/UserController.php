@@ -104,20 +104,16 @@ class UserController extends Controller
         ]);
 
         // 폼 데이터에서 이름, 이메일 주소 추출
-        $name = $req->input('username');
-        $email = $req->input('useremail');
+        $name = $req->input('name');
+        $email = $req->input('email');
 
         // 데이터베이스에서 이메일에 해당하는 사용자 조회
         $user = User::where('username', $name)
         ->where('useremail', $email)
         ->first();
 
-        // 아이디를 찾았을 경우, 해당 아이디를 뷰로 전달하여 표시할 수 있습니다.
-        $foundId = $user ? $user->id : null;
-
-    return view('foundid', compact('foundId'));
+    return view('foundid', ['user'=>$user]);
     }
-
 
     function findpw() {
         return view('findpw');
