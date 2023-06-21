@@ -15,13 +15,14 @@
             @if ($data->moffintype == 1)
                 <img src="{{ asset('/img/rabbit.png') }}" alt="">
             @elseif ($data->moffintype == 2)
-                <img src="{{ asset('/img/penguin.png') }}" alt="">
+                <img src="{{ asset('/img/penguin.png') }}" alt="" id="mofin" >
             @elseif ($data->moffintype == 3)
-                <img src="{{ asset('/img/panda.png') }}" alt="">
+                <img src="{{ asset('/img/panda.png') }}" alt="" >
             @endif
             <div id="info">
                 {{ $data->username }} 님의 {{ $data->moffinname }}
             </div>
+            <button onclick="toggleitem()">선글라스 장착</button>
 </div>
 <div>
     <form action="{{route('mofin.point',[auth()->user()->userno])}}" method="post">
@@ -30,7 +31,7 @@
     </form>
     <span>랜덤 포인트</span>
     <br><br>
-    <form action="{{route('mofin.item',[auth()->user()->userno])}}" method="post">
+    <form action="{{route('mofin.item',[auth()->user()->userno])}}" method="post" style="display : inline-block;">
         @csrf
     <button onclick="pt()" type="submit"><img src="{{ asset('/img/randomitem.png') }}" alt=""></button>
     </form>
@@ -43,7 +44,11 @@
             alert(' {{ $pt1 }} !!' );
         });
     </script>
-
+    {{-- <script>
+    toggleitem(){
+        var img
+    }
+    </script> --}}
 @endif
 
 
