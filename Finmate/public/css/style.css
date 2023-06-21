@@ -116,6 +116,12 @@ label {
     width: 250px;
 }
 
+.label4 > input {
+    width: 200px;
+    text-align: center;
+}
+
+
 input {
     border: none;
     outline: none;
@@ -150,13 +156,18 @@ input {
     cursor: pointer;
 }
 
+.button:hover {
+    background-color: var(--active-color);
+}
+
 #button, #button2 {
     margin-top: 15px;
     margin-bottom: 20px;
 }
 
-.button:hover {
-    background-color: var(--active-color);
+#button3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 #id, #password, #passwordchk, #name, #email, #phone {

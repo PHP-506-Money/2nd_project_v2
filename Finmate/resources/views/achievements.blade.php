@@ -21,30 +21,18 @@
         </thead>
         <tbody>
             @foreach ($achievements as $achievement)
-            @php
-            // UserController의 checkAchievements() 메서드 호출
-            $progress = 0;
-            $is_achieved = false;
-            @endphp
-            <tr>
+
+            <tr data-achievement-id="{{ $achievement->id }}">
                 <th>{{ $achievement->name }}</th>
                 <td>{{ $achievement->description }}</td>
+
+                <td class="progress"></td>
+                <td class="achievement-status"></td>
+
                 <td>
-                    {{-- 진행도를 아이콘, 이미지 또는 텍스트 형식으로 표시 --}}
-                    {{ $progress }}%
+                    <button class="receive-reward-button" onclick="receiveReward({{ $achievement->id }})" disabled>보상받기</button>
                 </td>
-                <td>
-                    {{-- 아래 조건을 사용하여 해당 업적이 완료되었는지 여부를 확인 --}}
-                    {!! $is_achieved ? '완료' : '미완료' !!}
-                </td>
-                <td>
-                    @if ($is_achieved && !$achievement->reward_received)
-                    {{-- 보상받기 버튼을 사용할 수 있는 조건: 완료되었고, 보상 받지 않음 --}}
-                    <button onclick="receiveReward({{ $achievement->id }})">보상받기</button>
-                    @else
-                    <button disabled>보상받기</button>
-                    @endif
-                </td>
+
             </tr>
             @endforeach
         </tbody>
@@ -53,7 +41,8 @@
 
 <script>
     function receiveReward(achievementId) {
-        fetch('/achievements/' + achievementId + '/reward', {
+        fetch('/users/achievements/' + achievementId + '/reward', {
+
                 method: 'POST'
                 , headers: {
                     'Content-Type': 'application/json'
@@ -74,6 +63,43 @@
             .catch(error => {
                 console.log('Error:', error);
             });
+    }
+
+    fetch('/users/checkAchievements', $results, {
+
+
+
+    method: 'POST'
+    , headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+
+    }
+    })
+    .then(response => response.json())
+    .then(json => {
+    if (json.results) {
+    json.results.forEach(result => {
+    updateProgressAndAchievementStatus(result);
+    });
+    }
+    })
+    .catch(error => {
+    console.log('Error:', error);
+    });
+
+    function updateProgressAndAchievementStatus(result) {
+    const achievementRow = document.querySelector(`[data-achievement-id="${result.id}"]`);
+    if (!achievementRow) return;
+
+    achievementRow.querySelector('.progress').innerHTML = `${result.progress}%`;
+
+    const isAchieved = result.is_achieved;
+    achievementRow.querySelector('.achievement-status').innerHTML = isAchieved ? '완료' : '미완료';
+
+    const receiveRewardButton = achievementRow.querySelector('.receive-reward-button');
+    receiveRewardButton.disabled = !isAchieved || !result.reward_received;
     }
 
 </script>
