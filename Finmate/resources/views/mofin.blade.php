@@ -5,6 +5,8 @@
 @section('contents')
 
 
+
+{{-- 
 <h1> 캐릭터 관리</h1>
                 <div >
                 @if ($data->moffintype == 1)
@@ -19,9 +21,13 @@
                 <h1> {{ $data->username }} 님의 {{ $data->moffinname }}</h1>
 <h2>나의 포인트 : {{$data->point}}</h2> <br><br>
 <h2>나의 아이템 목록</h2> <br><br>
-{{-- <h3>{{$itemname}}</h3> --}}
+ <h3>{{$itemname}}</h3> --}}
     <div>
         @foreach($itemname as $value)
+        <p>{{$value->moffintype}}</p>
+
+
+
             @if($value === '선글라스')
                 <img src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem1()" >장착/해제</button>
             @elseif($value === '검')
@@ -34,7 +40,7 @@
                 <img src="{{ asset('/img/idcard.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem5()" >장착/해제</button>
             @endif    
         @endforeach
-    </div>
+    </div>  
 <br><br>
     <div  >
                 <div>

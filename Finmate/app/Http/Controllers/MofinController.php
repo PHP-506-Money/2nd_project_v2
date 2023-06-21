@@ -22,20 +22,26 @@ class MofinController extends Controller
     public function index($id)
     {
 
-        $result = User::find($id);
-        $item_name = DB::table('iteminfos AS info')
-        ->select('info.itemname')
-        ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
-        ->where('tem.userno', $id)
-        ->orderBy('info.itemno', 'ASC')
-        ->pluck('itemname')
-        ->toArray();
+        // $result = User::find($id);
+        // $item_name = DB::table('iteminfos AS info')
+        // ->select('info.itemname')
+        // ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
+        // ->where('tem.userno', $id)
+        // ->orderBy('info.itemno', 'ASC')
+        // ->pluck('itemname')
+        // ->toArray();
 
-        $itemonly = array_unique($item_name);
+        $item_name = User::join('items', 'users.userid', '=', 'items.userid')
+        ->join('iteminfos', 'iteminfos.itemno', '=', 'items.itemno')
+        ->select('iteminfos.itemname', 'users.*')
+        ->where('users.userid', $id)
+        ->get();
+
+        // $itemonly = array_unique($item_name);
 
         // $itemonly = implode(',', $itemonly);
         
-        return view('mofin')->with('data',$result)->with('itemname', $itemonly);
+        return view('mofin')->with('itemname', $item_name);
 
     }
 
