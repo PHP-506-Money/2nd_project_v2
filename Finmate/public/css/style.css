@@ -73,6 +73,11 @@ span:hover + p.arrow_box {
     align-items: center;
 }
 
+.success {
+    color: var(--main-color);
+    font-weight: 400;
+}
+
 .error {
     color: var(--active-color);
     font-weight: 400;

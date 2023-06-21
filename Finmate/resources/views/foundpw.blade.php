@@ -7,7 +7,7 @@
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     @include('layout.errorsvalidate')
-    <form id="table">
+    <form id="table" action="{{route('users.foundpw.post')}}" method="post">
         @csrf
             @if ($user)
                 <div class="label5">
@@ -31,9 +31,9 @@
                 </div>
                 <button type="button" class="button" id="button" onclick="location.href='/users/findpw';">돌아가기</button>
                 <div class="bottom">
-                    <a href="{{route('users.login')}}" id="down">로그인</a>
                     <a href="{{route('users.findid')}}" id="down">아이디 찾기</a>
                     <a href="{{route('users.registration')}}" id="down">회원가입</a>
+                    <a href="{{route('users.login')}}" id="down">로그인</a>
                 </div>
             @endif
     </form>
