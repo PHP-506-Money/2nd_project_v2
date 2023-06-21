@@ -35,4 +35,8 @@ main{
 .leftone>p {
     padding:20px;
 }
+.chart{
+    width: 500px;
+    height: 500px;
+}
 

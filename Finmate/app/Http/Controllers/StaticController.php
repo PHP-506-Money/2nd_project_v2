@@ -19,15 +19,23 @@ class StaticController extends Controller
         // 현재 년도
         $currentYear = date('Y'); 
         
-        // 월별 입지출
-        $monthStatic = DB::select("
-        SELECT DATE_FORMAT(tran.trantime, ?) AS Month, SUM(tran.amount), tran.type
+        // 월별 입금
+        $monthRCStatic = DB::select("
+        SELECT DATE_FORMAT(tran.trantime, '%m') AS Month, SUM(tran.amount) AS consumption
         FROM assets ass
         INNER JOIN transactions tran ON ass.assetno = tran.assetno
-        WHERE ass.userid = ?
-        GROUP BY Month , tran.type ",["$currentYear-%m" , $userid]);
+        WHERE ass.userid = ? and tran.type = '0' and YEAR(tran.trantime) = ?
+        GROUP BY Month ",[$userid,$currentYear]);
         
-        var_dump($monthStatic);
+        // 월별 지출
+        $monthEXStatic = DB::select("
+        SELECT DATE_FORMAT(tran.trantime, '%m') AS Month, SUM(tran.amount) AS consumption
+        FROM assets ass
+        INNER JOIN transactions tran ON ass.assetno = tran.assetno
+        WHERE ass.userid = ? and tran.type = '1' and YEAR(tran.trantime) = ?
+        GROUP BY Month ",[$userid,$currentYear]);
+
+        // var_dump($monthStatic);
         
         // 이번달의 시작과 끝
         $startMonth = date( 'Y-m-01' );
@@ -44,12 +52,11 @@ class StaticController extends Controller
         GROUP BY cat.no , cat.name
         ORDER BY consumption desc ", [$startMonth,$finMonth,$userid]);
 
-
         var_dump($catExpenses);
         // var_dump($startMonth);
         // var_dump($finMonth);
 
-        return view('static' , compact('labels','data'))->with('monthdata' , $monthStatic)->with('catdata',$catExpenses);
+        return view('static')->with('monthrc' , $monthRCStatic)->with('catdata',$catExpenses)->with('monthex',$monthEXStatic);
 
         // v002 add end
     }

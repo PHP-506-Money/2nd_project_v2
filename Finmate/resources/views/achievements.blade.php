@@ -43,12 +43,12 @@
     function receiveReward(achievementId) {
         fetch('/achievements/' + achievementId + '/reward', {
 
-                method: 'POST'
-                , headers: {
+                method: 'POST', 
+                headers: {
                     'Content-Type': 'application/json'
                     , 'Accept': 'application/json'
                     , 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                , }
+                }
             })
             .then(response => response.json())
             .then(json => {
