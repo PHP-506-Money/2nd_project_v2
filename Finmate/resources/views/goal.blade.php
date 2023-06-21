@@ -45,7 +45,7 @@
                     {{ '시작일자 : ' . $goal->startperiod }}
                     {{ '마감일자 : ' . $goal->endperiod }}
                     {{'진행금액 : '. $goalint[$num]}}
-
+                    {{'달성률 : '. ceil(($goalint[$num]/$goal->amount)*100).'%' }}
                     <input type="hidden" name="goalcom" value="{{ $goal->completed_at }}">
                     <button type="button" onclick="toggleForm({{ $goal->goalno }})">수정</button>
                     <button type="submit">삭제</button>
