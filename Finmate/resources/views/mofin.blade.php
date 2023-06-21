@@ -12,7 +12,7 @@
     <div>
         @foreach($itemname as $value)
             @if($value === '선글라스')
-                <img src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button onclick="toggleitem1()" >장착</button>
+                <img src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem1()" >장착</button>
             @elseif($value === '검')
                 <img src="{{ asset('/img/sword.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button>장착</button>
             @elseif($value === '안전모')
@@ -38,7 +38,8 @@
                     {{ $data->username }} 님의 {{ $data->moffinname }}
                 </div>
                 <div>
-                <img  style= "display:none;" id="charitem1" src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 300px; height :200 px;">
+                <img id="charitem1" src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 300px; height :200 px; display:none;">
+
                 <img src="{{ asset('/img/sword.png') }}" alt="" style="width : 300px; height :200 px;" id="charitem2" >
                 <img src="{{ asset('/img/safe.png') }}" alt="" style="width : 300px; height :200 px;" id="charitem3" >
                 <img src="{{ asset('/img/air.png') }}" alt="" style="width : 300px; height :200 px;" id="charitem4" >
@@ -68,21 +69,34 @@
     </div>
     @if(isset($pt1))
         <script>
+        
             // 페이지가 로드될 때 자동으로 실행되도록 수정
-            window.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('window.onload', function() {
                 alert(' {{ $pt1 }} !!' );
             });
         </script>
         <script>
-        toggleitem1(){
+        function toggleitem1(){
             var charitem1 = document.getElementById('charitem1');
-                    if (charitem1.style.display == 'none') {
-            charitem1.style.display = 'block'
-            } 
+            if(charitem1.style.display == 'none'){
+
+            charitem1.style.display = 'block';
+
+            }else if(charitem1.style.display == 'block'){
+
+            charitem1.style.display = 'none';
+
+            }
+
+            }
+
+            //       if (charitem1.style.display == 'none') {
+            //charitem1.style.display = 'block'
+            // } 
             //else {
             //    charitem1.style.display = 'none';
             //}
-        }
+        
         </script>
     @endif
 
