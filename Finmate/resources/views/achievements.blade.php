@@ -41,7 +41,7 @@
 
 <script>
     function receiveReward(achievementId) {
-        fetch('/users/achievements/' + achievementId + '/reward', {
+        fetch('/achievements/' + achievementId + '/reward', {
 
                 method: 'POST'
                 , headers: {
@@ -65,7 +65,7 @@
             });
     }
 
-    fetch('/users/checkAchievements', $results, {
+    fetch('/checkAchievements',  {
 
 
 

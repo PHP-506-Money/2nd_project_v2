@@ -77,8 +77,8 @@ Route::middleware(['auth'])->group(function () {
 
     //achieve
     Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
-    Route::post('/users/{userid}/achievements', [UserController::class, 'getAchievements'])->name('users.getAchievements');
-    Route::post('/users/checkAchievements', [UserController::class, 'checkAchievements'])->name('users.checkAchievements');
+    Route::post('/achievements', [UserController::class, 'getAchievements'])->name('users.getAchievements');
+    Route::post('/checkAchievements', [UserController::class, 'checkAchievements'])->name('users.checkAchievements');
 
 });
 
