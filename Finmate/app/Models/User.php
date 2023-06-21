@@ -28,7 +28,11 @@ class User extends Authenticatable
         'phone',
         'moffintype',
         'moffinname',
-        'point'
+        'point',
+        'login_count',
+        'point_draw_count',
+        'item_draw_count',
+        'history_check_count'
     ];
 
     /**

@@ -12,6 +12,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\StaticController;
+use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Asset;
@@ -72,6 +73,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/users/myinfopost', [UserController::class, 'myinfopost'])->name('users.myinfo.post');
     Route::get('/users/modify', [UserController::class, 'modify'])->name('users.modify');
     Route::post('/users/modifypost', [UserController::class, 'modifypost'])->name('users.modify.post');
+
+    //achieve
+    Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
 });
 
 Route::get('/unauthorized-access', function () {
