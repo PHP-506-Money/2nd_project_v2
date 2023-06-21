@@ -86,7 +86,9 @@ Route::get('/unauthorized-access', function () {
     return view('errors.unauthorized');
 });
 
-
+Route::fallback(function() {
+    return response()->view('errors.404', [], 404);
+});
 
 
 // // Users

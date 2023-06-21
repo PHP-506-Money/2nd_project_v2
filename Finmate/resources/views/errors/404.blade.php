@@ -12,7 +12,12 @@
             <label for="password">잘못된 경로로 접속하셨습니다.</label>
         </div>
         <div class="bottom">
-            <a href="{{route('main')}}" id="down">메인 페이지로 돌아가기</a>
+            @auth
+                <a href="{{ url('/assets'.'/' . auth()->user()->userid) }}" id="down">메인 페이지로 돌아가기</a>
+            @endauth
+            @guest
+                <a href="{{ route('main') }}" id="down">메인 페이지로 돌아가기</a>
+            @endguest
         </div>
     </form>
 @endsection

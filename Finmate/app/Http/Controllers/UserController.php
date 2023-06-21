@@ -73,7 +73,7 @@ class UserController extends Controller
 
         $user = User::create($data); // insert. create ORM 모델
         if(!$user) {
-            $error = '시스템 에러가 발생하여, 회원가입에 실패했습니다.<br>잠시 후에 다시 회원가입을 시도해 주십시오.';
+            $error = '<div class="error">시스템 에러가 발생하여, 회원가입에 실패했습니다.<br>잠시 후에 다시 회원가입을 시도해 주십시오.</div>';
         return redirect()
             ->route('users.registration')
             ->with('error', $error);
