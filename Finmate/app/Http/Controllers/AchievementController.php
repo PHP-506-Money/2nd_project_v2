@@ -42,17 +42,17 @@ class AchievementController extends Controller
 
         $achieve_users = DB::table('achieve_users')
         ->where('userid', $user)
-        ->where('id', $achievement->id)
+        ->where('achievementsid', $achievement->achievementsid)
         ->first();
 
         // $achieve_users 변수가 null이면 reward_received를 0으로 설정합니다.
         if (!$achieve_users) {
-            $rewardReceived = '0';
+            $rewardReceived = 0;
         } else {
             $rewardReceived = $achieve_users->reward_received;
         }
 
-        if ($rewardReceived == '1') {
+        if ($rewardReceived == 1) {
             return response()->json(['error' => '이미 보상을 받았습니다.'], 400);
         }
 
@@ -77,7 +77,7 @@ class AchievementController extends Controller
         }
 
         $achieve_users->completed_at = Carbon::now();
-        $achieve_users->reward_received = '1';
+        $achieve_users->reward_received = 1;
         $achieve_users->save();
 
 
@@ -131,13 +131,13 @@ class AchievementController extends Controller
             if ($isAchieved) {
                 $achieve_users = DB::table('achieve_users')
                     ->where('userid','=', $user->userid)
-                    ->where('id','=', $achievement->id)
+                    ->where('achievementsid','=', $achievement->achievementsid)
                     ->first();
                 }
                 
 
             array_push($results, [
-                'id' => $achievement->id,
+                'achievementsid' => $achievement->achievementsid,
                 'name' => $achievement->name,
                 'progress' => min(100, (int)$progress),
                 'is_achieved' => $isAchieved,
