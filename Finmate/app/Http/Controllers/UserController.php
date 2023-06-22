@@ -153,8 +153,8 @@ class UserController extends Controller
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
             'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
         ]);
-        $userid = $req->user;
-        $result  = DB::table('users')
+        $userid = $req->id;
+        $data= DB::table('users')
         ->where('userid', $userid)
         ->first(); // $user 객체에서 ID 조회
 
