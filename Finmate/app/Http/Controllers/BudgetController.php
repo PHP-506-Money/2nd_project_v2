@@ -19,9 +19,9 @@ class BudgetController extends Controller
         // id의 해당하는 설정한 예산금액을 가져온다.
         // $monthBudget = DB::table('budgets')->select('budgetprice')->where('userid',$userid)->get();
 
-        // v002 add start
+        // ******** v002 add start kim 값받아오는 get에서 value로 방식 수정
         $monthBudget = DB::table('budgets')->where('userid', $userid)->value('budgetprice');
-        // v002 add end
+        // ******** v002 add end
 
         // 예산이 비어있으면 에러메세지와 함께 설정페이지로 간다.
         // if(empty($monthBudget[0])) {
@@ -41,7 +41,7 @@ class BudgetController extends Controller
         $currentMonth = date('m'); // 현재 달
         // $arrDate = [$startDate,$endDate,$currentMonth];
         
-        // v002 add start
+        // ******** v002 add start kim 날짜받아오는 방식 수정
         // 이번주 일요일~토요일 계산
         $start = date('Y-m-d', strtotime($today." -".$day."days"));
         $end = date('Y-m-d', strtotime($start." +6days"));
@@ -51,11 +51,11 @@ class BudgetController extends Controller
 
         $currentDay = date('d'); // 현재 달
 
-        // v003 delete
+        // ******** v003 delete kim 내용 삭제
         // if($currentDay === 1 ) {
         // }
-        // v002 add end
-        // v003 
+        // ******** v002 add end
+        // ******** v003 
 
 
         // 한달동안 지출한 금액의 합계
@@ -77,13 +77,13 @@ class BudgetController extends Controller
 
         // 한달예산에서 주간예산 구하기
         // $weekBudget = (intval($monthBudget[0]->budgetprice))/4;
-        // v002 add start
+        // ******** v002 add start kim 값받아오는 방식 변경 후 수정
         $weekBudget = (intval($monthBudget))/4;
-        // v002 add end
+        // ******** v002 add end
 
         // // 주간금액 중에 남은 금액 구하기
         $usebudget = (intval($sumWeekAmount));
-        $leftbudget = $weekBudget-$usebudget;
+        $leftBudget = $weekBudget-$usebudget;
 
         // // 설정된 예산 , 한달지출금액 , 주간예산 , 주간지출합계 , 남은주간예산 을 배열로 만든다.
         // $arrResult = [$monthBudget[0],$sumAmount,$weekBudget,$sumWeekAmount,$leftbudget,$arrDate];
@@ -99,13 +99,14 @@ class BudgetController extends Controller
         // var_dump($today);
         // var_dump($arrResult);
 
-        // v002 add start
-        $arrResult = [$startDate,$endDate,$currentMonth,$weekBudget,$leftbudget];
-        // var_dump($arrR);
+        // ******** v002 add start kim 배열 변경
+        $arrResult = [$startDate,$endDate,$currentMonth,$weekBudget,$leftBudget];
+
+        // var_dump($arrResult);
     
         // return view('budget')->with('item',$arrResult);
         return view('budget')->with('all',$monthBudget)->with('sumamount',$sumAmount)->with('sumweek',$sumWeekAmount)->with('data',$arrResult);
-        // v002 add end
+        // ******** v002 add end
     }
 
     // 예산 설정 페이지로

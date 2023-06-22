@@ -4,24 +4,27 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="{{ asset('/css/test.css')  }}" >
+
 @section('contents')
+
 <p>월별 입지출 내역</p>
 
-<form action="" method="get">
+<form action=" {{ route('static.get',[auth()->user()->userid])}}" method="get">
 @csrf
-<button type="submit" > < </button>
+<button type="submit" id="prevYear" name="prevYear" value="one"> < </button>
 <p>{{$date[0]}}</p>
-<button > > </button>
+<button type="submit" id="nextYear" name="nextYear"> > </button>
 </form>
-
-
 
 <div class = "chartB">
 <canvas id="monthChart" ></canvas>
 </div>
-<br>
-<br>
 
+<br>
+<br>
+<hr>
+<br>
+<article>
 <p>카테고리별 지출 내역</p>
 <div class = "chartD">
 <canvas id="categoryChart" ></canvas>
@@ -31,6 +34,7 @@
     <p>{{$data->category}}</p>
     <p>{{$data->consumption}}</p>
 @endforeach
+</article>
 
 <p>최대 지출 카테고리  : {{$catdata[0]->category}}</p>
 

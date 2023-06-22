@@ -13,25 +13,26 @@ use Illuminate\Support\Facades\DB;
 
 class StaticController extends Controller
 {
-    function static($userid) {
+    function static(Request $req , $userid) {
         
-        // v002 add start
+        // ******** v002 add start kim 전체적인 내용 추가
         // 현재 년도
         // $currentYear = date('Y'); 
 
-        // v003 add start
-
+        // ******** v003 add start kim 년도 변경 추가
         $currentYear = date('Y');
 
-        // if(){
-            
-        // }
-        $currentYear = date('Y', strtotime($currentYear." -"."1 years"));
+        // ******** v004 add start kim 년도 이동 추가
+        // var_dump($req);
+        if($req->input('prevYear')){
+            $currentYear = date('Y', strtotime($currentYear." -"."1 years"));
+        };
+
+        // ******** v004 add end
 
         // $currentYear = date('Y', strtotime($currentYear." -"."1 years"));
-
-        var_dump($currentYear);
-        // v003 add end
+        // var_dump($currentYear);
+        // ******** v003 add end
 
         // 월별 입금
         $monthRCStatic = DB::select("
@@ -70,12 +71,12 @@ class StaticController extends Controller
         // var_dump($startMonth);
         // var_dump($finMonth);
 
-        // v003 add start
+        // ******** v003 add start
         $arrResult= [$currentYear];
-        // v003 add end
+        // ******** v003 add end
 
         return view('static')->with('monthrc' , $monthRCStatic)->with('catdata',$catExpenses)->with('monthex',$monthEXStatic)->with('date',$arrResult);
 
-        // v002 add end
+        // ******** v002 add end
     }
 }
