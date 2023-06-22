@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AchievementController extends Controller
 {
@@ -31,7 +32,8 @@ class AchievementController extends Controller
             return response()->json(['error' => '업적 정보를 찾을 수 없습니다.'], 404);
         }
 
-        $rewardReceived = AchieveUser::where('userid', $user->userid)
+        $rewardReceived = DB::table('achieveuser')
+            ->where('userid', $user->userid)
             ->where('achievement_id', $achievement->id)
             ->first();
 
@@ -72,7 +74,7 @@ class AchievementController extends Controller
         foreach ($achievements as $achievement) {
             $progress = 0;
             $isAchieved = false;
-            $rewardReceived = false;
+            $rewardReceived = '0';
 
             switch ($achievement->name) {
                 case '로그인 10회':
@@ -97,8 +99,9 @@ class AchievementController extends Controller
             }
 
             if ($isAchieved) {
-                $achieveUser = AchieveUser::where('userid', $user->userid)
-                    ->where('id', $achievement->id)
+                $achieveUser = DB::table('achieveuser')
+                    ->where('userid','=', $user->userid)
+                    ->where('id','=', $achievement->id)
                     ->first();
                 $rewardReceived = $achieveUser && $achieveUser->reward_received == '1';
             }
@@ -112,7 +115,7 @@ class AchievementController extends Controller
             ]);
         }
 
-        return response()->json(['results' => $results],200,[],JSON_UNESCAPED_UNICODE);
+        return response()->json(['results' => $results]);
     }
 
 
