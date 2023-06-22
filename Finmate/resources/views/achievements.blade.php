@@ -42,14 +42,13 @@
 <script>
     function receiveReward(achievementId) {
         fetch('/achievements/' + achievementId + '/reward', {
-
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json'
-                    , 'Accept': 'application/json'
-                    , 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            })
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+        })
             .then(response => response.json())
             .then(json => {
                 if (json.error) {
@@ -65,16 +64,13 @@
             });
     }
 
-    fetch('/checkAchievements',  {
 
-
-
-    method: 'POST'
-    , headers: {
+    fetch('/checkAchievements', {
+    method: 'GET',
+    headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-
     }
     })
     .then(response => response.json())
@@ -103,6 +99,7 @@
     }
 
 </script>
+
 @endsection
 
 

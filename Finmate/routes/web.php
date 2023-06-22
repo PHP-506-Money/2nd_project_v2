@@ -57,7 +57,12 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/users/foundpwpost', [UserController::class, 'foundpwpost'])->name('users.foundpw.post');
 });
 
+
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () { return view('assets'); })->name('assets');
+    Route::get('/main', function () {
+        return view('assets');
+    })->name('assets');
     // Users
     Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
     Route::get('/users/withdraw', [UserController::class, 'withdraw'])->name('users.withdraw');
@@ -79,9 +84,9 @@ Route::middleware(['auth'])->group(function () {
 
     //achieve
     Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
-    Route::post('/achievements', [UserController::class, 'getAchievements'])->name('users.getAchievements');
-    Route::post('/checkAchievements', [UserController::class, 'checkAchievements'])->name('users.checkAchievements');
-
+    Route::post('/achievements', [AchievementController::class, 'getAchievements'])->name('achievements.getAchievements');
+    Route::get('/checkAchievements', [AchievementController::class, 'checkAchievements'])->name('achievements.checkAchievements');
+    Route::put('/achievements/{achievementId}/reward', [AchievementController::class, 'receiveAchievementReward'])->name('achievements.reward');
 });
 
 Route::get('/unauthorized-access', function () {
@@ -92,24 +97,6 @@ Route::fallback(function() {
     return response()->view('errors.404', [], 404);
 });
 
-
-// // Users
-// Route::get('/users/login', [UserController::class, 'login'])->name('users.login');
-// Route::post('/users/loginpost', [UserController::class, 'loginpost'])->name('users.login.post');
-// Route::get('/users/registration', [UserController::class, 'registration'])->name('users.registration');
-// Route::post('/users/registrationpost', [UserController::class, 'registrationpost'])->name('users.registration.post');
-// Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
-
-// Route::get('/users/registration/{userid}',[ApiController::class,'getUserChk'])->name('users.registration.check');
-
-// Route::get('/users/findid', [UserController::class, 'findid'])->name('users.findid');
-// Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
-
-// //계좌
-// Route::get('/assets/{userid}', [AssetController::class, 'index'])->name('assets.index');
-
-//모핀
-// Route::get('/mofin/{id}', [MofinController::class,'index'])->name('mofin.index');
 
 // 예산 설정
 Route::get('/budget/{userid}',[BudgetController::class, 'budget'])->name('budget.get');
