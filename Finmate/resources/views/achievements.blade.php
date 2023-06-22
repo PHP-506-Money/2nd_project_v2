@@ -22,7 +22,8 @@
         <tbody>
             @foreach ($achievements as $achievement)
 
-            <tr data-achievement-id="{{ $achievement->id }}">
+            <tr data-achievement-id="{{ $achievement->achievementsid }}">
+
                 <th>{{ $achievement->name }}</th>
                 <td>{{ $achievement->description }}</td>
 
@@ -30,7 +31,8 @@
                 <td class="achievement-status"></td>
 
                 <td>
-                    <button class="receive-reward-button" onclick="receiveReward({{ $achievement->id }})">보상받기</button>
+                    <button class="receive-reward-button" onclick="receiveReward({{ $achievement->achievementsid }})">보상받기</button>
+
                 </td>
 
             </tr>
@@ -95,7 +97,9 @@
     achievementRow.querySelector('.achievement-status').innerHTML = isAchieved ? '완료' : '미완료';
 
     const receiveRewardButton = achievementRow.querySelector('.receive-reward-button');
-    receiveRewardButton.disabled = !isAchieved || !result.reward_received;
+    receiveRewardButton.disabled = !isAchieved || result.$reward_received !== 0;
+
+
     }
 
 </script>
