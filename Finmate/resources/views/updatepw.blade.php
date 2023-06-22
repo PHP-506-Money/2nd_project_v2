@@ -12,11 +12,12 @@
     <form id="table" action="{{route('users.updatepw.post')}}" method="post">
         @csrf
             @if ($user)
-                {{-- <input type="hidden" name="id" value="{{ $user->id }}"> --}}
+                <input type="hidden" name="id" value="{{$_GET['userid']}}">
                 <div class="label5">
                     <label for="password">변경할 비밀번호</label>
                     <input type="password" name="password" id="password" required>
                 </div>
+                
                 <div class="label5">
                     <label for="passwordchk">비밀번호 확인</label>
                     <input type="password" name="passwordchk" id="passwordchk" required>

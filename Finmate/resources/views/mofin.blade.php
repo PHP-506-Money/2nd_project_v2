@@ -2,73 +2,80 @@
 
 @section('title', 'mofin')
 
+@section('header', 'MY MOFIN')
+
 @section('contents')
 
+<link rel="stylesheet" href="{{ asset('/css/hj.css')  }}" >
 
 
 
     <h1> 캐릭터 관리</h1>
-        <div >
-        
-        @if ($data->moffintype == 1)
-            <img src="{{ asset('/img/rabbit.png') }}" alt=""  style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;  ">
-        @elseif ($data->moffintype == 2)
-            <img src="{{ asset('/img/penguin.png') }}" alt="" id="mofin" style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;" >
-        @elseif ($data->moffintype == 3)
-            <img src="{{ asset('/img/panda.png') }}" alt="" style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;  " >
-        @endif
-        
-        </div>
-        <h1> {{ $data->username }} 님의 {{ $data->moffinname }}</h1>
-            <h2>나의 포인트 : {{$data->point}}</h2> <br><br>
-            <h2>나의 아이템 목록</h2> <br><br>
-        <h3>@foreach($itemname as $value)    
-            {{$value}}
-            @endforeach
-        </h3>
-    <div>
-        @foreach($itemname as $value)
-            @if($value === '선글라스')
-                <img src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem1()" >장착/해제</button>
-            @elseif($value === '검')
-                <img src="{{ asset('/img/sword.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem2()" >장착/해제</button>
-            @elseif($value === '안전모')
-                <img src="{{ asset('/img/safe.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem3()" >장착/해제</button>
-            @elseif($value === '에어팟맥스')
-                <img src="{{ asset('/img/air.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem4()" >장착/해제</button>
-            @elseif($value === '사원증')
-                <img src="{{ asset('/img/idcard.png') }}" alt="" style="width : 200px; height :200 px;"> {{$value}} <button  onclick="toggleitem5()" >장착/해제</button>
-            @endif    
-        @endforeach
-    </div>  
-<br><br>
-    <div  >
-                <div>
-                <img id="charitem1" src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  ">
-                <img id="charitem2" src="{{ asset('/img/sword.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
-                <img id="charitem3" src="{{ asset('/img/safe.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
-                <img id="charitem4" src="{{ asset('/img/air.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
-                <img id="charitem5" src="{{ asset('/img/idcard.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
+    <br>
+    <h2>나의 포인트 : {{$data->point}}</h2>
+<div class="container">
+    <div class="box1">
+            <div class="item">
+                <h2 class = "text_1" >나의 아이템 목록</h2> <br><br>
+                <h3 class = "text_1" >@foreach($itemname as $value)    
+                    {{$value}}
+                    @endforeach
+                </h3>
+                @foreach($itemname as $value)
+                    @if($value === '선글라스')
+                        <img src="{{ asset('/img/sunglasses.png') }}" class = "itemimg"> {{$value}} <button  onclick="toggleitem1()" >장착/해제</button>
+                    @elseif($value === '검')
+                        <img src="{{ asset('/img/sword.png') }}" class = "itemimg"> {{$value}} <button  onclick="toggleitem2()" >장착/해제</button>
+                    @elseif($value === '안전모')
+                        <img src="{{ asset('/img/safe.png') }}"  class = "itemimg"> {{$value}} <button  onclick="toggleitem3()" >장착/해제</button>
+                    @elseif($value === '에어팟맥스')
+                        <img src="{{ asset('/img/air.png') }}"  class = "itemimg"> {{$value}} <button  onclick="toggleitem4()" >장착/해제</button>
+                    @elseif($value === '사원증')
+                        <img src="{{ asset('/img/idcard.png') }}"  class = "itemimg"> {{$value}} <button  onclick="toggleitem5()" >장착/해제</button>
+                    @endif    
+                @endforeach
+            </div>
+            <br><br><br>
+        <div class="random">
+                <div class="randombox" >
+                    <form action="{{route('mofin.point',[auth()->user()->userid])}}" method="post" >
+                        @csrf
+                        <button type="submit"><img class="randomimg" src="{{ asset('/img/random.png') }}" ></button>
+                    </form>
+                    <span>랜덤 포인트(100pt)</span>
                 </div>
+
+                <div class="randombox" >
+                    <form action="{{route('mofin.item',[auth()->user()->userid])}}" method="post">
+                        @csrf
+                        <button type="submit"><img class="randomimg" src="{{ asset('/img/randomitem.png') }}"  ></button>
+                    </form>
+                    <span>랜덤 아이템(500pt)</span>
+                </div>
+        </div>
+    </div>{{-- end box1--}}
+
+    <div class="char">
+        @if ($data->moffintype == 1)
+            <img src="{{ asset('/img/rabbit.png') }}" class="charimg">
+        @elseif ($data->moffintype == 2)
+            <img src="{{ asset('/img/penguin.png') }}" class="charimg">
+        @elseif ($data->moffintype == 3)
+            <img src="{{ asset('/img/panda.png') }}"  class="charimg">
+        @endif
+        <h2 class = "text_1" > {{ $data->username }} 님의 {{ $data->moffinname }}</h2>
     </div>
+        
 
+</div>{{-- end container  --}}
     <div>
-
-        <div style = "float:left;">
-        <form action="{{route('mofin.point',[auth()->user()->userid])}}" method="post" >
-            @csrf
-        <button onclick="pt()" type="submit"><img src="{{ asset('/img/random.png') }}" alt="" style="width : 200px; height :200 px;" ></button>
-        </form>
-        <span>랜덤 포인트</span>
-        </div>
-
-        <div style = "display:inline-block; ">
-        <form action="{{route('mofin.item',[auth()->user()->userid])}}" method="post" style="display : inline-block;">
-            @csrf
-        <button onclick="pt()" type="submit"><img src="{{ asset('/img/randomitem.png') }}" alt="" style="width : 200px; height :200 px;" ></button>
-        </form>
-        <span>랜덤 아이템</span>
-        </div>
+                <div>
+                <img id="charitem1" class="noneimg" src="{{ asset('/img/sunglasses.png') }}" alt="">
+                <img id="charitem2" class="noneimg" src="{{ asset('/img/sword.png') }}" alt="" >
+                <img id="charitem3" class="noneimg" src="{{ asset('/img/safe.png') }}" alt="" >
+                <img id="charitem4" class="noneimg" src="{{ asset('/img/air.png') }}" alt=""   >
+                <img id="charitem5" class="noneimg" src="{{ asset('/img/idcard.png') }}" alt="" >
+                </div>
     </div>
     <script>
         function toggleitem1() {
