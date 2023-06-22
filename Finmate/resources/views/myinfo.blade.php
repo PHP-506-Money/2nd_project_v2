@@ -30,9 +30,6 @@
             <button type="button" class="button" id="btn" onclick="moffinnameChan();" autocomplete="off" required>모핀이명 변경</button>
             <button type="button" class="button" id="btn" onclick="btnClick();">공유하기</button>
         </div>
-        <div>
-            <a href="{{route('users.modify')}}" id="down2">회원정보 수정</a>
-        </div>
     </form>
 @endsection
 
