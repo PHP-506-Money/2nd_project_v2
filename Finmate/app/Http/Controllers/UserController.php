@@ -147,7 +147,7 @@ class UserController extends Controller
         return view('updatepw', compact('user'))->with('data',$user); // user 변수를 compact 함수로 전달
     }
 
-    function updatepwpost(Request $req, User $user) {
+    function updatepwpost(Request $req) {
         Log::debug('유효성체크');
         // 유효성 체크
         $req->validate([
@@ -216,7 +216,7 @@ class UserController extends Controller
             ,'phone'        => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/' // 휴대폰번호 유효성체크
         ]);
 
-        $result = User::find($id);
+        $result = User::where('userid', $id)->first();
         if (!$result) {
             // 사용자를 찾지 못한 경우에 대한 처리
             return redirect()->back()->withErrors(['message' => '사용자를 찾을 수 없습니다.']);
