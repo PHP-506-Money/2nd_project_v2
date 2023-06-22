@@ -149,25 +149,25 @@ class UserController extends Controller
 
     function updatepwpost(Request $req, User $user) {
         Log::debug('유효성체크');
-        //유효성 체크
-        $req->validate([ // validate는 자동으로 리다이렉트 해줌.
-            'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
+        // 유효성 체크
+        $req->validate([
+            'password' => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/'
         ]);
+        
         $userid = $req->id;
-        $data= DB::table('users')
-        ->where('userid', $userid)
-        ->first(); // $user 객체에서 ID 조회
-
-        $data['userpw'] = Hash::make($req->password);
+        $result = User::where('userid', $userid)->first();
+    
+        $data = ['userpw' => Hash::make($req->password)];
+    
         $result->update($data);
-
-        //비밀번호 변경완료. 로그인 페이지로 이동
+    
+        // 비밀번호 변경 완료. 로그인 페이지로 이동
         $success = '<div class="success">비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
-        ->route('users.login')
-        ->with('success', $success);
+            ->route('users.login')
+            ->with('success', $success);
     }
-
+    
     function myinfo() {
         $id = auth()->user()->userid; // 현재 로그인한 사용자의 ID를 가져옵니다.
         $result = User::select(['username', 'moffintype', 'moffinname'])
