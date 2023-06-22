@@ -63,7 +63,7 @@ class AchievementController extends Controller
         $achieve_users = DB::table('achieve_users')->where('userid', $user)->pluck('userid')->first();
 
         User::where('userid', $achieve_users)
-        ->increment('point', $points->points);
+        ->increment('point', $points->points)->save();
 
 
         
@@ -73,7 +73,7 @@ class AchievementController extends Controller
             $achieve_users->userid = $user;
             $achieve_users->id = $achievement->id;
             User::where('userid', $achieve_users)
-            ->increment('point', $points->points);
+            ->increment('point', $points->points)->save();
         }
 
         $achieve_users->completed_at = Carbon::now();
