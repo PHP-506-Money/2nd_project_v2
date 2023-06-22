@@ -1,6 +1,10 @@
 /* p{
     font-size: 25px;
 } */
+*{
+
+    text-align: center;
+}
 main{
     background-color: var(--sub-color);
     width:700px;
@@ -10,10 +14,9 @@ main{
     flex-direction:column;
     /* flex-wrap: wrap; */
     align-items: center;
-    text-align: center;
 }
 .monthBudget{
-    width: 400px;
+    width: 600px;
     height: 50px;
     background-color: var(--btn-color);
     border-radius: 15px;
@@ -40,3 +43,36 @@ main{
     height: 500px;
 }
 
+h2 {
+    font-size: 500;
+    margin-top: 150px;
+}
+
+.budgetset{
+    background-color: var(--sub-color);
+    width:500px;
+    height: 500px;
+}
+
+input{
+    width:200px;
+    height: 50px;
+    border:none;
+    border-bottom: 1px solid black;
+    background-color: var(--sub-color);
+    margin-top: 60px;
+}
+
+button{
+    background-color: var(--btn-color);
+    border:none;
+    width:50px;
+    height: 30px;
+    border-radius: 10px;
+    color : var(--sub-color);
+}
+
+.backbtn{
+    display: inline-block;
+    margin: 80px;
+}

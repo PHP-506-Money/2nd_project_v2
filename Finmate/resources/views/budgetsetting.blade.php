@@ -4,25 +4,32 @@
 
 @section('contents')
 
-<link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
+<link rel="stylesheet" href="{{ asset('/css/test.css')  }}" >
 
 @include('layout.errorsvalidate')
 <br>
-<h2>한달 예산 설정하기</h2>
 
     @if ($existingBudget)
+    <div class = "budgetset">
+    <h2>한달 예산 수정하기</h2>
         <form action="{{route('budget.put')}}" method="post">
             @csrf
             @method('PUT')
-            <input type="number" name="budgetprice" id="budgetprice">
-            <button type = "submit">설정</button>
+            <input type="number" name="budgetprice" id="budgetprice" placeholder="예산을 수정해주세요">
+            <button type = "submit"> 수정 </button>
+            <br>
+            <a href="{{ route('budget.get',[auth()->user()->userid])}}" class = "backbtn"> 돌아가기 </a>
             </form>
-        @else
+    </div>
+    @else
+    <div class = "budgetset">
+        <h2>한달 예산 설정하기</h2>
         <form action="{{route('budget.post')}}" method="post">
             @csrf
-            <input type="number" name="budgetprice" id="budgetprice" value="0" >
-            <button type = "submit">설정</button>
+            <input type="number" name="budgetprice" id="budgetprice" placeholder="예산을 입력해주세요" >
+            <button type = "submit"> 설정 </button>
         </form>
+    </div>
     @endif
 
 @endsection
