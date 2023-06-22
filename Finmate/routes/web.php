@@ -55,7 +55,8 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/users/findidpost', [UserController::class, 'findidpost'])->name('users.findid.post');
     Route::get('/users/findpw', [UserController::class, 'findpw'])->name('users.findpw');
     Route::post('/users/findpwpost', [UserController::class, 'findpwpost'])->name('users.findpw.post');
-    Route::post('/users/foundpwpost', [UserController::class, 'foundpwpost'])->name('users.foundpw.post');
+    Route::get('/users/updatepw', [UserController::class, 'updatepw'])->name('users.updatepw'); 
+    Route::post('/users/updatepwpost', [UserController::class, 'updatepwpost'])->name('users.updatepw.post');
 });
 
 
