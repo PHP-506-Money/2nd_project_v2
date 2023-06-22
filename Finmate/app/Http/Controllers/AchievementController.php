@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Achievement;
-use App\Models\AchieveUser;
+use App\Models\achieve_users;
 use App\Models\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\AchieveUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -22,43 +23,70 @@ class AchievementController extends Controller
 
     public function receiveAchievementReward(Request $request, $achievementId)
     {
-        $user = Auth::user();
-        
-        if (!$user) {
+        if (!auth()->check()) {
             return response()->json(['error' => '로그인 후 이용하세요.'], 403);
         }
 
+        $user = auth()->user()->userid;
+
+        if(!$user){
+            return response()->json(['error' => '유저 정보를 찾을 수 없습니다.'], 404);
+        }
+
+
         $achievement = Achievement::find($achievementId);
+
         if (!$achievement) {
             return response()->json(['error' => '업적 정보를 찾을 수 없습니다.'], 404);
         }
 
-        $achieveUser = DB::table('achieveuser')
-            ->where('userid', $user)
-            ->where('id', $achievement->id)
-            ->first();
-        $rewardReceived = $achieveUser && $achieveUser->reward_received == '1';
+        $achieve_users = DB::table('achieve_users')
+        ->where('userid', $user)
+        ->where('id', $achievement->id)
+        ->first();
 
-        if ($rewardReceived) {
+        // $achieve_users 변수가 null이면 reward_received를 0으로 설정합니다.
+        if (!$achieve_users) {
+            $rewardReceived = '0';
+        } else {
+            $rewardReceived = $achieve_users->reward_received;
+        }
+
+        if ($rewardReceived == '1') {
             return response()->json(['error' => '이미 보상을 받았습니다.'], 400);
         }
 
-        $user->point += $achievement->points;
-        User::find($user->userid)->save();
+        // $user->point += $achievement->points;
+        // User::where($user)->update();
 
-        // $achieveUser = new AchieveUser();
-        $achieveUser->userid = $user->userid;
-        $achieveUser->achievement_id = $achievement->id;
-        $achieveUser->completed_at = Carbon::now();
-        $achieveUser->reward_received = '1';
-        $achieveUser->save();
+        $points = DB::table('achievements')->select('points')->first();
+        $achieve_users = DB::table('achieve_users')->where('userid', $user)->pluck('userid')->first();
+
+        User::where('userid', $achieve_users)
+        ->increment('point', $points->points);
+
+
+        
+
+        if (!$achieve_users) {
+            $achieve_users = new AchieveUser();
+            $achieve_users->userid = $user;
+            $achieve_users->id = $achievement->id;
+            User::where('userid', $achieve_users)
+            ->increment('point', $points->points);
+        }
+
+        $achieve_users->completed_at = Carbon::now();
+        $achieve_users->reward_received = '1';
+        $achieve_users->save();
+
 
         return response()->json(['success' => '포인트가 지급되었습니다.']);
     }
 
     public function getAchievements($userid)
     {
-        $user = User::find($userid);
+        $user = User::where('userid', $userid)->first();
         if (!$user) {
             return response()->json(['error' => '유저를 찾을 수 없습니다.'], 404);
         }
@@ -101,7 +129,7 @@ class AchievementController extends Controller
             }
 
             if ($isAchieved) {
-                $achieveUser = DB::table('achieveuser')
+                $achieve_users = DB::table('achieve_users')
                     ->where('userid','=', $user->userid)
                     ->where('id','=', $achievement->id)
                     ->first();

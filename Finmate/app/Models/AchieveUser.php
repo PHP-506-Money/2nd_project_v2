@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AchieveUser extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 }
