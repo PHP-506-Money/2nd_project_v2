@@ -23,6 +23,7 @@ class AchievementController extends Controller
     public function receiveAchievementReward(Request $request, $achievementId)
     {
         $user = Auth::user();
+        
         if (!$user) {
             return response()->json(['error' => '로그인 후 이용하세요.'], 403);
         }
@@ -32,19 +33,20 @@ class AchievementController extends Controller
             return response()->json(['error' => '업적 정보를 찾을 수 없습니다.'], 404);
         }
 
-        $rewardReceived = DB::table('achieveuser')
-            ->where('userid', $user->userid)
-            ->where('achievement_id', $achievement->id)
+        $achieveUser = DB::table('achieveuser')
+            ->where('userid', $user)
+            ->where('id', $achievement->id)
             ->first();
+        $rewardReceived = $achieveUser && $achieveUser->reward_received == '1';
 
         if ($rewardReceived) {
             return response()->json(['error' => '이미 보상을 받았습니다.'], 400);
         }
 
         $user->point += $achievement->points;
-        $user->save();
+        User::find($user->userid)->save();
 
-        $achieveUser = new AchieveUser();
+        // $achieveUser = new AchieveUser();
         $achieveUser->userid = $user->userid;
         $achieveUser->achievement_id = $achievement->id;
         $achieveUser->completed_at = Carbon::now();
@@ -103,8 +105,8 @@ class AchievementController extends Controller
                     ->where('userid','=', $user->userid)
                     ->where('id','=', $achievement->id)
                     ->first();
-                $rewardReceived = $achieveUser && $achieveUser->reward_received == '1';
-            }
+                }
+                
 
             array_push($results, [
                 'id' => $achievement->id,

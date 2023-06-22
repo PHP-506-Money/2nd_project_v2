@@ -38,10 +38,16 @@ header {
     height: 150px;
 }
 
-.headerlogo {
+.headerlogo  {
     width: 150px;
     height: 150px;
     text-align: center;
+    margin: 0 50px;
+    
+}
+
+.logout {
+    margin: 0 50px;
 }
 
 .headerlogo:hover {
@@ -59,24 +65,64 @@ header {
 }
 
 .headerMain {
-    width: calc(80vw - 200px);
+    margin: 0 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.nav {
+.nav  {
     margin-top: 20px;
     display: inline-flex;
     position: relative;
-    overflow: hidden;
+    
     max-width: 100%;
     background-color: var(--main-color);
     padding: 0 20px;
     border-radius: 40px;
     box-shadow: 0 10px 40px rgba(159, 162, 177, 0.8);
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown a {
+    color: var(--sub-color);
+
+        text-decoration: none;
+        transition: 0.3s;
+
+        z-index: 1;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500;
+
+}
+
+.dropdown-content {
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    width: 200%;
+    background-color: var(--main-color);
+    padding: 0 10px;
+    border-radius: 20px;
+    /* box-shadow: 0 10px 40px rgba(159, 162, 177, 0.8); */
+    top: 60px;
+    left: -20px;
+    white-space: nowrap;
+    /* z-index: 2; */
+
+}
+
+.dropdown:hover  .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 .nav-item {
     color: var(--sub-color);
