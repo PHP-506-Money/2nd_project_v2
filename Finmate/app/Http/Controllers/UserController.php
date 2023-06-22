@@ -134,15 +134,17 @@ class UserController extends Controller
         $email = $req->input('email');
 
        // 데이터베이스에서 이메일에 해당하는 사용자 조회
-        $user = User::where('userid', $id)
+        $user = DB::table('users')
+        ->where('userid', $id)
         ->where('useremail', $email)
         ->first();
-
-        return redirect()->route('users.updatepw', compact('user'));
+        $userid = $user->userid;
+        return redirect()->route('users.updatepw',['userid' => $userid]);
     }
 
     function updatepw(Request $req, User $user) { // 사용자 객체를 주입받음
-        return view('updatepw', compact('user')); // user 변수를 compact 함수로 전달
+        
+        return view('updatepw', compact('user'))->with('data',$user); // user 변수를 compact 함수로 전달
     }
 
     function updatepwpost(Request $req, User $user) {
@@ -151,9 +153,9 @@ class UserController extends Controller
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
             'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
         ]);
-
+        $userid = $req->user;
         $result  = DB::table('users')
-        ->where('userid', $user)
+        ->where('userid', $userid)
         ->first(); // $user 객체에서 ID 조회
 
         $data['userpw'] = Hash::make($req->password);
