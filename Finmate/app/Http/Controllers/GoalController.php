@@ -59,6 +59,13 @@ class GoalController extends Controller
 
     public function insert($userid,Request $Req)
     {
+
+        $Req->validate([
+            'amount'   => 'numeric|min:100000|max:1000000000',
+            'startperiod' => 'required|date',
+            'endperiod'   => 'required|date|after:startperiod'
+        ]);
+        
         $userno = User::where('userid', $userid)
             ->pluck('userno')
             ->first();

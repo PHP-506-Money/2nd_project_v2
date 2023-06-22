@@ -8,24 +8,24 @@
 
 
     <h1> 캐릭터 관리</h1>
-                    <div >
-                    
-                    @if ($data->moffintype == 1)
-                        <img src="{{ asset('/img/rabbit.png') }}" alt=""  style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;  ">
-                    @elseif ($data->moffintype == 2)
-                        <img src="{{ asset('/img/penguin.png') }}" alt="" id="mofin" style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;" >
-                    @elseif ($data->moffintype == 3)
-                        <img src="{{ asset('/img/panda.png') }}" alt="" style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;  " >
-                    @endif
-                    
-                    </div>
-                    <h1> {{ $data->username }} 님의 {{ $data->moffinname }}</h1>
-    <h2>나의 포인트 : {{$data->point}}</h2> <br><br>
-    <h2>나의 아이템 목록</h2> <br><br>
- <h3>@foreach($itemname as $value)    
-    {{$value}}
-    @endforeach
- </h3>
+        <div >
+        
+        @if ($data->moffintype == 1)
+            <img src="{{ asset('/img/rabbit.png') }}" alt=""  style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;  ">
+        @elseif ($data->moffintype == 2)
+            <img src="{{ asset('/img/penguin.png') }}" alt="" id="mofin" style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;" >
+        @elseif ($data->moffintype == 3)
+            <img src="{{ asset('/img/panda.png') }}" alt="" style="width : 300px; height :200 px; position:absolute; right:50px; bottom:380px;  " >
+        @endif
+        
+        </div>
+        <h1> {{ $data->username }} 님의 {{ $data->moffinname }}</h1>
+            <h2>나의 포인트 : {{$data->point}}</h2> <br><br>
+            <h2>나의 아이템 목록</h2> <br><br>
+        <h3>@foreach($itemname as $value)    
+            {{$value}}
+            @endforeach
+        </h3>
     <div>
         @foreach($itemname as $value)
             @if($value === '선글라스')
@@ -44,13 +44,12 @@
 <br><br>
     <div  >
                 <div>
-                <img id="charitem1" src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;">
+                <img id="charitem1" src="{{ asset('/img/sunglasses.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  ">
                 <img id="charitem2" src="{{ asset('/img/sword.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
                 <img id="charitem3" src="{{ asset('/img/safe.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
                 <img id="charitem4" src="{{ asset('/img/air.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
                 <img id="charitem5" src="{{ asset('/img/idcard.png') }}" alt="" style="width : 300px; height :200 px; display:none; position:absolute; right:50px; bottom:380px;  "  >
                 </div>
-                {{-- <button onclick="toggleitem()">선글라스 장착</button> --}}
     </div>
 
     <div>
@@ -80,7 +79,7 @@
                 charitem1.style.display = 'none';
             }
         }
-             function toggleitem2() {
+            function toggleitem2() {
             var charitem2 = document.getElementById('charitem2');
             if (charitem2.style.display === 'none') {
                 charitem2.style.display = 'block';
@@ -88,7 +87,7 @@
                 charitem2.style.display = 'none';
             }
         }
-             function toggleitem3() {
+            function toggleitem3() {
             var charitem3 = document.getElementById('charitem3');
             if (charitem3.style.display === 'none') {
                 charitem3.style.display = 'block';
@@ -96,7 +95,7 @@
                 charitem3.style.display = 'none';
             }
         }
-             function toggleitem4() {
+            function toggleitem4() {
             var charitem4 = document.getElementById('charitem4');
             if (charitem4.style.display === 'none') {
                 charitem4.style.display = 'block';
@@ -104,7 +103,7 @@
                 charitem4.style.display = 'none';
             }
         }
-             function toggleitem5() {
+            function toggleitem5() {
             var charitem5 = document.getElementById('charitem5');
             if (charitem5.style.display === 'none') {
                 charitem5.style.display = 'block';
@@ -113,8 +112,7 @@
             }
         }
     </script>
-
- @if (session()->has('pt1'))
+@if (session()->has('pt1'))
     <script>
         // 페이지가 로드될 때 자동으로 실행되도록 수정
         window.addEventListener('load', function() {
@@ -123,6 +121,7 @@
         });
     </script>
 @endif
+
 
 
 @endsection

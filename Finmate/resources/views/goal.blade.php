@@ -6,6 +6,13 @@
 
 <h1>나의 목표</h1>
 
+    @if(isset($errors))
+    
+        {{$errors}}
+    
+        
+    @endif
+
 <form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post">
     @method('POST')
     @csrf
@@ -13,7 +20,7 @@
     <input type="text" class="" name="title"  id="title" required placeholder="목표">
     
     <label for="amount">금액 : </label>
-    <input type="number" min="1" max="1000000000" class="" name="amount"  id="amount" required placeholder="목표">
+    <input type="number" min="100000" max="1000000000" class="" name="amount"  id="amount" required placeholder="목표">
     
     <label for="startperiod">시작일자 : </label>
     <input type="date" name="startperiod"  id="startperiod" required>
@@ -71,7 +78,7 @@
                     <input type="text" name="title" id="title" required placeholder="목표" value="{{ $goal->title }}">
 
                     <label for="amount">금액 : </label>
-                    <input type="number" min="1" max="1000000000" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
+                    <input type="number" min="100000" max="1000000000" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
 
                     <label for="startperiod">시작일자 : </label>
                     <input type="date" name="startperiod" id="startperiod" required value="{{ $goal->startperiod }}">

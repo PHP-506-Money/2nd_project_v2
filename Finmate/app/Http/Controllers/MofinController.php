@@ -34,9 +34,6 @@ class MofinController extends Controller
         ->toArray();
 
         $itemonly = array_unique($item_name);
-
-        // $itemonly = implode(',', $itemonly);
-        
         return view('mofin')->with('data',$result)->with('itemname', $itemonly);
 
     }
@@ -51,7 +48,6 @@ class MofinController extends Controller
         if($result->point < 100 ){
             $errmsg = '포인트가부족합니다!';
 
-
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
@@ -61,11 +57,6 @@ class MofinController extends Controller
             ->toArray();
         
             $itemonly = array_unique($item_name);
-
-            // $itemonly = implode(',', $itemonly);
-            
-            
-        
             return view('mofin')->with('data', $result)->with('itemname', $itemonly)->with('pt1',$errmsg);
         }
 
@@ -78,7 +69,7 @@ class MofinController extends Controller
             ->update(['point' => $newPoint]);
 
         $randompoint = $randompoint . " 당첨되셨습니다";
-
+        
         session()->flash('pt1', $randompoint);
 
             $item_name = DB::table('iteminfos AS info')
@@ -90,8 +81,6 @@ class MofinController extends Controller
             ->toArray();
         
             $itemonly = array_unique($item_name);
-
-            // $itemonly = implode(',', $itemonly);
             return redirect()->route('mofin.index', ['userid' => $id])->with('data', $result)->with('itemname', $itemonly);
         }
 
@@ -131,9 +120,6 @@ class MofinController extends Controller
         ->toArray();
 
         $itemonly = array_unique($item_name);
-
-        // $itemonly = implode(',', $itemonly);
-        
         return view('mofin')->with('data',$result)->with('itemname', $itemonly);
 
         }
@@ -150,10 +136,7 @@ class MofinController extends Controller
             ->pluck('itemname')
             ->toArray();
             
-            $itemonly = array_unique($item_name);
-
-            // $itemonly = implode(',', $itemonly);
-        
+            $itemonly = array_unique($item_name);       
             return view('mofin')->with('data', $result)->with('itemname', $itemonly)->with('pt1',$errmsg);
         }
     }

@@ -6,6 +6,7 @@
  * History      : v001 0613 Subin.No new
  *******************************************/
 use App\Http\Controllers\MofinController;
+use App\Http\Controllers\RankController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
@@ -117,3 +118,6 @@ Route::post('/goal/delete/{userid}', [GoalController::class, 'delete'])->name('g
 Route::get('/mofin/{userid}', [MofinController::class,'index'])->name('mofin.index');
 Route::post('/mofin/post/{userid}', [MofinController::class, 'point'])->name('mofin.point');
 Route::post('/mofin/item/{userno}', [MofinController::class,'item'])->name('mofin.item');
+
+//랭크
+Route::get('/rank/{userid}', [RankController::class,'index'])->name('rank.index');
