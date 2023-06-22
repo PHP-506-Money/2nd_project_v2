@@ -79,8 +79,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/assets/transactions/{userid}', [TransactionController::class, 'index'])->name('transactions.index');
     
     // myinfo
-    Route::get('/users/myinfo', [UserController::class, 'myinfo'])->name('users.myinfo');
-    Route::post('/users/myinfopost', [UserController::class, 'myinfopost'])->name('users.myinfo.post');
+    Route::get('/users/profile', [UserController::class, 'profile'])->name('users.profile');
+    Route::post('/users/profilepost', [UserController::class, 'profilepost'])->name('users.profile.post');
     Route::get('/users/modify', [UserController::class, 'modify'])->name('users.modify');
     Route::post('/users/modifypost', [UserController::class, 'modifypost'])->name('users.modify.post');
 

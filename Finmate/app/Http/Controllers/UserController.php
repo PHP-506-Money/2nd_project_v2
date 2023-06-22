@@ -168,15 +168,15 @@ class UserController extends Controller
             ->with('success', $success);
     }
     
-    function myinfo() {
+    function profile() {
         $id = auth()->user()->userid; // 현재 로그인한 사용자의 ID를 가져옵니다.
         $result = User::select(['username', 'moffintype', 'moffinname'])
                         ->where('userid', $id)
                         ->get();
-        return view('myinfo')->with('data', $result);
+        return view('profile')->with('data', $result);
     }
 
-    function myinfopost(Request $req) {
+    function profilepost(Request $req) {
         $id = auth()->user()->userid;
 
         // 유효성 검사 방법 1
@@ -193,7 +193,7 @@ class UserController extends Controller
         $result->moffinname = $req->moffinname;
         $result->save();
 
-        return redirect()->route('users.myinfo');
+        return redirect()->route('users.profile');
     }
 
     function modify() {
@@ -228,7 +228,7 @@ class UserController extends Controller
 
         $result->update($data);
 
-        return redirect()->route('users.myinfo');
+        return redirect()->route('users.profile');
     }
 
     // 회원탈퇴 기능: softdeletes();를 사용하여 migration을 하였으므로, 로그인시 자동으로 탈퇴한 회원은 로그인 불가능하게 막아줌.
