@@ -114,7 +114,7 @@ class UserController extends Controller
         ->where('useremail', $email)
         ->first();
 
-    return view('foundid', ['user'=>$user]);
+        return view('foundid', ['user'=>$user]);
     }
 
     function findpw() {
@@ -137,18 +137,30 @@ class UserController extends Controller
         ->where('useremail', $email)
         ->first();
 
-    return view('foundpw', ['user'=>$user]);
+        return redirect()->route('users.updatepw', compact('user'));
     }
 
-    function foundpwpost(Request $req) {
+    function updatepw(Request $req, User $user) { // 사용자 객체를 주입받음
+        return view('updatepw', compact('user')); // user 변수를 compact 함수로 전달
+    }
+
+    function updatepwpost(Request $req, User $user) {
+        Log::debug('유효성체크');
         //유효성 체크
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
             'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
         ]);
 
-        $data['userpw'] = Hash::make($req->password);
+        $result = User::find($user->id); // $user 객체에서 ID 조회
 
-        return redirect()->route('users.login');
+        $data['userpw'] = Hash::make($req->password);
+        $result->update($data);
+
+        //비밀번호 변경완료. 로그인 페이지로 이동
+        $success = '<div class="success">비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
+        return redirect()
+        ->route('users.login')
+        ->with('success', $success);
     }
 
     function myinfo() {
@@ -220,11 +232,8 @@ class UserController extends Controller
         $result = User::destroy($id); // destroy 에러 났을 때 에러 핸들링 써서 예외 처리 하기
         Session::flush(); // 세션 파기
         Auth::logout(); // 로그아웃
+
         return redirect()->route('users.login');
     }
-
-
-    
-
 
 }
