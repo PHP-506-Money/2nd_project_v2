@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -151,7 +152,9 @@ class UserController extends Controller
             'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~#%*!@^])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
         ]);
 
-        $result = User::find($user->id); // $user 객체에서 ID 조회
+        $result  = DB::table('users')
+        ->where('userid', $user)
+        ->first(); // $user 객체에서 ID 조회
 
         $data['userpw'] = Hash::make($req->password);
         $result->update($data);

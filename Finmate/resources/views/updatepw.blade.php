@@ -5,6 +5,8 @@
 @section('header', 'CHANGE PASSWORD')
 
 @section('contents')
+@php 
+@endphp
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     @include('layout.errorsvalidate')
     <form id="table" action="{{route('users.updatepw.post')}}" method="post">
