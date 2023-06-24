@@ -7,7 +7,7 @@
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     @include('layout.errorsvalidate')
-    <form id="myinfo" name="myinfo" action="{{route('users.myinfo.post')}}" method="post">
+    <form id="myinfo" name="myinfo" action="{{route('users.profile.post')}}" method="post">
         @csrf
         <div>
             @foreach ($data as $user)
