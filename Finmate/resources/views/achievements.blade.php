@@ -22,8 +22,7 @@
         <tbody>
             @foreach ($achievements as $achievement)
 
-            <tr data-achievement-id="{{ $achievement->achievementsid }}">
-
+            <tr data-achievement-id="{{ $achievement->id }}">
                 <th>{{ $achievement->name }}</th>
                 <td>{{ $achievement->description }}</td>
 
@@ -31,8 +30,7 @@
                 <td class="achievement-status"></td>
 
                 <td>
-                    <button class="receive-reward-button" onclick="receiveReward({{ $achievement->achievementsid }})">보상받기</button>
-
+                    <button class="receive-reward-button" onclick="receiveReward({{ $achievement->id }})">보상받기</button>
                 </td>
 
             </tr>
@@ -44,13 +42,13 @@
 <script>
     function receiveReward(achievementId) {
         fetch('/achievements/' + achievementId + '/reward', {
-        method: 'PUT',
-        headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-        })
+                method: 'PUT'
+                , headers: {
+                    'Content-Type': 'application/json'
+                    , 'Accept': 'application/json'
+                    , 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                , }
+            })
             .then(response => response.json())
             .then(json => {
                 if (json.error) {
@@ -68,46 +66,39 @@
 
 
     fetch('/checkAchievements', {
-    method: 'GET',
-    headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    }
-    })
-    .then(response => response.json())
-    .then(json => {
-    if (json.results) {
-    json.results.forEach(result => {
-    updateProgressAndAchievementStatus(result);
-    });
-    }
-    })
-    .catch(error => {
-    console.log('Error:', error);
-    });
+            method: 'GET'
+            , headers: {
+                'Content-Type': 'application/json'
+                , 'Accept': 'application/json'
+                , 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            , }
+        })
+        .then(response => response.json())
+        .then(json => {
+            if (json.results) {
+                json.results.forEach(result => {
+                    updateProgressAndAchievementStatus(result);
+                });
+            }
+        })
+        .catch(error => {
+            console.log('Error:', error);
+        });
 
     function updateProgressAndAchievementStatus(result) {
-    const achievementRow = document.querySelector(`[data-achievement-id="${result.id}"]`);
-    if (!achievementRow) return;
+        const achievementRow = document.querySelector(`[data-achievement-id="${result.id}"]`);
+        if (!achievementRow) return;
 
-    achievementRow.querySelector('.progress').innerHTML = `${result.progress}%`;
+        achievementRow.querySelector('.progress').innerHTML = `${result.progress}%`;
 
-    const isAchieved = result.is_achieved;
-    achievementRow.querySelector('.achievement-status').innerHTML = isAchieved ? '완료' : '미완료';
+        const isAchieved = result.is_achieved;
+        achievementRow.querySelector('.achievement-status').innerHTML = isAchieved ? '완료' : '미완료';
 
-    const receiveRewardButton = achievementRow.querySelector('.receive-reward-button');
-    receiveRewardButton.disabled = !isAchieved || result.$reward_received !== 0;
-
-
+        const receiveRewardButton = achievementRow.querySelector('.receive-reward-button');
+        receiveRewardButton.disabled = !isAchieved || !result.reward_received == '0';
     }
 
 </script>
 
 @endsection
-
-
-
-
-
 

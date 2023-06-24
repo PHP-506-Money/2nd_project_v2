@@ -29,7 +29,7 @@ class AchievementController extends Controller
 
         $user = auth()->user()->userid;
 
-        if(!$user){
+        if (!$user) {
             return response()->json(['error' => '유저 정보를 찾을 수 없습니다.'], 404);
         }
 
@@ -41,18 +41,18 @@ class AchievementController extends Controller
         }
 
         $achieve_users = DB::table('achieve_users')
-        ->where('userid', $user)
-        ->where('achievementsid', $achievement->achievementsid)
-        ->first();
+            ->where('userid', $user)
+            ->where('id', $achievement->id)
+            ->first();
 
         // $achieve_users 변수가 null이면 reward_received를 0으로 설정합니다.
         if (!$achieve_users) {
-            $rewardReceived = 0;
+            $rewardReceived = '0';
         } else {
             $rewardReceived = $achieve_users->reward_received;
         }
 
-        if ($rewardReceived == 1) {
+        if ($rewardReceived == '1') {
             return response()->json(['error' => '이미 보상을 받았습니다.'], 400);
         }
 
@@ -63,22 +63,24 @@ class AchievementController extends Controller
         $achieve_users = DB::table('achieve_users')->where('userid', $user)->pluck('userid')->first();
 
         User::where('userid', $achieve_users)
-        ->increment('point', $points->points)->save();
+            ->increment('point', $points->points);
 
 
-        
+
 
         if (!$achieve_users) {
             $achieve_users = new AchieveUser();
             $achieve_users->userid = $user;
             $achieve_users->id = $achievement->id;
             User::where('userid', $achieve_users)
-            ->increment('point', $points->points)->save();
+                ->increment('point', $points->points);
         }
 
-        $achieve_users->completed_at = Carbon::now();
-        $achieve_users->reward_received = 1;
-        $achieve_users->save();
+        $achieve_user = AchieveUser::where('userid', $achieve_users)->first();
+
+        $achieve_user->completed_at = Carbon::now();
+        $achieve_user->reward_received = '1';
+        $achieve_user->save();
 
 
         return response()->json(['success' => '포인트가 지급되었습니다.']);
@@ -130,14 +132,14 @@ class AchievementController extends Controller
 
             if ($isAchieved) {
                 $achieve_users = DB::table('achieve_users')
-                    ->where('userid','=', $user->userid)
-                    ->where('achievementsid','=', $achievement->achievementsid)
+                    ->where('userid', '=', $user->userid)
+                    ->where('id', '=', $achievement->id)
                     ->first();
-                }
-                
+            }
+
 
             array_push($results, [
-                'achievementsid' => $achievement->achievementsid,
+                'id' => $achievement->id,
                 'name' => $achievement->name,
                 'progress' => min(100, (int)$progress),
                 'is_achieved' => $isAchieved,
@@ -147,7 +149,4 @@ class AchievementController extends Controller
 
         return response()->json(['results' => $results]);
     }
-
-
-
 }
