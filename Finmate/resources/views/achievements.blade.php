@@ -95,7 +95,7 @@
         achievementRow.querySelector('.achievement-status').innerHTML = isAchieved ? '완료' : '미완료';
 
         const receiveRewardButton = achievementRow.querySelector('.receive-reward-button');
-        receiveRewardButton.disabled = !isAchieved || !result.reward_received == '0';
+        receiveRewardButton.disabled = !isAchieved || result.reward_received == '1';
     }
 
 </script>
