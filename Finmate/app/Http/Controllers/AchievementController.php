@@ -74,11 +74,15 @@ class AchievementController extends Controller
         }
 
         $achieve_user = AchieveUser::where('userid', $achieve_users)->first();
+        User::where('userid', $achieve_user)
+            ->increment('point', $points->points);
 
         if (!$achieve_user) {
             $achieve_user = new AchieveUser();
             $achieve_user->userid = $achieve_users->userid;
             $achieve_user->achievementsid = $achievement->id;
+            User::where('userid', $achieve_user)
+                ->increment('point', $points->points);
         }
 
         $achieve_user->completed_at = Carbon::now();
