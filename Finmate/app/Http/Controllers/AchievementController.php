@@ -113,7 +113,7 @@ class AchievementController extends Controller
         foreach ($achievements as $achievement) {
             $progress = 0;
             $isAchieved = false;
-            $rewardReceived = '0';
+            $reward_received = AchieveUser::where('userid', $user->userid)->where('achievementsid', $achievement->id)->value('reward_received');
 
             switch ($achievement->name) {
                 case '로그인 10회':
@@ -150,7 +150,7 @@ class AchievementController extends Controller
                 'name' => $achievement->name,
                 'progress' => min(100, (int)$progress),
                 'is_achieved' => $isAchieved,
-                'reward_received' => $rewardReceived
+                'reward_received' => $reward_received
             ]);
         }
 
