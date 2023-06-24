@@ -42,7 +42,7 @@ class AchievementController extends Controller
 
         $achieve_users = DB::table('achieve_users')
             ->where('userid', $user)
-            ->where('id', $achievement->id)
+            ->where('achievementsid', $achievement->id)
             ->first();
 
         // $achieve_users 변수가 null이면 reward_received를 0으로 설정합니다.
@@ -65,18 +65,21 @@ class AchievementController extends Controller
         User::where('userid', $achieve_users)
             ->increment('point', $points->points);
 
-
-
-
         if (!$achieve_users) {
             $achieve_users = new AchieveUser();
             $achieve_users->userid = $user;
-            $achieve_users->id = $achievement->id;
+            $achieve_users->achievementsid = $achievement->id;
             User::where('userid', $achieve_users)
                 ->increment('point', $points->points);
         }
 
         $achieve_user = AchieveUser::where('userid', $achieve_users)->first();
+
+        if (!$achieve_user) {
+            $achieve_user = new AchieveUser();
+            $achieve_user->userid = $achieve_users->userid;
+            $achieve_user->achievementsid = $achievement->id;
+        }
 
         $achieve_user->completed_at = Carbon::now();
         $achieve_user->reward_received = '1';
