@@ -8,15 +8,14 @@
 @section('contents')
 
 <div class="container">
-    <h1>업적 목록</h1>
-    <table class="table">
+    <table class="table ">
         <thead>
             <tr>
-                <th scope="col">업적명</th>
-                <th scope="col">달성조건</th>
-                <th scope="col">진행도</th>
-                <th scope="col">완료 여부</th>
-                <th scope="col">보상 받기</th>
+                <th >업적명</th>
+                <th >달성조건</th>
+                <th >진행도</th>
+                <th >완료 여부</th>
+                <th >보상 받기</th>
             </tr>
         </thead>
         <tbody>

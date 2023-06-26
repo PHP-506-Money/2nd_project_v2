@@ -25,7 +25,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 header {
@@ -173,6 +172,13 @@ header {
     border-radius: 8px 8px 0 0;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
 
 
 footer {
@@ -313,6 +319,9 @@ section .bottombanner img {
     text-align: center;
     background-color: var(--sub-color);
     color: var(--main-color);
+    width: 60vw;
+    height: 70vh;
+    margin-bottom: 50px;
 }
 
 .scriptCalendar>thead>tr>td {
@@ -334,6 +343,11 @@ section .bottombanner img {
     height: 50px;
 }
 
+.scriptCalendar>tbody>tr>td:hover {
+    background-color: var(--ac-color);
+    /* color: var(--active-color); */
+}
+
 .calendarBtn {
     cursor: pointer;
 }
@@ -349,12 +363,13 @@ section .bottombanner img {
     color: var(--sub-color);
 }
 
-.assetTable {
+.assetTable , .table {
     border-collapse: collapse;
     background-color: var(--sub-color);
     color: var(--main-color);
     margin: 10px;
     width: 80vw;
+    text-align: center;
 }
 
 .assetTable tbody {
@@ -380,6 +395,15 @@ section .bottombanner img {
     align-items: center;
 }
 
+.table tr {
+    border-bottom: 1px solid var(--btn-color);
+    width: 100%;
+}
+
+.table td, .table th {
+    padding: 10px;
+}
+
 .button {
     background-color: var(--btn-color);
     color: var(--sub-color);
@@ -390,8 +414,19 @@ section .bottombanner img {
     width: 280px;
 }
 
+.button.min {
+    width: 80px;
+}
+
 .button:hover {
     background-color: var(--active-color);
 }
 
 
+#monthly-income {
+    color: var(--main-color);
+}
+
+#monthly-expense {
+    color: var(--active-color);
+}
