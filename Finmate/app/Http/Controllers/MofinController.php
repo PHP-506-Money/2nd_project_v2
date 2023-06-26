@@ -66,7 +66,7 @@ class MofinController extends Controller
 
         DB::table('users')
             ->where('userid', $id)
-            ->update(['point' => $newPoint]);
+            ->update(['point' => $newPoint, 'point_draw_count' => $result->point_draw_count + 1 ]);
 
         $randompoint = $randompoint . " 당첨되셨습니다";
         
@@ -99,7 +99,7 @@ class MofinController extends Controller
         
         DB::table('users')
         ->where('userid', $id)
-        ->update(['point' => $newPoint]);
+        ->update(['point' =>$newPoint, 'item_draw_count' => $result->item_draw_count + 1]);
 
         $randomitem = rand(1,5);
         $data['userno'] = $result->userno;
