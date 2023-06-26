@@ -1,4 +1,10 @@
 <?php
+/******************************************
+ * Project Name : Finmate
+ * Directory    : lang
+ * File Name    : validation.php
+ * History      : v001 0615 EY.Sin new
+ *******************************************/
 
 return [
 
@@ -43,7 +49,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'email' => 'The :attribute must be a valid email address.',
+    'email' => ':attribute의 형식이 맞지 않습니다.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
     'exists' => 'The selected :attribute is invalid.',
@@ -106,8 +112,8 @@ return [
     'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
-    'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'regex' => ':attribute의 형식이 맞지 않습니다.',
+    'required' => ':attribute란은 필수 입력 항목입니다.',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
@@ -158,6 +164,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email'         => '이메일',
+        'password'      => '비밀번호',
+        'name'          => '이름',
+        'id'            => '아이디',
+        'phone'         => '휴대폰번호',
+        'moffintype'    => '나의 모핀이 선택',
+        'moffinname'    => '모핀이명'
+    ],
 
 ];

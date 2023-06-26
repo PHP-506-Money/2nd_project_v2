@@ -6,6 +6,7 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
+    <div>{!!session()->has('success') ? session('success') : ""!!}</div>
     @include('layout.errorsvalidate')
     <form id="myinfo" name="myinfo" action="{{route('users.profile.post')}}" method="post">
         @csrf
@@ -23,7 +24,7 @@
         </div>
         <div id="info">
             {{-- {{ $user->username }} 님의 <input type="text" name="moffinname" id="moffinname" value="{{ $user->moffinname }}" required> --}}
-            {{ $user->username }} 님의 <textarea name="moffinname" id="moffinname" cols="10" rows="1">{{ $user->moffinname }}</textarea>
+            {{ $user->username }} 님의 <textarea name="moffinname" id="moffinname" cols="10" rows="1" required>{{ $user->moffinname }}</textarea>
             @endforeach
         </div>
         <div class="bottom2">

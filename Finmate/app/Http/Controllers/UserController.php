@@ -193,7 +193,10 @@ class UserController extends Controller
         $result->moffinname = $req->moffinname;
         $result->save();
 
-        return redirect()->route('users.profile');
+        $success = '<div class="success">모핀이명 변경을 완료 하였습니다.</div>';
+        return redirect()
+        ->route('users.profile')
+        ->with('success', $success);
     }
 
     function modify() {
