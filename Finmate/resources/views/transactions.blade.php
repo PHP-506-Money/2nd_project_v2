@@ -39,14 +39,12 @@
 <!-- 좌우 버튼 -->
 
 <h3>
-<span id="current-month"></span>월
-
-    <button id="previous-month-btn">&#60;&#60;</button>
+    <button class="button min" id="previous-month-btn">&#60;&#60;</button>
+    <span id="current-month"></span>월
+    <button class="button min" id="next-month-btn">&#62;&#62;</button>
+    <br>
     이번달 총 수입: <span id="monthly-income"></span> 원
     이번달 총 지출: <span id="monthly-expense"></span> 원
-    <button id="next-month-btn">&#62;&#62;</button>
-
-
 </h3>
 
 
@@ -66,9 +64,10 @@
 
             <td>{{$tran->payee}}</td>
             @if($tran->type == '0')
-            <td>수입</td>
+            <td>카테고리 : 수입</td>
+
             @else
-            <td>{{$tran->name}}</td>
+            <td>카테고리 : {{$tran->name}}</td>
 
             @endif
 
@@ -85,6 +84,7 @@
 </div>
 
 <script>
+
     const currentMonthElem = document.getElementById("current-month");
     const monthlyIncomeElem = document.getElementById("monthly-income");
     const monthlyExpenseElem = document.getElementById("monthly-expense");
@@ -135,13 +135,6 @@ currentYear++;
 currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMonthElem(); });
 
 
-
-
-
-
-</script>
-
-<script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         buildCalendar();
 
@@ -248,19 +241,11 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
                         column.style.cursor = "pointer";
                         column.style.color = "#607EAA";
 
-                        column.onclick = function() {
-                            calendarChoiceDay(this);
-                        }
-
                     }
 
                     // @details 현재일보다 이후이면서 현재월에 포함되는 일인경우
                     else if (nowDate.getDate() < day && lastDate.getDate() >= day) {
-
                         column.style.cursor = "pointer";
-                        column.onclick = function() {
-                            calendarChoiceDay(this);
-                        }
                     }
 
                     // @details 현재일인 경우
@@ -268,9 +253,6 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
                         column.style.backgroundColor = "#FF7676";
 
                         column.style.cursor = "pointer";
-                        column.onclick = function() {
-                            calendarChoiceDay(this);
-                        }
                     }
 
                     // @details 현재월보다 이전인경우
@@ -278,11 +260,6 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
                     if (Math.sign(day) == 1 && day <= lastDate.getDate()) {
                         column.style.cursor = "pointer";
                         column.style.color = "#607EAA";
-
-                        column.onclick = function() {
-                            calendarChoiceDay(this);
-                        }
-
                     }
                 }
 
@@ -290,9 +267,6 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
                 else {
                     if (Math.sign(day) == 1 && day <= lastDate.getDate()) {
                         column.style.cursor = "pointer";
-                        column.onclick = function() {
-                            calendarChoiceDay(this);
-                        }
                     }
                 }
             }
@@ -306,9 +280,6 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
             else {
                 if (Math.sign(day) == 1 && day <= lastDate.getDate()) {
                     column.style.cursor = "pointer";
-                    column.onclick = function() {
-                        calendarChoiceDay(this);
-                    }
                 }
             }
 
@@ -350,44 +321,11 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
             }
         }
 
-        // function clearTransactionAmounts() {
-        //  let calendarCells = document.querySelectorAll("td");
-        //  for (let i = 0; i < calendarCells.length; i++) { const cell=calendarCells[i]; const amountsDiv=cell.querySelector('div'); if (amountsDiv) { cell.removeChild(amountsDiv); } } }
-
         showTransactionAmounts();
 
         @endif
 
 
-    }
-
-    /**
-     * @brief   날짜 선택
-     * @details 사용자가 선택한 날짜에 체크표시를 남긴다.
-     */
-    function calendarChoiceDay(column) {
-
-        // @param 기존 선택일이 존재하는 경우 기존 선택일의 표시형식을 초기화 한다.
-        if (document.getElementsByClassName("choiceDay")[0]) {
-
-            // @see 금일인 경우
-            if (document.getElementById("calMonth").innerText == autoLeftPad((nowDate.getMonth() + 1), 2) && document.getElementsByClassName("choiceDay")[0].innerText == autoLeftPad(toDay.getDate(), 2)) {
-                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFFE6";
-            }
-
-            // @see 금일이 아닌 경우
-            else {
-                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFBF0";
-
-            }
-            document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");
-        }
-
-        // @param 선택일 체크 표시
-        column.style.backgroundColor = "#FF9999";
-
-        // @param 선택일 클래스명 변경
-        column.classList.add("choiceDay");
     }
 
     /**
