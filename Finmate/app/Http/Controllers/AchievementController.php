@@ -50,6 +50,8 @@ class AchievementController extends Controller
             $this->initializeAchievements();
         }
 
+        $this->checkAchievements();
+
         return view('achievements', compact('achievements'));
     }
 
@@ -156,8 +158,6 @@ class AchievementController extends Controller
         foreach ($achievements as $achievement) {
             $progress = 0;
             $isAchieved = false;
-
-            
             $reward_received = 0;
 
             switch ($achievement->id) {
@@ -186,12 +186,13 @@ class AchievementController extends Controller
                 $achieve_user = AchieveUser::where('userid', $user->userid)
                 ->where('achievementsid', $achievement->id)
                 ->first();
+                $reward_received = $achieve_user->reward_received;
                 // If an entry does not exist, create one
                 if (!$achieve_user) {
                     $achieve_user = new AchieveUser([
                         'userid' => $user->userid,
                         'achievementsid' => $achievement->id,
-                        'reward_received' => '0'
+                        'reward_received' => $reward_received
                     ]);
                     $achieve_user->save();
                 }
