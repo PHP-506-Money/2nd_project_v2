@@ -26,11 +26,11 @@
                         @if ($user->moffintype == 0)
                             <img src="{{ asset('/img/moffin2.png') }}" alt="">
                         @elseif ($user->moffintype == 1)
-                            <img src="{{ asset('/img/rabbit.png') }}" alt="">
+                            <img src="{{ asset('/img/rabbit3.png') }}" alt="">
                         @elseif ($user->moffintype == 2)
-                            <img src="{{ asset('/img/penguin.png') }}" alt="">
+                            <img src="{{ asset('/img/penguin3.png') }}" alt="">
                         @elseif ($user->moffintype == 3)
-                            <img src="{{ asset('/img/panda.png') }}" alt="">
+                            <img src="{{ asset('/img/panda3.png') }}" alt="">
                         @endif
                 </div>
                 <div id="info">
