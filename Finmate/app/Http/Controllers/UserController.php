@@ -34,7 +34,7 @@ class UserController extends Controller
         // 유저정보 습득
         $user = User::where('userid', $req->id)->first();
         if(!$user || !(Hash::check($req->password, $user->userpw))) {
-            $error = '<div class="error">아이디와 비밀번호를 다시 확인해주세요.</div>';
+            $error = '<div class="error">! 아이디와 비밀번호를 다시 확인해주세요.</div>';
             return redirect()->back()->with('error', $error);
         }
 
@@ -75,14 +75,14 @@ class UserController extends Controller
 
         $user = User::create($data); // insert. create ORM 모델
         if(!$user) {
-            $error = '<div class="error">시스템 에러가 발생하여, 회원가입에 실패했습니다.<br>잠시 후에 다시 회원가입을 시도해 주십시오.</div>';
+            $error = '<div class="error">! 시스템 에러가 발생하여, 회원가입에 실패했습니다.<br>잠시 후에 다시 회원가입을 시도해 주십시오.</div>';
         return redirect()
             ->route('users.registration')
             ->with('error', $error);
         }
 
         // 회원가입 완료 로그인 페이지로 이동
-        $success = '<div class="success">회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.</div>';
+        $success = '<div class="success">✓ 회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
             ->route('users.login')
             ->with('success', $success);
@@ -162,7 +162,7 @@ class UserController extends Controller
         $result->update($data);
     
         // 비밀번호 변경 완료. 로그인 페이지로 이동
-        $success = '<div class="success">비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
+        $success = '<div class="success">✓ 비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
             ->route('users.login')
             ->with('success', $success);
@@ -203,7 +203,7 @@ class UserController extends Controller
         $result->moffinname = $req->moffinname;
         $result->save();
 
-        $success = '<div class="success">모핀이명 변경을 완료 하였습니다.</div>';
+        $success = '<div class="success">✓ 모핀이명 변경을 완료 하였습니다.</div>';
         return redirect()
         ->route('users.profile')
         ->with('success', $success);
@@ -242,7 +242,7 @@ class UserController extends Controller
         $result->update($data);
 
         // 회원정보 변경 완료. 수정 페이지 리다이렉트
-        $success = '<div class="success">회원정보 변경을 완료 하였습니다.</div>';
+        $success = '<div class="success">✓ 회원정보 변경을 완료 하였습니다.</div>';
         return redirect()
         ->route('users.modify')
         ->with('success', $success);
