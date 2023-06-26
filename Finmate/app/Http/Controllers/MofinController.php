@@ -76,7 +76,7 @@ class MofinController extends Controller
         //$newpoint 를 회원의 point 에 대입
         DB::table('users')
             ->where('userid', $id)
-            ->update(['point' => $newPoint]);
+            ->update(['point' =>$newPoint, 'point_draw_count' => $result->point_draw_count + 1]);
 
         $randompoint = $randompoint . " 당첨되셨습니다";
         
@@ -110,7 +110,7 @@ class MofinController extends Controller
         //회원포인트에서 500을빼서 newpoint 에 담고 회원포인트에 대입해줌
         DB::table('users')
         ->where('userid', $id)
-        ->update(['point' => $newPoint]);
+        ->update(['point' =>$newPoint, 'point_draw_count' => $result->point_draw_count + 1]);
 
         $randomitem = rand(1,5); // 랜덤으로 아이템번호 1~5
         $data['userno'] = $result->userno;
