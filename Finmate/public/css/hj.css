@@ -2,6 +2,10 @@
     position: relative;
 }
 
+.profile img {
+    width: 90%;
+}
+
 .noneimg{
     display:none;
     position: absolute;
