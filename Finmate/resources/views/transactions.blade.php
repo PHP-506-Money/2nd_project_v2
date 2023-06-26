@@ -34,34 +34,29 @@
 </div>
 
 
+<div class="listbox">
+
 <!-- 좌우 버튼 -->
 
 <h3>
-    <button id="previous-month-btn">&lt;</button><span id="current-month"></span>월<button id="next-month-btn">&gt;</button>
-    <br>
-    총 수입: <span id="monthly-income"></span> 원
-    <br>
-    총 지출: <span id="monthly-expense"></span> 원
+<span id="current-month"></span>월
+
+    <button id="previous-month-btn">&#60;&#60;</button>
+    이번달 총 수입: <span id="monthly-income"></span> 원
+    이번달 총 지출: <span id="monthly-expense"></span> 원
+    <button id="next-month-btn">&#62;&#62;</button>
+
 
 </h3>
 
 
+    <table class="assetTable">
 
-
-<div class="listbox">
-    <a href="{{url('/assets'.'/'.auth()->user()->userid)}}">내 자산 목록 보러가기</a>
-    <table>
-        <tr>
-            <th>자산명</th>
-            <th>거래구분</th>
-            <th>거래처</th>
-            <th>카테고리</th>
-            <th>거래금액</th>
-            <th>거래일시</th>
-        </tr>
         @foreach($transactions as $tran)
+        
         <tr data-month="{{ substr($tran->trantime, 0, 7) }}">
-            <td>{{$tran->assetname}}</td>
+            
+            <td> 자산명 : {{$tran->assetname}}</td>
 
             @if($tran->type == '0')
             <td>입금</td>
@@ -78,12 +73,12 @@
             @endif
 
             @if($tran->type == '0')
-            <td>{{number_format($tran->amount)}}원</td>
+            <td>거래금액 : {{number_format($tran->amount)}}원</td>
             @else
-            <td>-{{number_format($tran->amount)}}원</td>
+            <td>거래금액 : -{{number_format($tran->amount)}}원</td>
             @endif
 
-            <td>{{$tran->trantime}}</td>
+            <td>거래일시 : {{$tran->trantime}}</td>
         </tr>
         @endforeach
     </table>
@@ -115,10 +110,10 @@
 
     const showByMonth = (month) => {
         allRows.forEach((row) => {
-            if (row.dataset.month === month) row.style.display = "table-row";
+            if (row.dataset.month === month) row.style.display = "flex";
             else row.style.display = "none";
         });
-    };
+    }; 
 
     // 초기 표시
     updateMonthElem();

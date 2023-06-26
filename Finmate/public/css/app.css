@@ -339,10 +339,59 @@ section .bottombanner img {
 }
 
 .listbox {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listbox a {
+    color: var(--sub-color);
+}
+
+.assetTable {
+    border-collapse: collapse;
     background-color: var(--sub-color);
     color: var(--main-color);
     margin: 10px;
+    width: 80vw;
 }
 
+.assetTable tbody {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.assetTable tr, .assetTable th, .assetTable td {
+    
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+.assetTable tr {
+    border-bottom: 1px solid var(--btn-color);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button {
+    background-color: var(--btn-color);
+    color: var(--sub-color);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+    width: 280px;
+}
+
+.button:hover {
+    background-color: var(--active-color);
+}
 
 
