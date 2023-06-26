@@ -115,23 +115,23 @@ class AchievementController extends Controller
             $isAchieved = false;
             $reward_received = AchieveUser::where('userid', $user->userid)->where('achievementsid', $achievement->id)->value('reward_received');
 
-            switch ($achievement->name) {
-                case '로그인 10회':
+            switch ($achievement->id) {
+                case 1:
                     $progress = ($user->login_count / 10) * 100;
                     $isAchieved = $user->login_count >= 10;
                     break;
 
-                case '포인트 뽑기':
+                case 2:
                     $progress = ($user->point_draw_count / 10) * 100;
                     $isAchieved = $user->point_draw_count >= 10;
                     break;
 
-                case '아이템 뽑기':
+                case 3:
                     $progress = ($user->item_draw_count / 10) * 100;
                     $isAchieved = $user->item_draw_count >= 10;
                     break;
 
-                case '내역 조회':
+                case 4:
                     $progress = ($user->history_check_count / 10) * 100;
                     $isAchieved = $user->history_check_count >= 10;
                     break;
