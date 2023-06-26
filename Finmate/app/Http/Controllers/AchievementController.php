@@ -124,7 +124,22 @@ class AchievementController extends Controller
         foreach ($achievements as $achievement) {
             $progress = 0;
             $isAchieved = false;
-            $reward_received = AchieveUser::where('userid', $user->userid)->where('achievementsid', $achievement->id)->value('reward_received');
+            // Check if an achieve_user entry exists for the user and the achievement
+            $achieve_user = AchieveUser::where('userid', $user->userid)
+                ->where('achievementsid', $achievement->id)
+                ->first();
+
+            // If an entry does not exist, create one
+            if (!$achieve_user) {
+                $achieve_user = new AchieveUser([
+                    'userid' => $user->userid,
+                    'achievementsid' => $achievement->id,
+                    'reward_received' => '0'
+                ]);
+                $achieve_user->save();
+            }
+
+            $reward_received = $achieve_user->reward_received;
 
             switch ($achievement->id) {
                 case 1:

@@ -9,5 +9,10 @@ class AchieveUser extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'userid'
+        
+    ];
+
     public $timestamps = false;
 }
