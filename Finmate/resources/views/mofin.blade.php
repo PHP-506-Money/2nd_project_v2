@@ -36,7 +36,7 @@
                 @endforeach
             </div>
             <br><br><br>
-        <div class="random">
+        {{-- <div class="random">
                 <div class="randombox" >
                     <form action="{{route('mofin.point',[auth()->user()->userid])}}" method="post" >
                         @csrf
@@ -52,7 +52,7 @@
                     </form>
                     <span>랜덤 아이템(500pt)</span>
                 </div>
-        </div>
+        </div> --}}
     </div>{{-- end box1--}}
 
     <div class="char">
@@ -68,6 +68,8 @@
         
 
 </div>{{-- end container  --}}
+
+
     <div>
                 <div>
                 <img id="charitem1" class="noneimg" src="{{ asset('/img/sunglasses.png') }}" alt="">
