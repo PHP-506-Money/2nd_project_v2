@@ -2,15 +2,19 @@
     position: relative;
 }
 
-.profile img {
+.moffin img {
     width: 90%;
+}
+
+.charitem {
+    width: 100%;
 }
 
 .noneimg{
     display:none;
     position: absolute;
-    left: -50px;
-    top: -60px;
+    left: -48px;
+    top: -43px;
 }
 
 .itemimg{

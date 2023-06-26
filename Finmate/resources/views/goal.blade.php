@@ -2,6 +2,7 @@
 
 @section('title', 'goals')
 
+@section('header', 'GOAL')
 @section('contents')
 @include('layout.errorsvalidate')
 <h1>나의 목표</h1>
