@@ -3,15 +3,9 @@
 @section('title', 'goals')
 
 @section('contents')
-
+@include('layout.errorsvalidate')
 <h1>나의 목표</h1>
 
-    @if(isset($errors))
-    
-        {{$errors}}
-    
-        
-    @endif
 
 <form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post">
     @method('POST')
@@ -51,7 +45,7 @@
                     {{ '목표금액 : ' . $goal->amount }}
                     {{ '시작일자 : ' . $goal->startperiod }}
                     {{ '마감일자 : ' . $goal->endperiod }}
-                    {{'진행금액 : '. $goalint[$num]}}
+                    {{'진행금액 : '. number_format($goalint[$num])}}
                     {{'달성률 : '. ceil(($goalint[$num]/$goal->amount)*100).'%' }}
                     <input type="hidden" name="goalcom" value="{{ $goal->completed_at }}">
                     <button type="button" onclick="toggleForm({{ $goal->goalno }})">수정</button>

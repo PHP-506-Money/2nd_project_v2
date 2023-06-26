@@ -21,6 +21,10 @@ class MofinController extends Controller
      */
     public function index($id)
     {
+        $current_user_id = auth()->user()->userid;
+        if ($current_user_id != $id) {
+            return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
+        }
         //유저의 포인트를 조회
         $result  = DB::table('users')
         ->where('userid', $id)
@@ -60,7 +64,7 @@ class MofinController extends Controller
             ->toArray();
             
             $itemonly = array_unique($item_name);
-            return view('mofin')->with('data', $result)->with('itemname', $itemonly);
+            return redirect()->route('mofin.index', ['userid' => $id])->with('data', $result)->with('itemname', $itemonly);
         }
         //포인트가 100 이상일경우
         else{
@@ -127,7 +131,7 @@ class MofinController extends Controller
         ->toArray();
 
         $itemonly = array_unique($item_name);
-        return view('mofin')->with('data',$result)->with('itemname', $itemonly);
+        return redirect()->route('mofin.index', ['userid' => $id])->with('data', $result)->with('itemname', $itemonly);
 
         }
         //포인트가 500 미만일경우
@@ -145,7 +149,7 @@ class MofinController extends Controller
             ->toArray();
             
             $itemonly = array_unique($item_name);       
-            return view('mofin')->with('data', $result)->with('itemname', $itemonly);
+            return redirect()->route('mofin.index', ['userid' => $id])->with('data', $result)->with('itemname', $itemonly);
         }
     }
 

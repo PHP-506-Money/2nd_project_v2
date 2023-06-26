@@ -12,7 +12,7 @@
 
     <h1> 캐릭터 관리</h1>
     <br>
-    <h2>나의 포인트 : {{$data->point}}</h2>
+    <h2>나의 포인트 : {{$data->point}}</h2><br><br><br>
 {{-- <div class="container">
     <div class="box1">
             <div class="item">
@@ -43,7 +43,7 @@
                         @csrf
                         <button type="submit"><img class="randomimg" src="{{ asset('/img/random.png') }}" ></button>
                     </form>
-                    <span>랜덤 포인트(100pt)</span>
+                    <span>랜덤 포인트 뽑기(100pt)</span>
                 </div>
 
                 <div class="randombox" >
@@ -51,7 +51,7 @@
                         @csrf
                         <button type="submit"><img class="randomimg" src="{{ asset('/img/randomitem.png') }}"  ></button>
                     </form>
-                    <span>랜덤 아이템(500pt)</span>
+                    <span>랜덤 아이템 뽑기(500pt)</span>
                 </div>
         </div>
     {{-- </div>end box1 --}}
