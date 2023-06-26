@@ -13,15 +13,15 @@
 
     @include('layout.errorsvalidate')
     <div class ="container">
-        <div>{{-- 모핀프로필 --}}
+        <div class="profile">{{-- 모핀프로필 --}}
         <form id="myinfo" name="myinfo" action="{{route('users.profile.post')}}" method="post">
             @csrf
                 <div>
-                                    <img id="charitem1" class="noneimg" src="{{ asset('/img/sunglasses.png') }}" alt="">
-                                    <img id="charitem2" class="noneimg" src="{{ asset('/img/sword.png') }}" alt="" >
-                                    <img id="charitem3" class="noneimg" src="{{ asset('/img/safe.png') }}" alt="" >
-                                    <img id="charitem4" class="noneimg" src="{{ asset('/img/air.png') }}" alt=""   >
-                                    <img id="charitem5" class="noneimg" src="{{ asset('/img/idcard.png') }}" alt="" >
+                    <img id="charitem1" class="noneimg" src="{{ asset('/img/sunglasses.png') }}" alt="">
+                    <img id="charitem2" class="noneimg" src="{{ asset('/img/sword.png') }}" alt="" >
+                    <img id="charitem3" class="noneimg" src="{{ asset('/img/safe.png') }}" alt="" >
+                    <img id="charitem4" class="noneimg" src="{{ asset('/img/air.png') }}" alt=""   >
+                    <img id="charitem5" class="noneimg" src="{{ asset('/img/idcard.png') }}" alt="" >
                     @foreach ($data as $user)
                         @if ($user->moffintype == 0)
                             <img src="{{ asset('/img/moffin2.png') }}" alt="">

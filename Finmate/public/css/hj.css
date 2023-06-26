@@ -1,5 +1,12 @@
+.profile {
+    position: relative;
+}
+
 .noneimg{
-    display:none; position:absolute; left:700px; bottom: 245px;
+    display:none;
+    position: absolute;
+    left: -50px;
+    top: -60px;
 }
 
 .itemimg{
