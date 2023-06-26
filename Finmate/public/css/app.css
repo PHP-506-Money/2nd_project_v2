@@ -429,6 +429,17 @@ section .bottombanner img {
 
 .receive-reward-button:disabled {
     background-color: var(--btn-color);
+    position: relative;
+}
+
+.receive-reward-button:disabled::after {
+    content: ' - 비활성 - ';
+    background-color: var(--btn-color);
+    position: absolute;
+    /* font-size: 12px; */
+    left: 13px;
+    /* padding: 10px; */
+    z-index: 1;
 }
 
 .button:hover {
