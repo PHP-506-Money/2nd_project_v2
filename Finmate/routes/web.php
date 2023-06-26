@@ -3,7 +3,7 @@
  * Project Name : Finmate
  * Directory    : Route
  * File Name    : web.php
- * History      : v001 0613 Subin.No new
+ * History      : v001 0613 Subin.Noh new
  *******************************************/
 use App\Http\Controllers\MofinController;
 use App\Http\Controllers\RankController;

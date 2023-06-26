@@ -1,4 +1,10 @@
 <?php
+/******************************************
+ * Project Name : Finmate
+ * Directory    : Models
+ * File Name    : User.php
+ * History      : v001 0615 EY.Sin new
+ *******************************************/
 
 namespace App\Models;
 
