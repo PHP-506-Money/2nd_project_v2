@@ -74,8 +74,11 @@ span:hover + p.arrow_box {
 }
 
 .success {
-    color: var(--main-color);
-    font-weight: 400;
+    background-color: var(--btn-color);
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
+    margin: 10px;
 }
 
 .error {

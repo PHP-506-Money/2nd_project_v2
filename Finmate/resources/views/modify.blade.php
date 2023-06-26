@@ -6,7 +6,7 @@
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
-    <div>{!!session()->has('success') ? session('success') : ""!!}</div>
+    <div class="success">{!!session()->has('success') ? session('success') : ""!!}</div>
     @include('layout.errorsvalidate')
     <form id="modify" action="{{route('users.modify.post')}}" method="post">
         @csrf

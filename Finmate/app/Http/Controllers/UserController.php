@@ -34,7 +34,7 @@ class UserController extends Controller
         // 유저정보 습득
         $user = User::where('userid', $req->id)->first();
         if(!$user || !(Hash::check($req->password, $user->userpw))) {
-            $error = '<div class="error">아이디와 비밀번호를 다시 확인해주세요.</div>';
+            $error = '<div class="error">! 아이디와 비밀번호를 다시 확인해주세요.</div>';
             return redirect()->back()->with('error', $error);
         }
 
@@ -75,14 +75,14 @@ class UserController extends Controller
 
         $user = User::create($data); // insert. create ORM 모델
         if(!$user) {
-            $error = '<div class="error">시스템 에러가 발생하여, 회원가입에 실패했습니다.<br>잠시 후에 다시 회원가입을 시도해 주십시오.</div>';
+            $error = '<div class="error">! 시스템 에러가 발생하여, 회원가입에 실패했습니다.<br>잠시 후에 다시 회원가입을 시도해 주십시오.</div>';
         return redirect()
             ->route('users.registration')
             ->with('error', $error);
         }
 
         // 회원가입 완료 로그인 페이지로 이동
-        $success = '<div class="success">회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.</div>';
+        $success = '<div class="success">✓ Success!<br>회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
             ->route('users.login')
             ->with('success', $success);
@@ -162,7 +162,7 @@ class UserController extends Controller
         $result->update($data);
     
         // 비밀번호 변경 완료. 로그인 페이지로 이동
-        $success = '<div class="success">비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
+        $success = '<div class="success">✓ Success!<br>비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
             ->route('users.login')
             ->with('success', $success);
@@ -173,7 +173,17 @@ class UserController extends Controller
         $result = User::select(['username', 'moffintype', 'moffinname'])
                         ->where('userid', $id)
                         ->get();
-        return view('profile')->with('data', $result);
+        $item_name = DB::table('iteminfos AS info')
+        ->select('info.itemname')
+        ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
+        ->where('tem.userid', $id)
+        ->orderBy('info.itemno', 'ASC')
+        ->pluck('itemname')//아이템 이름반환(컬렉션 객체)
+        ->toArray();// 컬렉션 객체를 다시 배열로 바꿔줌
+
+        $itemonly = array_unique($item_name);// 유저가 가진 아이템이 중복값이 많아서 출력할때 중복값 제거하기위해서 unique써서 $itemonly에 담아줌
+                
+        return view('profile')->with('data', $result)->with('itemname', $itemonly);
     }
 
     function profilepost(Request $req) {
@@ -193,7 +203,7 @@ class UserController extends Controller
         $result->moffinname = $req->moffinname;
         $result->save();
 
-        $success = '<div class="success">모핀이명 변경을 완료 하였습니다.</div>';
+        $success = '<div class="success">✓ Success!<br>모핀이명 변경을 완료 하였습니다.</div>';
         return redirect()
         ->route('users.profile')
         ->with('success', $success);
@@ -232,7 +242,7 @@ class UserController extends Controller
         $result->update($data);
 
         // 회원정보 변경 완료. 수정 페이지 리다이렉트
-        $success = '<div class="success">회원정보 변경을 완료 하였습니다.</div>';
+        $success = '<div class="success">✓ Success!<br>회원정보 변경을 완료 하였습니다.</div>';
         return redirect()
         ->route('users.modify')
         ->with('success', $success);
