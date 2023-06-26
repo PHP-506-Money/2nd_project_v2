@@ -13,11 +13,12 @@
     <h1> 캐릭터 관리</h1>
     <br>
     <h2>나의 포인트 : {{$data->point}}</h2>
-<div class="container">
+{{-- <div class="container">
     <div class="box1">
             <div class="item">
                 <h2 class = "text_1" >나의 아이템 목록</h2> <br><br>
-                <h3 class = "text_1" >@foreach($itemname as $value)    
+                <h3 class = "text_1" >
+                @foreach($itemname as $value)    
                     {{$value}}
                     @endforeach
                 </h3>
@@ -35,8 +36,8 @@
                     @endif    
                 @endforeach
             </div>
-            <br><br><br>
-        {{-- <div class="random">
+            <br><br><br> --}}
+        <div class="random">
                 <div class="randombox" >
                     <form action="{{route('mofin.point',[auth()->user()->userid])}}" method="post" >
                         @csrf
@@ -52,10 +53,10 @@
                     </form>
                     <span>랜덤 아이템(500pt)</span>
                 </div>
-        </div> --}}
-    </div>{{-- end box1--}}
+        </div>
+    {{-- </div>end box1 --}}
 
-    <div class="char">
+    {{-- <div class="char">
         @if ($data->moffintype == 1)
             <img src="{{ asset('/img/rabbit.png') }}" class="charimg">
         @elseif ($data->moffintype == 2)
@@ -67,10 +68,10 @@
     </div>
         
 
-</div>{{-- end container  --}}
+</div>end container  --}}
 
 
-    <div>
+    {{-- <div>
                 <div>
                 <img id="charitem1" class="noneimg" src="{{ asset('/img/sunglasses.png') }}" alt="">
                 <img id="charitem2" class="noneimg" src="{{ asset('/img/sword.png') }}" alt="" >
@@ -120,7 +121,7 @@
                 charitem5.style.display = 'none';
             }
         }
-    </script>
+    </script> --}}
 @if (session()->has('pt1'))
     <script>
         // 페이지가 로드될 때 자동으로 실행되도록 수정
@@ -129,7 +130,7 @@
             toggleitem1();
         });
     </script>
-@endif
+@endif 
 
 
 

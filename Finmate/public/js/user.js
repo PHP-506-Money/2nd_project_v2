@@ -53,4 +53,43 @@ function confirmWithdrawal() {
         return false;
     }
 }
-
+function toggleitem1() {
+    var charitem1 = document.getElementById('charitem1');
+    if (charitem1.style.display === 'none') {
+        charitem1.style.display = 'block';
+    } else {
+        charitem1.style.display = 'none';
+    }
+}
+    function toggleitem2() {
+    var charitem2 = document.getElementById('charitem2');
+    if (charitem2.style.display === 'none') {
+        charitem2.style.display = 'block';
+    } else {
+        charitem2.style.display = 'none';
+    }
+}
+    function toggleitem3() {
+    var charitem3 = document.getElementById('charitem3');
+    if (charitem3.style.display === 'none') {
+        charitem3.style.display = 'block';
+    } else {
+        charitem3.style.display = 'none';
+    }
+}
+    function toggleitem4() {
+    var charitem4 = document.getElementById('charitem4');
+    if (charitem4.style.display === 'none') {
+        charitem4.style.display = 'block';
+    } else {
+        charitem4.style.display = 'none';
+    }
+}
+    function toggleitem5() {
+    var charitem5 = document.getElementById('charitem5');
+    if (charitem5.style.display === 'none') {
+        charitem5.style.display = 'block';
+    } else {
+        charitem5.style.display = 'none';
+    }
+}
