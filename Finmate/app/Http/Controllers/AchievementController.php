@@ -33,7 +33,6 @@ class AchievementController extends Controller
             return response()->json(['error' => '유저 정보를 찾을 수 없습니다.'], 404);
         }
 
-
         $achievement = Achievement::find($achievementId);
 
         if (!$achievement) {
@@ -41,11 +40,10 @@ class AchievementController extends Controller
         }
 
         $achieve_users = DB::table('achieve_users')
-            ->where('userid', $user)
+        ->where('userid', $user)
             ->where('achievementsid', $achievement->id)
             ->first();
 
-        // $achieve_users 변수가 null이면 reward_received를 0으로 설정합니다.
         if (!$achieve_users) {
             $rewardReceived = '0';
         } else {
@@ -56,42 +54,32 @@ class AchievementController extends Controller
             return response()->json(['error' => '이미 보상을 받았습니다.'], 400);
         }
 
-        // $user->point += $achievement->points;
-        // User::where($user)->update();
+        // Get achievement points
+        $points = $achievement->points;
 
-        $points = DB::table('achievements')->select('points')->first();
-        $achieve_users = DB::table('achieve_users')->where('userid', $user)->pluck('userid')->first();
-
-        User::where('userid', $achieve_users)
-            ->increment('point', $points->points);
-
-        if (!$achieve_users) {
-            $achieve_users = new AchieveUser();
-            $achieve_users->userid = $user;
-            $achieve_users->achievementsid = $achievement->id;
-            User::where('userid', $achieve_users)
-                ->increment('point', $points->points);
-        }
-
-        $achieve_user = AchieveUser::where('userid', $achieve_users)->first();
-        User::where('userid', $achieve_user)
-            ->increment('point', $points->points);
+        // Check if the user has an achievements record
+        $achieve_user = AchieveUser::where('userid', $user)
+            ->where('achievementsid', $achievement->id)
+            ->first();
 
         if (!$achieve_user) {
             $achieve_user = new AchieveUser();
-            $achieve_user->userid = $achieve_users->userid;
+            $achieve_user->userid = $user;
             $achieve_user->achievementsid = $achievement->id;
-            User::where('userid', $achieve_user)
-                ->increment('point', $points->points);
         }
 
         $achieve_user->completed_at = Carbon::now();
         $achieve_user->reward_received = '1';
         $achieve_user->save();
 
+        // Increase points after updating the AchieveUser entry
+        User::where('userid', $user)
+            ->increment('point', $points);
 
         return response()->json(['success' => '포인트가 지급되었습니다.']);
     }
+
+
 
     public function getAchievements($userid)
     {
