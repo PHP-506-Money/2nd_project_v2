@@ -46,33 +46,24 @@
         </div>{{-- 모핀 프로필 종료 --}}
 
     </div>
-        <h3> 내 아이템 목록</h3>
+        <h3> 내 아이템 목록(클릭시 장착/해제)</h3>
         <div class="itemlist"> {{-- 아이템 부분 --}}
                     @foreach($itemname as $value)
                         @if($value === '선글라스')
-                            <img src="{{ asset('/img/sunglasses.png') }}" class = "itemimg"> {{$value}} <button class="itembtn"  onclick="toggleitem1()" >장착/해제</button>
+                            <button class="itembtn"  onclick="toggleitem1()" > <img src="{{ asset('/img/sunglasses.png') }}" class = "itemimg">  </button>
                         @elseif($value === '검')
-                            <img src="{{ asset('/img/sword.png') }}" class = "itemimg"> {{$value}} <button class="itembtn"   onclick="toggleitem2()" >장착/해제</button>
+                            <button class="itembtn"   onclick="toggleitem2()" > <img src="{{ asset('/img/sword.png') }}" class = "itemimg">  </button>
                         @elseif($value === '안전모')
-                            <img src="{{ asset('/img/safe.png') }}"  class = "itemimg"> {{$value}} <button class="itembtn"   onclick="toggleitem3()" >장착/해제</button>
+                            <button class="itembtn"   onclick="toggleitem3()" > <img src="{{ asset('/img/safe.png') }}"  class = "itemimg"> </button>
                         @elseif($value === '에어팟맥스')
-                            <img src="{{ asset('/img/air.png') }}"  class = "itemimg"> {{$value}} <button class="itembtn"   onclick="toggleitem4()" >장착/해제</button>
+                            <button class="itembtn"   onclick="toggleitem4()" > <img src="{{ asset('/img/air.png') }}"  class = "itemimg">  </button>
                         @elseif($value === '사원증')
-                            <img src="{{ asset('/img/idcard.png') }}"  class = "itemimg"> {{$value}} <button class="itembtn"   onclick="toggleitem5()" >장착/해제</button>
+                            <button class="itembtn"   onclick="toggleitem5()" > <img src="{{ asset('/img/idcard.png') }}"  class = "itemimg"> </button>
                         @endif    
                     @endforeach
         
         </div>
 
-@if (session()->has('pt1'))
-    <script>
-        // 페이지가 로드될 때 자동으로 실행되도록 수정
-        window.addEventListener('load', function() {
-            alert('{{ session('pt1') }}');
-            toggleitem1();
-        });
-    </script>
-@endif
 @endsection
 
 <script src="{{ asset('/js/user.js') }}"></script>
