@@ -121,7 +121,7 @@ return [
     'required_with_all' => 'The :attribute field is required when :values are present.',
     'required_without' => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same' => 'The :attribute and :other must match.',
+    'same' => ':attribute란과 :other란이 일치하지 않습니다.',
     'size' => [
         'numeric' => 'The :attribute must be :size.',
         'file' => 'The :attribute must be :size kilobytes.',
@@ -170,6 +170,7 @@ return [
         'name'          => '이름',
         'id'            => '아이디',
         'phone'         => '휴대폰번호',
+        'passwordchk'   => '비밀번호 확인',
         'moffintype'    => '나의 모핀이 선택',
         'moffinname'    => '모핀이명'
     ],
