@@ -78,7 +78,7 @@ span:hover + p.arrow_box {
     color: white;
     font-weight: 500;
     border-radius: 10px;
-    margin: 8px;
+    margin: 10px;
 }
 
 .error {

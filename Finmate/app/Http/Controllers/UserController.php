@@ -82,7 +82,7 @@ class UserController extends Controller
         }
 
         // 회원가입 완료 로그인 페이지로 이동
-        $success = '<div class="success">✓ 회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.</div>';
+        $success = '<div class="success">✓ Success!<br>회원가입을 완료 했습니다.<br>가입하신 아이디와 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
             ->route('users.login')
             ->with('success', $success);
@@ -162,7 +162,7 @@ class UserController extends Controller
         $result->update($data);
     
         // 비밀번호 변경 완료. 로그인 페이지로 이동
-        $success = '<div class="success">✓ 비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
+        $success = '<div class="success">✓ Success!<br>비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
             ->route('users.login')
             ->with('success', $success);
@@ -203,7 +203,7 @@ class UserController extends Controller
         $result->moffinname = $req->moffinname;
         $result->save();
 
-        $success = '<div class="success">✓ 모핀이명 변경을 완료 하였습니다.</div>';
+        $success = '<div class="success">✓ Success!<br>모핀이명 변경을 완료 하였습니다.</div>';
         return redirect()
         ->route('users.profile')
         ->with('success', $success);
@@ -242,7 +242,7 @@ class UserController extends Controller
         $result->update($data);
 
         // 회원정보 변경 완료. 수정 페이지 리다이렉트
-        $success = '<div class="success">✓ 회원정보 변경을 완료 하였습니다.</div>';
+        $success = '<div class="success">✓ Success!<br>회원정보 변경을 완료 하였습니다.</div>';
         return redirect()
         ->route('users.modify')
         ->with('success', $success);
