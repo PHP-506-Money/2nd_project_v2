@@ -21,33 +21,36 @@ class MofinController extends Controller
      */
     public function index($id)
     {
-        
+        //유저의 포인트를 조회
         $result  = DB::table('users')
         ->where('userid', $id)
         ->first();
+
+        //유저가 가진 아이템을 조회
         $item_name = DB::table('iteminfos AS info')
         ->select('info.itemname')
         ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
         ->where('tem.userid', $id)
         ->orderBy('info.itemno', 'ASC')
-        ->pluck('itemname')
-        ->toArray();
+        ->pluck('itemname')//아이템 이름반환(컬렉션 객체)
+        ->toArray();// 컬렉션 객체를 다시 배열로 바꿔줌
 
-        $itemonly = array_unique($item_name);
+        $itemonly = array_unique($item_name);// 유저가 가진 아이템이 중복값이 많아서 출력할때 중복값 제거하기위해서 unique써서 $itemonly에 담아줌
         return view('mofin')->with('data',$result)->with('itemname', $itemonly);
 
     }
 
     public function point($id)
     {
-        
+        // 유저의 포인트 조회
         $result  = DB::table('users')
         ->where('userid', $id)
         ->first();
-
+        //포인트가 100미만일경우
         if($result->point < 100 ){
-            $errmsg = '포인트가부족합니다!';
 
+            $pt1 = '포인트가부족합니다!';
+            session()->flash('pt1', $pt1);
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
             ->join('items AS tem', 'info.itemno', '=', 'tem.itemno')
@@ -55,21 +58,25 @@ class MofinController extends Controller
             ->orderBy('info.itemno', 'ASC')
             ->pluck('itemname')
             ->toArray();
-        
+            
             $itemonly = array_unique($item_name);
-            return view('mofin')->with('data', $result)->with('itemname', $itemonly)->with('pt1',$errmsg);
+            return view('mofin')->with('data', $result)->with('itemname', $itemonly);
         }
-
+        //포인트가 100 이상일경우
         else{
+        // 1~199 사이의 랜덤숫자를 $randompoint 에 담아줌
         $randompoint = rand(1, 199);
+        // 회원의 포인트에서 100을 뺀 후 $randompoint 를 더해서 $newpoint에 담아줌
         $newPoint = $result->point - 100 + $randompoint;
-
+        
+        //$newpoint 를 회원의 point 에 대입
         DB::table('users')
             ->where('userid', $id)
-            ->update(['point' => $newPoint, 'point_draw_count' => $result->point_draw_count + 1 ]);
+            ->update(['point' => $newPoint]);
 
         $randompoint = $randompoint . " 당첨되셨습니다";
         
+        // 일회성으로 세션에 $randompoint 를 담아줌
         session()->flash('pt1', $randompoint);
 
             $item_name = DB::table('iteminfos AS info')
@@ -92,24 +99,24 @@ class MofinController extends Controller
         ->where('userid', $id)
         ->first();
 
-
+        //포인트가 500 이상일때
         if($result->point >= 500)
         {
         $newPoint = $result->point -= 500;
-        
+        //회원포인트에서 500을빼서 newpoint 에 담고 회원포인트에 대입해줌
         DB::table('users')
         ->where('userid', $id)
-        ->update(['point' =>$newPoint, 'item_draw_count' => $result->item_draw_count + 1]);
+        ->update(['point' => $newPoint]);
 
-        $randomitem = rand(1,5);
+        $randomitem = rand(1,5); // 랜덤으로 아이템번호 1~5
         $data['userno'] = $result->userno;
         $data['userid'] = $id;
         $data['itemno'] = $randomitem;
-        DB::table('items')->insert($data);
-        $pt1 =  DB::table('iteminfos')->where('itemno', $randomitem)->value('itemname');
+        DB::table('items')->insert($data); // 당첨된 아이템번호로 items 테이블에 추가
+        $pt1 =  DB::table('iteminfos')->where('itemno', $randomitem)->value('itemname');//당첨된 아이템 번호를 기준으로 iteminfos 테이블에서 아이템명 가지고오기
         $pt1 = '축하합니다. '.$pt1.' 아이템 당첨';
 
-        session()->flash('pt1', $pt1);
+        session()->flash('pt1', $pt1);// $pt 를 세션에 일회성으로 담아줌
 
         $item_name = DB::table('iteminfos AS info')
         ->select('info.itemname')
@@ -123,10 +130,11 @@ class MofinController extends Controller
         return view('mofin')->with('data',$result)->with('itemname', $itemonly);
 
         }
+        //포인트가 500 미만일경우
         else
         {
-            $errmsg = '포인트가부족합니다!';
-
+            $pt1 = '포인트가부족합니다!';
+            session()->flash('pt1', $pt1);
 
             $item_name = DB::table('iteminfos AS info')
             ->select('info.itemname')
@@ -137,7 +145,7 @@ class MofinController extends Controller
             ->toArray();
             
             $itemonly = array_unique($item_name);       
-            return view('mofin')->with('data', $result)->with('itemname', $itemonly)->with('pt1',$errmsg);
+            return view('mofin')->with('data', $result)->with('itemname', $itemonly);
         }
     }
 
