@@ -31,7 +31,7 @@ return [
     'before' => 'The :attribute must be a date before :date.',
     'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
     'between' => [
-        'numeric' => 'The :attribute must be between :min and :max.',
+        'numeric' => ':attribute 란은 :min 에서 :max 사이로 입력해주세요.',
         'file' => 'The :attribute must be between :min and :max kilobytes.',
         'string' => 'The :attribute must be between :min and :max characters.',
         'array' => 'The :attribute must have between :min and :max items.',
@@ -172,7 +172,8 @@ return [
         'phone'         => '휴대폰번호',
         'passwordchk'   => '비밀번호 확인',
         'moffintype'    => '나의 모핀이 선택',
-        'moffinname'    => '모핀이명'
+        'moffinname'    => '모핀이명',
+        'budgetprice'   => '예산'
     ],
 
 ];

@@ -15,9 +15,6 @@ class StaticController extends Controller
 {
     function static(Request $req , $userid) {
         
-        // ******** v002 update start kim 전체적인 내용 추가
-        
-        // ******** v003 update start kim 년도 변경 추가
         // var_dump($req->year);
 
         // 현재 년도
@@ -34,7 +31,6 @@ class StaticController extends Controller
             $currentYear = $req->year;
         }
         // var_dump($currentYear);
-        // ******** v003 update end
 
         // 월별 입금
         $monthRCStatic = DB::select("
@@ -73,8 +69,8 @@ class StaticController extends Controller
         // $startDate =date('m-d',strtotime($startMonth));
         // $endDate =date('m-d',strtotime($finMonth));
         
-        $startDate =date('m-1');
-        $endDate =date('m-t');
+        // $startDate =date('m-1');
+        // $endDate =date('m-t');
         $mmonth = date( 'm' );
 
 
@@ -100,21 +96,7 @@ class StaticController extends Controller
         GROUP BY cat.no , cat.name
         ORDER BY consumption desc ", [$currentYear,$mmonth,$userid]);
 
-
-        // 지출이 없을때 자산 페이지로 이동
-        // if(empty($catExpenses)){
-        //     return redirect('/static/'.$userid);
-        // }
-
-        // if (empty($catExpenses)) {
-        //     return redirect('/static/'.$userid)->with('modal',true);
-        // }
-        if (empty($catExpenses)) {
-            return redirect('/achievements')->with('modal',true);
-        }
-
-        // var_dump(session());
-        // ******** v004 add start kim 퍼센트 추가
+        // var_dump(session('all'));
 
         // 현재달의 지출 합계
         $monthEXSum = DB::select("
@@ -128,38 +110,29 @@ class StaticController extends Controller
         $resultSum = intval($monthEXSum[0]->consumption);
 
         // 지출별 퍼센트를 계산하여 배열로 만들어주기
+        if(isset($catExpenses)){
         foreach($catExpenses as $data){
             $catPrice = $data->consumption;
-            $catPercent[]= intval(($catPrice/$resultSum)*100);
+            $catPercent[]= intval(round(($catPrice/$resultSum)*100));
+        }}
+    
+        // var_dump($arrResult);
+
+
+        if(isset($catPercent)){
+            return view('static', [
+                'currentYear' => $currentYear,
+                'mmonth' => $mmonth
+                ])
+                ->with('monthrc',$monthRCStatic)
+                ->with('catdata',$catExpenses)
+                ->with('monthex',$monthEXStatic)
+                ->with('dayex',$dayEXStatic)
+                ->with('percent',$catPercent);
+            }
+            else{
+                return view('static');
         }
 
-        // ******** v004 add end
-
-        // var_dump($catExpenses);
-        // var_dump($startMonth);
-        // var_dump($finMonth);
-        // var_dump($monthEXSum);
-        // var_dump($catPercent);
-        // var_dump($resultSum);
-
-        // ******** v003 update start 배열 변경
-        $arrResult= [
-            'startDate' => $startDate,
-            'endDate' => $endDate];
-        
-        // var_dump($arrResult);
-        // ******** v003 update end
-
-        return view('static', [
-            'currentYear' => $currentYear,
-            ])
-        ->with('monthrc',$monthRCStatic)
-        ->with('catdata',$catExpenses)
-        ->with('monthex',$monthEXStatic)
-        ->with('date',$arrResult)
-        ->with('dayex',$dayEXStatic)
-        ->with('percent',$catPercent);
-
-        // ******** v002 update end
     }
 }

@@ -20,7 +20,6 @@ class BudgetController extends Controller
         // $monthBudget = DB::table('budgets')->select('budgetprice')->where('userid',$userid)->get();
 
         // db table budgets에서 userid의 해당하는 첫번째레코드에서 지정 예산금액을 가져온다.
-        // ******** v002 update start kim 값받아오는 get에서 value로 방식 수정 에러메시지 수정
         $monthBudget = DB::table('budgets')->where('userid', $userid)->value('budgetprice');
         
         // 예산이 비어있어있는지 확인하고 에러메시지와 함께 설정페이지로 간다.(예산이 없을때 empty로 반환)
@@ -30,15 +29,12 @@ class BudgetController extends Controller
                 // return redirect()->route('budgetset.get')->with('error', "예산을 설정해주세요!");
                 return redirect('/budgetset')->with('error', "예산을 설정해주세요!");
             }
-            
-        // ******** v002 update end
 
         // 날짜계산
         // 현재날짜와 현재 요일을 숫자로 가져온다 (0~6)
         $today = date('Y-m-d');
         $day = date('w');
-        
-        // ******** v002 update start kim 날짜받아오는 방식 수정
+
         // $startDate = date('Y-m-d', strtotime('last Monday', strtotime($today))); 
         // $endDate = date('Y-m-d', strtotime('next Sunday', strtotime($today)));
 
@@ -56,8 +52,6 @@ class BudgetController extends Controller
         $endDate =date('m-d',strtotime($endDay));
 
         // $currentDay = date('d'); 
-        
-        // ******** v002 update end
 
         // 한달동안 지출한 금액의 합계
         $sumAmount = DB::table('assets')
@@ -76,12 +70,10 @@ class BudgetController extends Controller
         ->whereBetween('transactions.trantime',[$startDay,$endDay])
         ->sum('transactions.amount');
 
-        // ******** v002 update start kim 값받아오는 방식 변경 후 수정
         // $weekBudget = (intval($monthBudget[0]->budgetprice))/4;
         
         // 한달예산에서 주간예산 구하기(한달을 4주로 할지 5주로할지 고민)
         $weekBudget = (intval($monthBudget))/4;
-        // ******** v002 update end
 
         // 주간금액 중에 남은 금액 구하기(주간 금액에서 주간 지출금액은 뺀다.)
         $usebudget = (intval($sumWeekAmount));
@@ -101,7 +93,6 @@ class BudgetController extends Controller
         // var_dump($today);
         // var_dump($arrResult);
 
-        // ******** v002 update start kim 배열 변경
         // $arrResult = [$startDate,$endDate,$currentMonth,$weekBudget,$leftBudget];
         $arrResult = [
             'startDate' => $startDate,
@@ -136,14 +127,13 @@ class BudgetController extends Controller
         $user = auth()->user()->userid;
 
         $req->validate([
-            'budgetprice' => 'required'
+            'budgetprice' => 'required|integer|between:1000,100000000'
         ]);
 
         // 현재 date를 가져온다.
         $date = Carbon::now();
         // DB::insert('insert into budgets (userid,budgetprice,created_at,updated_at) values (?,?,?,?)', [$user,$req->budgetprice, $date, $date]);
 
-        // ******** v003 update start kim 방식 변경
         $budget = new budget([
             'userid' => $user,
             'budgetprice' => $req->input('budgetprice'),
@@ -152,7 +142,6 @@ class BudgetController extends Controller
         ]);
         
         $budget->save();
-        // ******** v003 update end
 
         return redirect('/budget/'.$user);
     }
@@ -161,19 +150,17 @@ class BudgetController extends Controller
         $user = auth()->user()->userid;
 
         $req->validate([
-            'budgetprice' => 'required'
+            'budgetprice' => 'required|integer|between:1000,100000000'
         ]);
 
         $date = Carbon::now();
         // DB::update('update budgets set budgetprice = ? , created_at = ?, updated_at = ? where userid = ?', [$req->budgetprice, $date, $date, $user]);
 
-        // ******** v003 update start kim 방식 변경
         $budget = budget::find($user);
         $budget->budgetprice = $req->budgetprice;
         $budget->created_at = $date;
         $budget->updated_at = $date;
         $budget->save();
-        // ******** v003 update end
 
         return redirect('/budget/'.$user);
     } 

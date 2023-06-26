@@ -2,9 +2,11 @@
 
 @section('title', 'Budget')
 
+@section('header', 'BUDGET')
+
 @section('contents')
 
-<link rel="stylesheet" href="{{ asset('/css/test.css')  }}" >
+<link rel="stylesheet" href="{{ asset('/css/kja.css')  }}" >
 
 @include('layout.errorsvalidate')
 <br>
