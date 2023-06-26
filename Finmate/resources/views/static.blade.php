@@ -3,51 +3,43 @@
 @section('title', 'static')
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script> 
 <link rel="stylesheet" href="{{ asset('/css/test.css')  }}" >
 
 @section('contents')
 
-<p>월별 입지출 내역</p>
+<p>{{ $currentYear }}년 월별 입지출 내역</p>
 
 <form action=" {{ route('static.get',[auth()->user()->userid])}}" method="get">
 @csrf
-
-{{-- <select name="year" id="year" size="4">
-    <option value="2021">2021</option>
-    <option value="2022" >2022</option>
-    <option value="2023" selected>2023</option>
-</select> --}}
-
 <button type="submit" id="year" name="year" value="2021"> 2021 </button>
-{{-- <p>{{$date[0]}}</p> --}}
 <button type="submit" id="year" name="year" value="2022"> 2022 </button>
 <button type="submit" id="year" name="year" value="2023"> 2023 </button>
-
-
 </form> 
 
 <div class = "chartB">
 <canvas id="monthChart" ></canvas>
 </div>
-<br>
-<br>
 <article>
+
 <p>카테고리별 지출 내역</p>
-    <p>{{$date[1]}} ~ {{$date[2]}}</p>
+    <p>{{$date['startDate']}} ~ {{$date['endDate']}}</p>
 <div class = "chartD">
 
-<div>
-<canvas id="categoryChart" ></canvas>
-</div>
+<div class ="categoryChart">
+        <canvas id="categoryChart" ></canvas>
 
-<div>
-<canvas id="dayChart"></canvas>
+    @foreach($percent as $data)
+        <p>{{$data}}</p>
+    @endforeach
+    
+    @foreach($catdata as $data)
+        <div class="catdetail">
+            <p>{{$data->category}}</p>
+            <p>{{number_format($data->consumption)}}</p>
+        </div>
+    @endforeach
 </div>
-
-@foreach($catdata as $data)
-    <p>{{$data->category}}</p>
-    <p>{{number_format($data->consumption)}}</p>
-@endforeach
 </article>
 
 <p>최대 지출 카테고리  : {{$catdata[0]->category}}</p>
@@ -74,14 +66,6 @@
         @foreach($catdata as $data)
             categoryLabels.push("{{ $data->category }}");
             categoryData.push({{ $data->consumption }});
-        @endforeach
-
-        let dayexLabels = [];
-        let dayexData = [];
-
-        @foreach($dayex as $data)
-            dayexLabels.push("{{ $data->day }}");
-            dayexData.push({{ $data->consumption }});
         @endforeach
 
         var monthChart = new Chart(document.getElementById('monthChart'), {
@@ -147,12 +131,36 @@
             cutoutPercentage: 60,
             plugins: {
                 legend: {
-                    position: 'right'
+                    position: 'bottom'
                 }
             }
         }
     });
+</script>
 
-        </script>
+<div id="myModal" class="modal" >
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p>연동된 자산이 없습니다.</p>
+        <p>자산을 연동해주세요.</p>
+        <p><br /></p>
+        <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="redirectToStatic()">
+            <span class="pop_bt" style="font-size: 13pt;">
+                연동하러 가기
+            </span>
+        </div>
+    </div>
+</div>
 
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function() {
+        if ('{{ session('modal') }}') {
+            document.getElementById('myModal').style.display = 'block';
+        }
+    });
+
+    function redirectToStatic() {
+        window.location.href = '/static/{{ $userid }}';
+    }
+</script>
 @endsection
