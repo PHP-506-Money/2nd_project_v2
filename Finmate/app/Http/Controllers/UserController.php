@@ -184,7 +184,7 @@ class UserController extends Controller
             'moffinname'  => 'regex:/^[a-zA-Z가-힣]{1,20}$/' // regex:정규식. 한글, 영어만 글자 수 1~20
         ]);
 
-        $result = User::find($id);
+        $result = User::where('userid', $id)->first();
         if (!$result) {
             // 사용자를 찾지 못한 경우에 대한 처리
             return redirect()->back()->withErrors(['message' => '사용자를 찾을 수 없습니다.']);
@@ -228,7 +228,11 @@ class UserController extends Controller
 
         $result->update($data);
 
-        return redirect()->route('users.profile');
+        // 회원정보 변경 완료. 수정 페이지 리다이렉트
+        $success = '<div class="success">회원정보 변경을 완료 하였습니다.</div>';
+        return redirect()
+        ->route('users.modify')
+        ->with('success', $success);
     }
 
     // 회원탈퇴 기능: softdeletes();를 사용하여 migration을 하였으므로, 로그인시 자동으로 탈퇴한 회원은 로그인 불가능하게 막아줌.
