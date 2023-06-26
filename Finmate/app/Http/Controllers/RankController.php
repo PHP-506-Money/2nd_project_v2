@@ -9,14 +9,26 @@ class RankController extends Controller
     public function index($id)
     {
         
-        $result = DB::table('users')
+        $pointrank = DB::table('users')
         ->select('point','username')
         ->orderBy('point', 'desc')
         ->limit(10)
         ->get();
 
+        $loginrank = DB::table('users')
+        ->select('login_count','username')
+        ->orderBy('login_count', 'desc')
+        ->limit(10)
+        ->get();
+
+        $itemdrawrank = DB::table('users')
+        ->select('item_draw_count','username')
+        ->orderBy('item_draw_count', 'desc')
+        ->limit(10)
+        ->get();
         
-        return view('rank')->with('data',$result);
+        
+        return view('rank')->with('pointrank',$pointrank)->with('loginrank',$loginrank)->with('itemdrawrank',$itemdrawrank);
 
     }
 }

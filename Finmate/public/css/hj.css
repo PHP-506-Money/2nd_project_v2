@@ -128,3 +128,10 @@ width : 200px; height :200px;
     color: #333333;
     
 }
+.bigbox{
+    display: flex;
+}
+.loginrank_list{
+    margin-left: 240px;
+    margin-right: 200px;
+}
