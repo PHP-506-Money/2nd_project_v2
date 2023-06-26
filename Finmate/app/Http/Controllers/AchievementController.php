@@ -39,6 +39,29 @@ class AchievementController extends Controller
             return response()->json(['error' => '업적 정보를 찾을 수 없습니다.'], 404);
         }
 
+        $userprogress = Auth::user();
+        $progress = 0;
+        switch ($achievement->id) {
+            case 1:
+                $progress = ($userprogress->login_count / 10) * 100;
+                break;
+            case 2:
+                $progress = ($userprogress->point_draw_count / 10) * 100;
+                break;
+            case 3:
+                $progress = ($userprogress->item_draw_count / 10) * 100;
+                break;
+            case 4:
+                $progress = ($userprogress->history_check_count / 10) * 100;
+                break;
+        }
+
+        if ($progress < 100) {
+            return response()->json(['error' => '업적이 완료되지 않았습니다.'], 400);
+        }
+
+
+
         $achieve_users = DB::table('achieve_users')
         ->where('userid', $user)
             ->where('achievementsid', $achievement->id)
