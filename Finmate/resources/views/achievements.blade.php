@@ -30,6 +30,7 @@
 
                 <td>
                     <button class="receive-reward-button" onclick="receiveReward({{ $achievement->id }})">보상받기</button>
+
                 </td>
 
             </tr>

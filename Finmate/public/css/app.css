@@ -180,7 +180,6 @@ header {
 }
 
 
-
 footer {
     background-color: var(--main-color);
     color: var(--sub-color);
@@ -416,6 +415,20 @@ section .bottombanner img {
 
 .button.min {
     width: 80px;
+}
+
+.receive-reward-button {
+    background-color: var(--active-color);
+    color: var(--sub-color);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+    width: 80px;
+}
+
+.receive-reward-button:disabled {
+    background-color: var(--btn-color);
 }
 
 .button:hover {
