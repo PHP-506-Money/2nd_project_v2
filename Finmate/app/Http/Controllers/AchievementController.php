@@ -15,9 +15,41 @@ use Illuminate\Support\Facades\DB;
 
 class AchievementController extends Controller
 {
+
+    public function initializeAchievements()
+    {
+        $user = Auth::user();
+        $achievements = Achievement::all();
+        $achievementCount = $achievements->count();
+
+        for ($i=1; $i <= $achievementCount ; $i++) {
+            $achieve_user = AchieveUser::where('userid', $user->userid)
+                ->where('achievementsid', $i)
+                ->first();
+
+            // If an entry does not exist, create one
+            if (!$achieve_user) {
+                $achieve_user = new AchieveUser();
+                $achieve_user->userid = $user->userid;
+                $achieve_user->achievementsid = $i;
+                $achieve_user->reward_received = 0;
+                $achieve_user->save();
+            }
+        }
+    }
+
     public function index()
     {
         $achievements = Achievement::all();
+        $user = Auth::user();
+        // Check if the user has already accessed achievements
+        $hasInitializedAchievements = AchieveUser::where('userid', $user->userid)->exists();
+
+        // Call initializeAchievements() if it's the user's first time accessing achievements
+        if (!$hasInitializedAchievements) {
+            $this->initializeAchievements();
+        }
+
         return view('achievements', compact('achievements'));
     }
 
@@ -124,50 +156,45 @@ class AchievementController extends Controller
         foreach ($achievements as $achievement) {
             $progress = 0;
             $isAchieved = false;
-            // Check if an achieve_user entry exists for the user and the achievement
-            $achieve_user = AchieveUser::where('userid', $user->userid)
-                ->where('achievementsid', $achievement->id)
-                ->first();
 
-            // If an entry does not exist, create one
-            if (!$achieve_user) {
-                $achieve_user = new AchieveUser([
-                    'userid' => $user->userid,
-                    'achievementsid' => $achievement->id,
-                    'reward_received' => '0'
-                ]);
-                $achieve_user->save();
-            }
-
-            $reward_received = $achieve_user->reward_received;
+            
+            $reward_received = 0;
 
             switch ($achievement->id) {
                 case 1:
                     $progress = ($user->login_count / 10) * 100;
-                    $isAchieved = $user->login_count >= 10;
+                    $isAchieved = $user->login_count >= $achievement->requires;
                     break;
 
                 case 2:
                     $progress = ($user->point_draw_count / 10) * 100;
-                    $isAchieved = $user->point_draw_count >= 10;
+                    $isAchieved = $user->point_draw_count >= $achievement->requires;
                     break;
 
                 case 3:
                     $progress = ($user->item_draw_count / 10) * 100;
-                    $isAchieved = $user->item_draw_count >= 10;
+                    $isAchieved = $user->item_draw_count >= $achievement->requires;
                     break;
 
                 case 4:
                     $progress = ($user->history_check_count / 10) * 100;
-                    $isAchieved = $user->history_check_count >= 10;
+                    $isAchieved = $user->history_check_count >= $achievement->requires;
                     break;
             }
 
             if ($isAchieved) {
-                $achieve_users = DB::table('achieve_users')
-                    ->where('userid', '=', $user->userid)
-                    ->where('id', '=', $achievement->id)
-                    ->first();
+                $achieve_user = AchieveUser::where('userid', $user->userid)
+                ->where('achievementsid', $achievement->id)
+                ->first();
+                // If an entry does not exist, create one
+                if (!$achieve_user) {
+                    $achieve_user = new AchieveUser([
+                        'userid' => $user->userid,
+                        'achievementsid' => $achievement->id,
+                        'reward_received' => '0'
+                    ]);
+                    $achieve_user->save();
+                }
             }
 
 
