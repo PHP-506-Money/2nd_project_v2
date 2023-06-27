@@ -13,8 +13,8 @@
 .noneimg{
     display:none;
     position: absolute;
-    left: -48px;
-    top: -43px;
+    left: -52px;
+    top: -20px;
 }
 
 .itemimg{
@@ -162,4 +162,11 @@ td{
 .itemrank_list h2 {
     margin-bottom: 10px;
     text-align: center;
+}
+
+.container {
+    display: contents;
+}
+.title {
+    margin: 30px;
 }
