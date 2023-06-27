@@ -13,8 +13,8 @@
 .noneimg{
     display:none;
     position: absolute;
-    left: -48px;
-    top: -43px;
+    left: -52px;
+    top: -20px;
 }
 
 .itemimg{
@@ -134,4 +134,10 @@ width : 200px; height :200px;
 .loginrank_list{
     margin-left: 240px;
     margin-right: 200px;
+}
+.container {
+    display: contents;
+}
+.title {
+    margin: 30px;
 }
