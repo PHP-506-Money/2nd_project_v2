@@ -372,29 +372,19 @@ section .bottombanner img {
 }
 
 .assetTable tbody {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     width: 100%;
     flex-direction: column;
 }
 
 .assetTable tr, .assetTable th, .assetTable td {
-    
     padding: 10px;
     box-sizing: border-box;
+    min-width: 185px;
+    text-align: left;
 }
 
 
 .assetTable tr {
-    border-bottom: 1px solid var(--btn-color);
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.table tr {
     border-bottom: 1px solid var(--btn-color);
     width: 100%;
 }
@@ -436,9 +426,27 @@ section .bottombanner img {
     content: ' - 비활성 - ';
     background-color: var(--btn-color);
     position: absolute;
-    /* font-size: 12px; */
     left: 13px;
-    /* padding: 10px; */
+    z-index: 1;
+}
+
+.receive-reward-button:disabled.yet-to-achieve::after {
+    content: " 달성전비활성 ";
+    background-color: var(--btn-color);
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    font-size: 10px;
+    z-index: 1;
+}
+
+.receive-reward-button:disabled.received::after {
+    content: " 이미받은보상 ";
+    background-color: var(--btn-color);
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    font-size: 10px;
     z-index: 1;
 }
 
