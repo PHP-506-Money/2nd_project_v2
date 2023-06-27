@@ -22,7 +22,7 @@
                 </div>
             @else
                 <div class="label4">
-                    <label>아이디를 찾을 수 없습니다.</label>
+                    <label>일치하는 사용자가 없습니다.</label>
                 </div>
                 <button type="button" class="button" id="button" onclick="location.href='/users/findid';">돌아가기</button>
                 <div class="bottom">

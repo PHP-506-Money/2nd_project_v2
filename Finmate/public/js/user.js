@@ -93,3 +93,11 @@ function toggleitem1() {
         charitem5.style.display = 'none';
     }
 }
+    function toggleitem6() {
+    var charitem6 = document.getElementById('charitem6');
+    if (charitem6.style.display === 'none') {
+        charitem6.style.display = 'block';
+    } else {
+        charitem6.style.display = 'none';
+    }
+}

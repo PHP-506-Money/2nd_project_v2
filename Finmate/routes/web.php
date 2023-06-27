@@ -78,8 +78,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/assets/transactions/{userid}', [TransactionController::class, 'index'])->name('transactions.index');
     
     // myinfo
-
-    Route::post('/users/profilepost', [UserController::class, 'profilepost'])->name('users.profile.post');
     Route::get('/users/modify', [UserController::class, 'modify'])->name('users.modify');
     Route::post('/users/modifypost', [UserController::class, 'modifypost'])->name('users.modify.post');
 
@@ -121,3 +119,4 @@ Route::post('/mofin/item/{userno}', [MofinController::class,'item'])->name('mofi
 //랭크
 Route::get('/rank/{userid}', [RankController::class,'index'])->name('rank.index');
 Route::get('/users/profile/{userid}', [UserController::class, 'profile'])->name('users.profile');
+Route::post('/users/profilepost', [UserController::class, 'profilepost'])->name('users.profile.post');

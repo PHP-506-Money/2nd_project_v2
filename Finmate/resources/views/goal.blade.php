@@ -7,103 +7,124 @@
 @include('layout.errorsvalidate')
 <h1>나의 목표</h1>
 
-
 <form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post">
     @method('POST')
     @csrf
-    <label for="title">목표 : </label>
-    <input type="text" class="" name="title"  id="title" required placeholder="목표">
-    
-    <label for="amount">금액 : </label>
-    <input type="number" min="100000" max="1000000000" class="" name="amount"  id="amount" required placeholder="목표">
-    
-    <label for="startperiod">시작일자 : </label>
-    <input type="date" name="startperiod"  id="startperiod" required>
-    
-    <label for="endperiod">목표일 : </label>
-    <input type="date" name="endperiod"  id="endperiod" required>
-    
-    <button type="submit">목표생성하기</button>
+    <div class="form-group">
+        <label for="title">목표</label>
+        <input type="text" class="form-control" name="title" id="title" required placeholder="목표">
+    </div>
+
+    <div class="form-group">
+        <label for="amount">금액</label>
+        <input type="number" min="100000" max="1000000000" class="form-control" name="amount" id="amount" required placeholder="목표">
+    </div>
+
+    <div class="form-group">
+        <label for="startperiod">시작일자</label>
+        <input type="date" class="form-control" name="startperiod" id="startperiod" required>
+    </div>
+
+    <div class="form-group">
+        <label for="endperiod">목표일</label>
+        <input type="date" class="form-control" name="endperiod" id="endperiod" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">목표 생성하기</button>
 </form>
 <br><br>
 <h2>목록</h2>
 
-    @php
-        
-        $num = 0;
-    @endphp
-<div class="listbox1" style="background-color : #FFFBF0 ;" >
-@if(isset($data))
-    @foreach($data as $goal)
+@php
+$num = 0;
+@endphp
 
-            <div>
-                <div id="view_{{ $goal->goalno }}" style="display: block;" >
-                <form id = "view_form_{{ $goal->goalno }}" action="{{ route('goal.delete',[auth()->user()->userid]) }}" method="post">
-                @csrf
-                @method('post')
-                    <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
-                    {{ '목표 : ' . $goal->title }}
-                    {{ '목표금액 : ' . $goal->amount }}
-                    {{ '시작일자 : ' . $goal->startperiod }}
-                    {{ '마감일자 : ' . $goal->endperiod }}
-                    {{'진행금액 : '. number_format($goalint[$num])}}
-                    {{'달성률 : '. ceil(($goalint[$num]/$goal->amount)*100).'%' }}
-                    <input type="hidden" name="goalcom" value="{{ $goal->completed_at }}">
-                    <button type="button" onclick="toggleForm({{ $goal->goalno }})">수정</button>
-                    <button type="submit">삭제</button>
+<div class="listbox1" style="background-color: #FFFBF0;">
+    @if(isset($data))
+    <table class="table">
+        <thead>
+            <tr>
+                <th>목표</th>
+                <th>목표금액</th>
+                <th>시작일자</th>
+                <th>마감일자</th>
+                <th>진행금액</th>
+                <th>달성률</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($data as $goal)
+            <tr>
+                <td>{{ $goal->title }}</td>
+                <td>{{ $goal->amount }}</td>
+                <td>{{ $goal->startperiod }}</td>
+                <td>{{ $goal->endperiod }}</td>
+                <td>{{ number_format($goalint[$num]) }}</td>
+                <td>{{ ceil(($goalint[$num]/$goal->amount)*100).'%' }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="toggleForm({{ $goal->goalno }})">수정</button>
+                </td>
+                <td>
+                    <form action="{{ route('goal.delete',[auth()->user()->userid]) }}" method="post">
+                        @csrf
+                        @method('post')
+                        <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
+                        <button type="submit" class="btn btn-danger">삭제</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <form action="{{ route('goal.update',[auth()->user()->userid]) }}" method="post" id="form_{{ $goal->goalno }}" style="display: none;">
+                        @csrf
+                        @method('post')
+                        <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
 
-            @if($goal->completed_at !== null)
-                <script>
-                    var viewstyle = 'view_form_{{ $goal->goalno }}';
-                    var view1 = document.getElementById(viewstyle);
-                    if (view1) {
-                        view1.style.backgroundColor = "gray";
-                    }
-                </script>
-            @endif
-                </form>
-                </div>
+                        <div class="form-group">
+                            <label for="title">목표</label>
+                            <input type="text" class="form-control" name="title" id="title" required placeholder="목표" value="{{ $goal->title }}">
+                        </div>
 
-                <form action="{{ route('goal.update',[auth()->user()->userid]) }}" method="post" id="form_{{ $goal->goalno }}" style="display: none;">
-                    @csrf 
-                    @method('post')
-                    <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
+                        <div class="form-group">
+                            <label for="amount">금액</label>
+                            <input type="number" min="100000" max="1000000000" class="form-control" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
+                        </div>
 
-                    <label for="title">목표 : </label>
-                    <input type="text" name="title" id="title" required placeholder="목표" value="{{ $goal->title }}">
+                        <div class="form-group">
+                            <label for="startperiod">시작일자</label>
+                            <input type="date" class="form-control" name="startperiod" id="startperiod" required value="{{ $goal->startperiod }}">
+                        </div>
 
-                    <label for="amount">금액 : </label>
-                    <input type="number" min="100000" max="1000000000" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
+                        <div class="form-group">
+                            <label for="endperiod">목표일</label>
+                            <input type="date" class="form-control" name="endperiod" id="endperiod" required value="{{ $goal->endperiod }}">
+                        </div>
 
-                    <label for="startperiod">시작일자 : </label>
-                    <input type="date" name="startperiod" id="startperiod" required value="{{ $goal->startperiod }}">
-
-                    <label for="endperiod">목표일 : </label>
-                    <input type="date" name="endperiod" id="endperiod" required value="{{ $goal->endperiod }}">
-
-                    <button type="submit">수정</button>
-                    <button type="button"onclick="cancelForm({{ $goal->goalno }})">취소</button>
-                </form>
-            </div>
+                        <button type="submit" class="btn btn-primary">수정</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelForm({{ $goal->goalno }})">취소</button>
+                    </form>
+                </td>
+            </tr>
             @php
-        
-        $num++;
-    @endphp
-    @endforeach
-@endif
+            $num++;
+            @endphp
+            @endforeach
+        </tbody>
+    </table>
+    @endif
 </div>
-<script>
 
+<script>
     function toggleForm(goalno) {
-        
         var formId = 'form_' + goalno;
         var form = document.getElementById(formId);
         var viewId = 'view_' + goalno;
         var view = document.getElementById(viewId);
-        
-    
+
         if (form.style.display === 'none') {
-            form.style.display = 'block'
+            form.style.display = 'block';
             view.style.display = 'none';
         } else {
             form.style.display = 'none';
@@ -120,8 +141,4 @@
         view.style.display = 'block';
     }
 </script>
-
-
-
-
 @endsection

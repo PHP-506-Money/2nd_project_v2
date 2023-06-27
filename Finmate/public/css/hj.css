@@ -13,8 +13,8 @@
 .noneimg{
     display:none;
     position: absolute;
-    left: -48px;
-    top: -43px;
+    left: 0px;
+    top: -20px;
 }
 
 .itemimg{
@@ -132,6 +132,80 @@ width : 200px; height :200px;
     display: flex;
 }
 .loginrank_list{
-    margin-left: 240px;
-    margin-right: 200px;
+    margin-left: 140px;
+    margin-right: 140px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #1C3879;
+    text-align: center;
+}
+
+th {
+    background-color: #1C3879;
+    color: white;
+}
+td{
+    background-color: #FFFBF0;
+}
+
+/* .pointrank_list h2,
+.loginrank_list h2,
+.itemrank_list h2 {
+    margin-bottom: 10px;
+    text-align: center;
+} */
+
+ul{list-style:none;}
+
+.tabmenu{ 
+  width:600px; 
+  margin: 0 auto;
+  position:relative; 
+  height: 780px;  
+}
+.tabmenu ul li{
+  display:  inline-block;
+  width:33.33%; 
+  float:left;  
+  text-align:center; 
+  background :#f9f9f9;
+}
+.tabmenu ul li a{
+  display:block;
+  line-height:40px;
+  height:40px;
+  text-decoration:none; 
+  color: #000;
+}
+.tabCon{
+  display:none; 
+  text-align:center; 
+  padding: 20px;
+  box-sizing: border-box; 
+  /* border : 5px solid #ffffff; */
+  position:absolute; 
+  left:3px; top:40px; 
+  width: 600px;
+
+}
+.btnCon:target  {
+  background : #ffffff;
+}
+.btnCon:target .tabCon{
+  display: block;
+}
+.container {
+    display: contents;
+}
+.title {
+    margin: 30px;
 }

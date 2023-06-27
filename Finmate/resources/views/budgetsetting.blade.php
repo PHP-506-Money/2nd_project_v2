@@ -24,14 +24,14 @@
             </form>
     </div>
     @else
-    <div class = "budgetset">
-        <h2>한달 예산 설정하기</h2>
-        <form action="{{route('budget.post')}}" method="post">
-            @csrf
-            <input type="number" name="budgetprice" id="budgetprice" placeholder="예산을 입력해주세요" >
-            <button type = "submit"> 설정 </button>
-        </form>
-    </div>
+        <div class = "budgetset">
+            <h2>한달 예산 설정하기</h2>
+            <form action="{{route('budget.post')}}" method="post">
+                @csrf
+                <input type="number" name="budgetprice" id="budgetprice" placeholder="예산을 입력해주세요" >
+                <button type = "submit"> 설정 </button>
+            </form>
+        </div>
     @endif
 
 @endsection
