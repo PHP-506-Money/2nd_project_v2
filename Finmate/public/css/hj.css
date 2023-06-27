@@ -58,7 +58,7 @@ width : 200px; height :200px;
 }
 
 .randombtn {
-    background-color:#95fc7c;
+    background-color:#ffffff;
     border: none;
     padding: 0;
     cursor: pointer;
@@ -72,7 +72,7 @@ width : 200px; height :200px;
 }
 
 .randombtn:hover {
-    background-color: #337eff;
+    background-color: #201e25;
 }
 
 .randomimg {
@@ -169,7 +169,8 @@ ul{list-style:none;}
 .tabmenu{ 
   width:600px; 
   margin: 0 auto;
-  position:relative;   
+  position:relative; 
+  height: 780px;  
 }
 .tabmenu ul li{
   display:  inline-block;
@@ -192,7 +193,8 @@ ul{list-style:none;}
   box-sizing: border-box; 
   /* border : 5px solid #ffffff; */
   position:absolute; 
-  left:150px; top:40px; 
+  left:3px; top:40px; 
+  width: 600px;
 
 }
 .btnCon:target  {

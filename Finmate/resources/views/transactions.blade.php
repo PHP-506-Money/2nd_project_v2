@@ -49,35 +49,37 @@
 
 
     <table class="assetTable">
-
+        <tr class="assetTableTittle">
+            <th>자산명</th>
+            <th>거래구분</th>
+            <th>카테고리</th>
+            <th>거래금액</th>
+            <th>거래일시</th>
+        </tr>
         @foreach($transactions as $tran)
-        
         <tr data-month="{{ substr($tran->trantime, 0, 7) }}">
-            
-            <td> 자산명 : {{$tran->assetname}}</td>
-
+            <td>{{$tran->assetname}}</td>
             @if($tran->type == '0')
             <td>입금</td>
             @else
             <td>출금</td>
             @endif
-
             <td>{{$tran->payee}}</td>
             @if($tran->type == '0')
-            <td>카테고리 : 수입</td>
+            <td>수입</td>
 
             @else
-            <td>카테고리 : {{$tran->name}}</td>
+            <td>{{$tran->name}}</td>
 
             @endif
 
             @if($tran->type == '0')
-            <td>거래금액 : {{number_format($tran->amount)}}원</td>
+            <td>{{number_format($tran->amount)}}원</td>
             @else
-            <td>거래금액 : -{{number_format($tran->amount)}}원</td>
+            <td>-{{number_format($tran->amount)}}원</td>
             @endif
 
-            <td>거래일시 : {{$tran->trantime}}</td>
+            <td>{{$tran->trantime}}</td>
         </tr>
         @endforeach
     </table>
