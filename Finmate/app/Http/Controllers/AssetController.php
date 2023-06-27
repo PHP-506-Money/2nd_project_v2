@@ -56,7 +56,8 @@ class AssetController extends Controller
             $payeeChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
             $amountMin = 1000;
             $amountMax = 900000;
-            $transNames = ['용돈', '축의금', '선물', '조의금', '식비', '기부금'];
+            $transNamesDeposit = ['용돈', '계좌입금', '알바비', '아빠', '엄마'];
+            $transNamesWithdraw = ['배민', '요기요', '쿠팡', '에이블리', '올리브영', '버스', '지하철', '마트', '편의점'];
 
             for ($i = 1; $i <= 50;
                 $i++
@@ -65,7 +66,11 @@ class AssetController extends Controller
                 $transaction->assetno = $assetNos[array_rand($assetNos)];
                 $transaction->type = $types[array_rand($types)];
                 $transaction->trantime = Carbon::now()->subYear()->addDays(rand(0, 365));
-                $transaction->payee = $transNames[array_rand($transNames)];
+                if($transaction->type == '0'){
+                    $transaction->payee = $transNamesDeposit[array_rand($transNamesDeposit)];
+                }else {
+                    $transaction->payee = $transNamesWithdraw[array_rand($transNamesWithdraw)];
+                }
                 $transaction->amount = mt_rand($amountMin, $amountMax);
                 $transaction->char = $payeeChars[array_rand($payeeChars)];
                 $transaction->save();
