@@ -75,7 +75,7 @@ span:hover + p.arrow_box {
 
 #myinfo {
     width: 400px;
-    height: 450px;
+    height: 500px;
     background-color: var(--sub-color);
     display: flex;
     flex-direction: column;
@@ -158,7 +158,7 @@ input {
 }
 
 .bottom2 {
-    margin-top: 30px;
+    margin-top: 0px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;

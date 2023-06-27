@@ -13,8 +13,8 @@
 .noneimg{
     display:none;
     position: absolute;
-    left: -48px;
-    top: -43px;
+    left: 0px;
+    top: -20px;
 }
 
 .itemimg{
