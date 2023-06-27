@@ -260,3 +260,11 @@ textarea:focus {
     align-items: center;
     text-align: center;
 }
+
+.moffin {
+    z-index: 1;
+}
+
+#charitem6 {
+    z-index: 0;
+}
