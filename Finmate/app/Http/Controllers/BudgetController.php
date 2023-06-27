@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Session;
 class BudgetController extends Controller
 {
     function budget($userid) {
+
+        $current_user_id = auth()->user()->userid;
+        if ($current_user_id != $userid) {
+            return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
+        }
+        
         // db table budgets에서 userid의 해당하는 첫번째레코드에서 지정 예산금액을 가져온다.
         $monthBudget = DB::table('budgets')->where('userid', $userid)->value('budgetprice');
         

@@ -68,7 +68,7 @@
                 <div class="catdetail">
                     @foreach($catdata as $data)
                         <p class="catname">{{$data->category}}</p>
-                        <p class = "catprice">{{number_format($data->consumption)}}</p>
+                        <p class = "catprice">{{number_format($data->consumption)}}원</p>
                     @endforeach
                 </div>
             </div>
