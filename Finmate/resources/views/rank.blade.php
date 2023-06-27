@@ -10,9 +10,10 @@
 
 <h5>(닉네임클릭시 클릭한 회원의 모핀이를 구경할수있습니다!)</h5>
 <br><br>
-<div class="bigbox">
-
-    <div class="pointrank_list">
+<div class="tabmenu">
+    <ul>
+    <li id="tab1" class="btnCon"><a class="btn first" href="#tab1">포인트부자</a>
+        <div class="tabCon">
         <h2>포인트부자</h2>
         <table>
             <thead>
@@ -39,8 +40,10 @@
             </tbody>
         </table>
     </div>
-
-    <div class="loginrank_list">
+    
+    </li>
+    <li id="tab2" class="btnCon"><a class="btn" href="#tab2">로그인왕</a>
+        <div class="tabCon">
         <h2>로그인왕</h2>
         <table>
             <thead>
@@ -65,10 +68,14 @@
                 @endphp
                 @endforeach
             </tbody>
-        </table>
-    </div>
+            </table>
+        </div>
+    
+    </li>    
 
-    <div class="itemrank_list">
+    
+    <li id="tab3" class="btnCon"><a class="btn" href="#tab3">아이템뽑기왕</a>
+       <div class="tabCon">
         <h2>아이템뽑기왕</h2>
         <table>
             <thead>
@@ -94,7 +101,15 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
-
+        </div>
+      
+    </li>
+  </ul>
 </div>
+
+<script>location.href = "#tab1";
+</script>
 @endsection
+
+
+

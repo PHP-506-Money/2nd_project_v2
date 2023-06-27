@@ -13,8 +13,8 @@
 .noneimg{
     display:none;
     position: absolute;
-    left: -52px;
-    top: -20px;
+    left: -48px;
+    top: -43px;
 }
 
 .itemimg{
@@ -157,13 +157,50 @@ td{
     background-color: #FFFBF0;
 }
 
-.pointrank_list h2,
+/* .pointrank_list h2,
 .loginrank_list h2,
 .itemrank_list h2 {
     margin-bottom: 10px;
     text-align: center;
-}
+} */
 
+ul{list-style:none;}
+
+.tabmenu{ 
+  width:600px; 
+  margin: 0 auto;
+  position:relative;   
+}
+.tabmenu ul li{
+  display:  inline-block;
+  width:33.33%; 
+  float:left;  
+  text-align:center; 
+  background :#f9f9f9;
+}
+.tabmenu ul li a{
+  display:block;
+  line-height:40px;
+  height:40px;
+  text-decoration:none; 
+  color: #000;
+}
+.tabCon{
+  display:none; 
+  text-align:center; 
+  padding: 20px;
+  box-sizing: border-box; 
+  /* border : 5px solid #ffffff; */
+  position:absolute; 
+  left:150px; top:40px; 
+
+}
+.btnCon:target  {
+  background : #ffffff;
+}
+.btnCon:target .tabCon{
+  display: block;
+}
 .container {
     display: contents;
 }
