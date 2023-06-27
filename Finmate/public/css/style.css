@@ -265,6 +265,10 @@ textarea:focus {
     z-index: 1;
 }
 
+.noneimg{
+    z-index: 2;
+}
+
 #charitem6 {
     z-index: 0;
 }
