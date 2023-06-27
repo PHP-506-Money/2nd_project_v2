@@ -32,7 +32,7 @@
                     <a href="{{url('/assets/transactions'.'/'.auth()->user()->userid)}}" class="nav-item">자산내역</a>
                 </div>
             </div>
-            <div class="dropdown nav-item {{ Request::is('assets/*') ? 'is-active' : '' }}" active-color="#FF7676">
+            <div class="dropdown nav-item {{ Request::is('mofin/*') ? 'is-active' : '' }}" active-color="#FF7676">
                 <a href="{{ url('/users/profile'.'/' . auth()->user()->userid) }}">
                     모핀
                 </a>

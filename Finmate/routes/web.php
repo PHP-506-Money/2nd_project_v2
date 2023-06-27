@@ -61,6 +61,9 @@ Route::middleware(['guest'])->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return view('assets.index');
+    });
     // Users
     Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
     Route::get('/users/withdraw', [UserController::class, 'withdraw'])->name('users.withdraw');

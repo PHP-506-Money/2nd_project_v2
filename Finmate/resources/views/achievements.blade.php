@@ -95,7 +95,19 @@
         achievementRow.querySelector('.achievement-status').innerHTML = isAchieved ? '완료' : '미완료';
 
         const receiveRewardButton = achievementRow.querySelector('.receive-reward-button');
-        receiveRewardButton.disabled = !isAchieved || result.reward_received !== '0';
+        if (!isAchieved) {
+        receiveRewardButton.disabled = true;
+        receiveRewardButton.classList.add("yet-to-achieve");
+        } else {
+        receiveRewardButton.classList.remove("yet-to-achieve");
+        }
+
+        if (result.reward_received !== "0") {
+        receiveRewardButton.disabled = true;
+        receiveRewardButton.classList.add("received");
+        } else {
+        receiveRewardButton.classList.remove("received");
+        }
 
 
     }
