@@ -58,7 +58,7 @@ width : 200px; height :200px;
 }
 
 .randombtn {
-    background-color:#95fc7c;
+    background-color:#ffffff;
     border: none;
     padding: 0;
     cursor: pointer;
@@ -72,7 +72,7 @@ width : 200px; height :200px;
 }
 
 .randombtn:hover {
-    background-color: #337eff;
+    background-color: #201e25;
 }
 
 .randomimg {
