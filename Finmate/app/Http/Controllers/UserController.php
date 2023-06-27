@@ -115,6 +115,11 @@ class UserController extends Controller
         ->where('useremail', $email)
         ->first();
 
+        // 일치하는 사용자가 없을 때 => foundid 뷰페이지에서 체크
+        // if(!$user) {
+        //     $error = '<div class="error">! 사용자 정보가 일치하지 않습니다.</div>';
+        //     return redirect()->route('users.login')->with('error', $error);
+        // }
         return view('foundid', ['user'=>$user]);
     }
 

@@ -42,6 +42,12 @@
                 <button type="submit" class="button" id="button">변경하기</button>
             </div>
             <div class="btn2">
+                <div id="info">
+                    {{-- {{ $user->username }} 님의 <input type="text" name="moffinname" id="moffinname" value="{{ $user->moffinname }}" required> --}}
+                    {{ $user->username }} 님의 <textarea name="moffinname" id="moffinname" cols="10" rows="1" required>{{ $user->moffinname }}</textarea>
+                    @endforeach
+                </div>
+                <button type="button" class="button" id="btn" onclick="moffinnameChan();" autocomplete="off" required>모핀이명 변경</button>
                 <button type="button" class="button" id="button2" onclick="confirmWithdrawal()">회원탈퇴</button>
             </div>
         </div>
