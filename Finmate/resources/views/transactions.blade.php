@@ -121,7 +121,12 @@
    // 이전 달로 이동
 previousMonthBtn.addEventListener("click", () => {
 currentMonth = parseInt(currentMonth, 10) - 1;
-if (currentMonth < 1) { currentMonth=12; currentYear--; } currentMonth=currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMonthElem(); });
+if (currentMonth < 1) { 
+    currentMonth=12; currentYear--; 
+    } 
+    currentMonth=currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMonthElem(); 
+    }
+    );
 
 
 
@@ -150,17 +155,13 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
     var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
     var nowDate = new Date(); // @param 전역 변수, 실제 오늘날짜 고정값
 
-    /**
-     * @brief   이전달 버튼 클릭시
-     */
+    /* @brief   이전달 버튼 클릭시 */
     function prevCalendar() {
         this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() - 1, toDay.getDate());
         buildCalendar(); // @param 전월 캘린더 출력 요청
     }
 
-    /**
-     * @brief   다음달 버튼 클릭시
-     */
+    /* @brief   다음달 버튼 클릭시 */
     function nextCalendar() {
         this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() + 1, toDay.getDate());
         buildCalendar(); // @param 명월 캘린더 출력 요청
