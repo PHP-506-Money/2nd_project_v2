@@ -12,60 +12,89 @@
 <br><br>
 <div class="bigbox">
 
-    @php
-    $rank = 1 ; 
-    @endphp
     <div class="pointrank_list">
-    <h2>포인트부자</h2>
-        @foreach($pointrank as $value)
-            {{$rank}}
-            <a href={{ url('/users/profile'.'/' . $value->userid) }}>{{'닉네임 : '.$value->username}}</a>
-            <pre>{{' 포인트 : '.$value->point}}</pre>
-            
-            <br>
-            @php
-                $rank++;
-            @endphp
-        @endforeach
+        <h2>포인트부자</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>닉네임</th>
+                    <th>포인트</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                $rank = 1 ; 
+                @endphp
+                @foreach($pointrank as $value)
+                <tr>
+                    <td>{{$rank}}</td>
+                    <td><a href={{ url('/users/profile'.'/' . $value->userid) }}>{{$value->username}}</a></td>
+                    <td>{{$value->point}}</td>
+                </tr>
+                @php
+                    $rank++;
+                @endphp
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
-
-    @php
-    $login = 1 ; 
-    @endphp
     <div class="loginrank_list">
-    <h2>로그인왕</h2>
-        @foreach($loginrank as $value)
-            {{$login}}
-            <a href={{ url('/users/profile'.'/' . $value->userid) }}>{{'닉네임 : '.$value->username}}</a>
-            <pre>{{' 로그인횟수 : '.$value->login_count}}</pre>
-            
-            <br>
-            @php
-                $login++;
-            @endphp
-        @endforeach
+        <h2>로그인왕</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>닉네임</th>
+                    <th>로그인횟수</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                $login = 1 ; 
+                @endphp
+                @foreach($loginrank as $value)
+                <tr>
+                    <td>{{$login}}</td>
+                    <td><a href={{ url('/users/profile'.'/' . $value->userid) }}>{{$value->username}}</a></td>
+                    <td>{{$value->login_count}}</td>
+                </tr>
+                @php
+                    $login++;
+                @endphp
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
-
-    @php
-    $item = 1 ; 
-    @endphp
     <div class="itemrank_list">
-    <h2>아이템뽑기왕</h2>
-        @foreach($itemdrawrank as $value)
-            {{$item}}
-            <a href={{ url('/users/profile'.'/' . $value->userid) }}>{{'닉네임 : '.$value->username}}</a>
-            <pre>{{' 아이템뽑기 횟수 : '.$value->item_draw_count}}</pre>
-            
-            <br>
-            @php
-                $item++;
-            @endphp
-        @endforeach
+        <h2>아이템뽑기왕</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>닉네임</th>
+                    <th>아이템뽑기 횟수</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                $item = 1 ; 
+                @endphp
+                @foreach($itemdrawrank as $value)
+                <tr>
+                    <td>{{$item}}</td>
+                    <td><a href={{ url('/users/profile'.'/' . $value->userid) }}>{{$value->username}}</a></td>
+                    <td>{{$value->item_draw_count}}</td>
+                </tr>
+                @php
+                    $item++;
+                @endphp
+                @endforeach
+            </tbody>
+        </table>
     </div>
-
 
 </div>
-
 @endsection
