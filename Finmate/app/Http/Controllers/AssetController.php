@@ -37,12 +37,12 @@ class AssetController extends Controller
         $user = auth()->user();
         if($user->userid == $req->input('id') && Hash::check($req->input('password'), $user->userpw ) && $user->username == $req->input('name') && $user->phone == $req->input('phone')){
         //더미 데이터 추가 
-
+        $assetCount = Asset::count();
         $assetNames = ['토스뱅크', '신한은행', '현대카드', '대구은행', '카카오뱅크', '국민은행', '하나은행'];
         $balanceMin = 100000;
         $balanceMax = 90000000;
 
-            for ($i = 101; $i <= 110; $i++) {
+            for ($i = $assetCount; $i <= $assetCount+10; $i++) {
                 $asset = new Asset();
                 $asset->assetno = $i;
                 $asset->userid = $user->userid;
@@ -51,7 +51,7 @@ class AssetController extends Controller
                 $asset->save();
             }
 
-            $assetNos = range(101, 110);
+            $assetNos = range($assetCount, $assetCount+10);
             $types = ['0', '1'];
             $payeeChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
             $amountMin = 1000;

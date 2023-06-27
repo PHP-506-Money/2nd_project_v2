@@ -454,3 +454,34 @@ section .bottombanner img {
 #monthly-expense {
     color: var(--active-color);
 }
+
+.message {
+    background-color: var(--active-color);
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.agreeform {
+    background-color: var(--sub-color);
+    color: var(--main-color);
+}
+
+.agreeform article {
+    margin: 12px;
+}
+
+.agreeform article dl {
+    width: 500px;
+    text-align: center;
+}
+
+.agreeform article dl dt input:not([type="checkbox"]), 
+.agreeform article dl dd input:not([type="checkbox"]) ,
+.agreeform article dl dt label,
+.agreeform article dl dd label {
+    width: 300px;
+}

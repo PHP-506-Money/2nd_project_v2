@@ -15,7 +15,7 @@
     <a class="button" onclick="openPopup()">연동하기</a>
     <script>
         function openPopup() {
-            window.open('/link','linkAccount', 'width=600,height=400');
+            window.open('/link','linkAccount', 'width=600,height=700');
             }
 
     </script>
