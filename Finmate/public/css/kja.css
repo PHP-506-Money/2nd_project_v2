@@ -136,6 +136,7 @@ a{
 .categoryChart{
     display: flex;
     flex-direction: row;
+    margin-left: 50px;
 }
 
 .catdetail{
@@ -144,11 +145,12 @@ a{
     margin: 30px;
 }
 
+
 .percent{
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
-    margin-left: 40px;  
+    margin-top: 10px;
+    margin-left: 100px;  
 }
 
 .percent>p{
@@ -156,23 +158,24 @@ a{
     width: 50px;
     height: 50px;
     border-radius: 30px;
-    margin : 20px;
+    margin : 10px;
     padding-top: 10px;
 }
 
 .catdetail{
-    margin : 20px;
+    margin : 10px;
 }
 
 .catname{
-    margin-top: 15px;
+    margin-top: 10px;
+    width: 100px;
 }
 .catprice{
-    margin-bottom:45px;
+    margin-bottom:25px;
 }
 
 h3{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 20px;
     word-spacing: 5px;
 }
@@ -187,4 +190,15 @@ h3{
     margin-top: 50px;
     margin-bottom:50px ;
     width: 800px;
+}
+
+.allcategoryChart{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+}
+
+.maxEx{
+    position: relative;
+    left: -140px;
 }

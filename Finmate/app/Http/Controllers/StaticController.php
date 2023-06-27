@@ -14,23 +14,28 @@ use Illuminate\Support\Facades\DB;
 class StaticController extends Controller
 {
     function static(Request $req , $userid) {
-        
-        // var_dump($req->year);
 
         // 현재 년도
         $currentYear = date('Y');
-        $lastYear = strval(date('Y') - 1);
-        $BlastYear = strval(date('Y') - 2);
-        // var_dump($lastYear);
-        // var_dump($BlastYear);
+        // $lastYear = strval(date('Y') - 1);
+        // $BlastYear = strval(date('Y') - 2);
         
-        if($req->year === $BlastYear) {
-            $currentYear = $req->year;
+        // if($req->year === $BlastYear) {
+        //     $currentYear = $req->year;
+        // }
+        // else if($req->year === $lastYear) {
+        //     $currentYear = $req->year;
+        // }
+
+        $nextYear = $req->has('nextYear');
+        $year = $req->session()->get('year', date('Y'));
+                if ($nextYear) {
+            $year += 1;
+        } else {
+            $year -= 1;
         }
-        else if($req->year === $lastYear) {
-            $currentYear = $req->year;
-        }
-        // var_dump($currentYear);
+        $req->session()->put('year', $year);
+
 
         // 월별 입금
         $monthRCStatic = DB::select("
@@ -59,32 +64,6 @@ class StaticController extends Controller
         WHERE ass.userid = ? and tran.type = '1' and YEAR(tran.trantime) = ? and MONTH(tran.trantime) = ?
         GROUP BY day ",[$userid,$currentYear,$currentMonth]);
 
-        // var_dump($monthStatic);
-        
-        // 이번달의 시작과 끝
-
-        // $startMonth = date( 'Y-m-01' );
-        // $finMonth = date( 'Y-m-t' );
-        // 이번달의 시작과 마지막날의 형태를 변경
-        // $startDate =date('m-d',strtotime($startMonth));
-        // $endDate =date('m-d',strtotime($finMonth));
-        
-        // $startDate =date('m-1');
-        // $endDate =date('m-t');
-        $mmonth = date( 'm' );
-
-
-        // 카테고리별 지출
-        // $catExpenses = DB::select( " select cat.name as category, SUM(tran.amount) AS consumption
-        // FROM assets ass
-        // INNER JOIN transactions tran ON ass.assetno = tran.assetno
-        // INNER JOIN categories cat ON tran.char = cat.no
-        // WHERE tran.trantime BETWEEN ? AND ?
-        // and ass.userid = ?
-        // and tran.type='1'
-        // GROUP BY cat.no , cat.name
-        // ORDER BY consumption desc ", [$startMonth,$finMonth,$userid]);
-
         $catExpenses = DB::select( " select cat.name as category, SUM(tran.amount) AS consumption
         FROM assets ass
         INNER JOIN transactions tran ON ass.assetno = tran.assetno
@@ -94,9 +73,7 @@ class StaticController extends Controller
         and ass.userid = ?
         and tran.type='1'
         GROUP BY cat.no , cat.name
-        ORDER BY consumption desc ", [$currentYear,$mmonth,$userid]);
-
-        // var_dump(session('all'));
+        ORDER BY consumption desc ", [$currentYear,$currentMonth,$userid]);
 
         // 현재달의 지출 합계
         $monthEXSum = DB::select("
@@ -111,18 +88,17 @@ class StaticController extends Controller
 
         // 지출별 퍼센트를 계산하여 배열로 만들어주기
         if(isset($catExpenses)){
-        foreach($catExpenses as $data){
-            $catPrice = $data->consumption;
-            $catPercent[]= intval(round(($catPrice/$resultSum)*100));
+            foreach($catExpenses as $data){
+                $catPrice = $data->consumption;
+                $catPercent[]= intval(round(($catPrice/$resultSum)*100));
         }}
-    
-        // var_dump($arrResult);
 
 
         if(isset($catPercent)){
             return view('static', [
                 'currentYear' => $currentYear,
-                'mmonth' => $mmonth
+                'mmonth' => $currentMonth,
+                'year' => $year
                 ])
                 ->with('monthrc',$monthRCStatic)
                 ->with('catdata',$catExpenses)

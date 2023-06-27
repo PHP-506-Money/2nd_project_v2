@@ -10,7 +10,7 @@
 
 @section('contents')
 
-    @if(empty($monthrc))
+    @if(empty($catdata))
     <div id="myModal" class="modal">
         <div class="modal_content">
                     <p ><span><b><span> 고객님 </span></b></span></p>
@@ -47,12 +47,19 @@
     @else
         <h3>{{ $currentYear }}년 월별 입지출 내역</h3>
 
-        <form action=" {{ route('static.get',[auth()->user()->userid])}}" method="get">
+        {{-- <form action=" {{ route('static.get',[auth()->user()->userid])}}" method="get">
         @csrf
         <button type="submit" id="year" name="year" value="2021"> 2021 </button>
         <button type="submit" id="year" name="year" value="2022"> 2022 </button>
         <button type="submit" id="year" name="year" value="2023"> 2023 </button>
-        </form> 
+        </form>  --}}
+        <form action="{{ route('static.get', [auth()->user()->userid]) }}" method="get">
+        @csrf
+        <button type="submit" id="prevYear" name="prevYear" value="one"> < </button>
+        <p>{{ $year }}</p>
+        <button type="submit" id="nextYear" name="nextYear"> > </button>
+    </form>
+
 
         <div class = "chartBar">
         <canvas id="monthChart" ></canvas>
@@ -65,22 +72,24 @@
 
         <div class ="categoryChart">
             <canvas id="categoryChart" ></canvas>
-            <div class ="percent">
-                @foreach($percent as $data)
-                    <p>{{$data}}%</p>
-                @endforeach
-            </div>
-        
-            <div class="catdetail">
-                @foreach($catdata as $data)
-                    <p class="catname">{{$data->category}}</p>
-                    <p class = "catprice">{{number_format($data->consumption)}}</p>
-                @endforeach
+            <div class = "allcategoryChart">
+                <div class ="percent">
+                    @foreach($percent as $data)
+                        <p>{{$data}}%</p>
+                    @endforeach
+                </div>
+            
+                <div class="catdetail">
+                    @foreach($catdata as $data)
+                        <p class="catname">{{$data->category}}</p>
+                        <p class = "catprice">{{number_format($data->consumption)}}</p>
+                    @endforeach
+                </div>
             </div>
         </div>
         </article>
 
-        <p>최대 지출 카테고리  : {{$catdata[0]->category}}</p>
+        <p class="maxEx">최대 지출 카테고리  : {{$catdata[0]->category}}</p>
 
 
         <script>
@@ -166,7 +175,7 @@
                 },
                 options: {
                     responsive: true,
-                    cutoutPercentage: 60,
+                    cutoutPercentage: 50,
                     plugins: {
                         legend: {
                             position: 'left'
