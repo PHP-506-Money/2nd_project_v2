@@ -61,10 +61,6 @@ Route::middleware(['guest'])->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    // Route::get('/', function () { return view('assets'); })->name('assets');
-    // Route::get('/main', function () {
-    //     return view('assets');
-    // })->name('assets');
     // Users
     Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');
     Route::get('/users/withdraw', [UserController::class, 'withdraw'])->name('users.withdraw');
@@ -86,7 +82,6 @@ Route::middleware(['auth'])->group(function () {
 
     //achieve
     Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
-    // Route::post('/achievements', [AchievementController::class, 'getAchievements'])->name('achievements.getAchievements');
     Route::get('/checkAchievements', [AchievementController::class, 'checkAchievements'])->name('achievements.checkAchievements');
     Route::put('/achievements/{achievementId}/reward', [AchievementController::class, 'receiveAchievementReward'])->name('achievements.reward');
 });

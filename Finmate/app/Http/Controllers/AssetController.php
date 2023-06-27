@@ -19,18 +19,6 @@ class AssetController extends Controller
     public function index($userid)
     {
         $assets = Asset::where('userid', $userid)->get();
-        // $transactions = Transaction::whereHas('assets', function ($query) use ($userid)
-        // {
-        //     $query->where('userid', $userid);
-        // })->get();
-        // return view('assets', ['assets' => $assets, 'transactions' => $transactions]);
-        // $assets = Asset::where('userid', $userid)->get();
-
-        // $transactions = Transaction::join('assets', 'transactions.assetno', '=' , 'assets.assetno')
-        //                 ->select('transactions.*')
-        //                 ->where('assets.userid', $userid)
-        //                 ->orderby('transactions.trantime', 'desc')
-        //                 ->get();
 
         $current_user_id = auth()->user()->userid;
         if ($current_user_id != $userid) {
