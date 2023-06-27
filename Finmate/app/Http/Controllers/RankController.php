@@ -10,19 +10,19 @@ class RankController extends Controller
     {
         
         $pointrank = DB::table('users')
-        ->select('point','username')
+        ->select('point','username','userid')
         ->orderBy('point', 'desc')
         ->limit(10)
         ->get();
 
         $loginrank = DB::table('users')
-        ->select('login_count','username')
+        ->select('login_count','username','userid')
         ->orderBy('login_count', 'desc')
         ->limit(10)
         ->get();
 
         $itemdrawrank = DB::table('users')
-        ->select('item_draw_count','username')
+        ->select('item_draw_count','username','userid')
         ->orderBy('item_draw_count', 'desc')
         ->limit(10)
         ->get();

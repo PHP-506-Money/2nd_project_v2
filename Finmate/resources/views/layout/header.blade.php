@@ -33,11 +33,11 @@
                 </div>
             </div>
             <div class="dropdown nav-item {{ Request::is('assets/*') ? 'is-active' : '' }}" active-color="#FF7676">
-                <a href="{{route('users.profile') }}">
+                <a href="{{ url('/users/profile'.'/' . auth()->user()->userid) }}">
                     모핀
                 </a>
                 <div class="dropdown-content">
-                    <a href="{{ route('users.profile') }}" class="nav-item">모핀</a>
+                    <a href="{{ url('/users/profile'.'/' . auth()->user()->userid) }}" class="nav-item">모핀</a>
 
                     <a href="{{url('/mofin'.'/' . auth()->user()->userid)}}" class="nav-item">뽑기</a>
                 </div>
