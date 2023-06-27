@@ -17,25 +17,6 @@ class StaticController extends Controller
 
         // 현재 년도
         $currentYear = date('Y');
-        // $lastYear = strval(date('Y') - 1);
-        // $BlastYear = strval(date('Y') - 2);
-        
-        // if($req->year === $BlastYear) {
-        //     $currentYear = $req->year;
-        // }
-        // else if($req->year === $lastYear) {
-        //     $currentYear = $req->year;
-        // }
-
-        $nextYear = $req->has('nextYear');
-        $year = $req->session()->get('year', date('Y'));
-                if ($nextYear) {
-            $year += 1;
-        } else {
-            $year -= 1;
-        }
-        $req->session()->put('year', $year);
-
 
         // 월별 입금
         $monthRCStatic = DB::select("
@@ -93,12 +74,11 @@ class StaticController extends Controller
                 $catPercent[]= intval(round(($catPrice/$resultSum)*100));
         }}
 
-
         if(isset($catPercent)){
             return view('static', [
                 'currentYear' => $currentYear,
                 'mmonth' => $currentMonth,
-                'year' => $year
+                'year' => $currentYear
                 ])
                 ->with('monthrc',$monthRCStatic)
                 ->with('catdata',$catExpenses)

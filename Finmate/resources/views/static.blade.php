@@ -47,20 +47,6 @@
     @else
         <h3>{{ $currentYear }}년 월별 입지출 내역</h3>
 
-        {{-- <form action=" {{ route('static.get',[auth()->user()->userid])}}" method="get">
-        @csrf
-        <button type="submit" id="year" name="year" value="2021"> 2021 </button>
-        <button type="submit" id="year" name="year" value="2022"> 2022 </button>
-        <button type="submit" id="year" name="year" value="2023"> 2023 </button>
-        </form>  --}}
-        <form action="{{ route('static.get', [auth()->user()->userid]) }}" method="get">
-        @csrf
-        <button type="submit" id="prevYear" name="prevYear" value="one"> < </button>
-        <p>{{ $year }}</p>
-        <button type="submit" id="nextYear" name="nextYear"> > </button>
-    </form>
-
-
         <div class = "chartBar">
         <canvas id="monthChart" ></canvas>
         </div>
