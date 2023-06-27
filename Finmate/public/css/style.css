@@ -211,10 +211,10 @@ input {
     float: right;
 }
 
-#profile2 {
+#myinfo {
     width: 400px;
-    height: 350px;
-    background-color: none;
+    height: 450px;
+    background-color: var(--sub-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
