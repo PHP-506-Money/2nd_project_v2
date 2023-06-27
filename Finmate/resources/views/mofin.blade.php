@@ -16,7 +16,7 @@
         <form action="{{route('mofin.point',[auth()->user()->userid])}}" method="post">
             @csrf
             <button type="submit" class="randombtn">
-                <img class="randomimg" src="{{ asset('/img/randpoint.png') }}">
+                <img class="randomimg" src="{{ asset('/img/randpoint.jpg') }}">
             </button>
         </form>
         <span class="bold">랜덤 포인트 뽑기</span>
@@ -27,7 +27,7 @@
         <form action="{{route('mofin.item',[auth()->user()->userid])}}" method="post">
             @csrf
             <button type="submit" class="randombtn">
-                <img class="randomimg" src="{{ asset('/img/randitem.png') }}">
+                <img class="randomimg" src="{{ asset('/img/randitem.jpg') }}">
             </button>
         </form>
         <span class="bold">랜덤 아이템 뽑기</span>
