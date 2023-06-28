@@ -112,7 +112,7 @@ class MofinController extends Controller
         ->where('userid', $id)
         ->update(['point' =>$newPoint, 'item_draw_count' => $result->item_draw_count + 1]);
 
-        $randomitem = rand(1,6); // 랜덤으로 아이템번호 1~5
+        $randomitem = rand(1,7); // 랜덤으로 아이템번호 1~7
         $data['userno'] = $result->userno;
         $data['userid'] = $id;
         $data['itemno'] = $randomitem;

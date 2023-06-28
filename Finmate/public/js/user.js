@@ -213,3 +213,11 @@ function toggleitem1() {
         charitem6.style.display = 'none';
     }
 }
+    function toggleitem7() {
+    var charitem7 = document.getElementById('charitem7');
+    if (charitem7.style.display === 'none') {
+        charitem7.style.display = 'block';
+    } else {
+        charitem7.style.display = 'none';
+    }
+}
