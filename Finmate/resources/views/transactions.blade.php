@@ -49,7 +49,7 @@
 
 
     <table class="assetTable">
-        <tr class="assetTableTittle">
+        <tr>
             <th>자산명</th>
             <th>거래구분</th>
             <th>카테고리</th>
@@ -122,7 +122,9 @@
 
    // 이전 달로 이동
 previousMonthBtn.addEventListener("click", () => {
+prevCalendar();
 currentMonth = parseInt(currentMonth, 10) - 1;
+
 if (currentMonth < 1) { 
     currentMonth=12; currentYear--; 
     } 
@@ -134,7 +136,9 @@ if (currentMonth < 1) {
 
 // 다음 달로 이동
 nextMonthBtn.addEventListener("click", () => {
+nextCalendar();
 currentMonth = parseInt(currentMonth, 10) + 1;
+
 if (currentMonth > 12) {
 currentMonth = 1;
 currentYear++;
@@ -147,10 +151,22 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
 
         document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
             prevCalendar();
+            currentMonth = parseInt(currentMonth, 10) - 1;
+
+            if (currentMonth < 1) { currentMonth=12; currentYear--; } currentMonth=currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMonthElem(); 
+
         });
 
         document.getElementById("nextNextCalendar").addEventListener("click", function(event) {
             nextCalendar();
+            currentMonth = parseInt(currentMonth, 10) + 1;
+
+            if (currentMonth > 12) {
+            currentMonth = 1;
+            currentYear++;
+            }
+            currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMonthElem();
+
         });
     });
 

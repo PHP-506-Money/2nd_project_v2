@@ -161,6 +161,8 @@ header {
     color: var(--active-color);
 }
 
+
+
 .nav-indicator {
     position: absolute;
     left: 0;
