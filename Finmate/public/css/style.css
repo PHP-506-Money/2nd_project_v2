@@ -76,7 +76,7 @@ span:hover + p.arrow_box {
 
 #form {
     width: 700px;
-    height: 700px;
+    height: 730px;
     background-color: var(--sub-color);
     display: flex;
     flex-direction: column;
@@ -110,7 +110,9 @@ span:hover + p.arrow_box {
 }
 
 #errMsgId {
-text-align: center;
+    text-align: center;
+    font-size: small;
+    color: red;
 }
 
 label, input {
@@ -147,7 +149,7 @@ label {
 }
 
 .label3 > input {
-    width: 250px;
+    width: 270px;
 }
 
 .label4 > input {
@@ -169,7 +171,7 @@ input {
 }
 
 .bottom2 {
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;

@@ -17,6 +17,13 @@ class ApiController extends Controller
 {
     public function getUserChk($id){
 
+        // ID에 영문과 숫자만 포함되어 있는지 확인
+        if (!ctype_alnum($id)) {
+            $arr['errorcode'] = "E02";
+            $arr['msg'] = "! ID는 영문 대소문자, 숫자로만 구성되어야 합니다.";
+            return response()->json($arr, Response::HTTP_OK);
+        }
+
         $user=DB::table('users')->where('userid',$id)->first();
         // user가 없을 경우 성공
         $arr['errorcode']="0";
