@@ -272,3 +272,11 @@ textarea:focus {
 #charitem6 {
     z-index: 0;
 }
+
+#btnoff {
+    display: none;
+}
+
+.bottom3 {
+    margin: 25px;
+}

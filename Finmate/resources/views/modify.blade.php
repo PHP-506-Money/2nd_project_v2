@@ -46,6 +46,6 @@
             </div>
         </div>
     </form>
+@endsection
 
 <script src="{{ asset('/js/user.js') }}"></script>
-@endsection

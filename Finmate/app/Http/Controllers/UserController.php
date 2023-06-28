@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Models\Achievement;
 use App\Models\AchieveUser;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -276,12 +278,20 @@ class UserController extends Controller
 
     // 회원탈퇴 기능: softdeletes();를 사용하여 migration을 하였으므로, 로그인시 자동으로 탈퇴한 회원은 로그인 불가능하게 막아줌.
     function withdraw() {
-        $id = auth()->user()->userid;
-        $result = User::destroy($id); // destroy 에러 났을 때 에러 핸들링 써서 예외 처리 하기
-        Session::flush(); // 세션 파기
-        Auth::logout(); // 로그아웃
-
-        return redirect()->route('users.login');
+        try {
+            // $id = auth()->user()->userid;
+            $user = Auth::user();
+            $user->delete(); // 회원 탈퇴
+            Session::flush();
+            Auth::logout();
+    
+            return redirect()->route('users.login');
+        } catch (ModelNotFoundException $e) {
+            // 모델을 찾을 수 없는 경우 처리
+            return back()->with('error', '회원을 찾을 수 없습니다.');
+        } catch (QueryException $e) {
+            // 쿼리 실행 중 오류가 발생한 경우 처리
+            return back()->with('error', '회원탈퇴 중 오류가 발생했습니다.');
+        }
     }
-
 }
