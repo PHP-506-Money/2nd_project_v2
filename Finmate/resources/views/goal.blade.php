@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
 <h1>나의 목표</h1>
 
-<form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post" class="listbox2">
+<form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post" class="listbox2" id="db1">
     @method('POST')
     @csrf
         <label for="title">목표</label>
@@ -24,7 +24,7 @@
         <label for="endperiod">목표일</label>
         <input type="date" class="" name="endperiod" id="endperiod" required value="{{ old('endperiod')}}" >
 
-    <button type="submit" class="button">목표 생성하기</button>
+        <button type="button" class="button" onclick="debouncedSubmitForm()">목표 생성하기</button>
 </form>
 <br><br>
 <h2>진행 목록</h2>
@@ -114,7 +114,7 @@ $num = 0;
 </div>
     <h2>달성 목록</h2>
     @if(isset($data1))
-    <table class = "table">
+    <table class="table">
         <thead>
             <tr>
                 <th>목표</th>
@@ -146,6 +146,23 @@ $num = 0;
     </table>
     @endif
 <script>
+    var debounceTimer;
+
+    function debounce(func, delay) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(func, delay);
+    }
+
+    function debouncedSubmitForm() {
+        debounce(submitForm, 1000);
+    }
+
+    function submitForm() {
+        // 'form'를 실제로 사용하는 폼의 ID 또는 클래스로 대체하세요
+        var form = document.getElementById('db1');
+        form.submit();
+    }
+
     function toggleForm(goalno) {
         var formId = 'form_' + goalno;
         var form = document.getElementById(formId);
