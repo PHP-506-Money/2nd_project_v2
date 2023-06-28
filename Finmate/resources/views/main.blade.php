@@ -100,6 +100,7 @@
 <section>
     <div class="bottombanner">
         <img src="{{ asset('/img/mainbottombanner.png') }}" alt="">
+
     </div>
 </section>
 
