@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 class StaticController extends Controller
 {
-    function static(Request $req , $userid) {
+    function static( $userid) {
+
+        $current_user_id = auth()->user()->userid;
+        if ($current_user_id != $userid) {
+            return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
+        }
 
         // 현재 년도
         $currentYear = date('Y');
@@ -45,6 +50,7 @@ class StaticController extends Controller
         WHERE ass.userid = ? and tran.type = '1' and YEAR(tran.trantime) = ? and MONTH(tran.trantime) = ?
         GROUP BY day ",[$userid,$currentYear,$currentMonth]);
 
+        // 카테고리별 지출
         $catExpenses = DB::select( " select cat.name as category, SUM(tran.amount) AS consumption
         FROM assets ass
         INNER JOIN transactions tran ON ass.assetno = tran.assetno
