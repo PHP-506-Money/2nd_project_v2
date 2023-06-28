@@ -54,8 +54,7 @@
             <h2>업적시스템</h2>
             <div class="subtitle">따분한 자산관리 어려운 자산 관리는 그만!<br>
                 핀메이트에서 업적을 달성하며 재미있게 관리해 보세요.<br>
-                업적에 따른 뱃지와 포인트를 얻을 수 있어요!<br>
-                업적에 따른 칭찬과 조언도 있어요!
+                업적에 따른 포인트를 얻을 수 있어요!
             </div>
             <a href="{{ route('users.login') }}" class="common-btn">사용해보기</a>
         </div>
@@ -66,7 +65,8 @@
 </section>
 <section>
     <div class="box">
-        <img src="{{ asset('/img/sec4.jpg') }}" alt="">
+        <img src="{{ asset('/img/maingraph.png') }}" alt="">
+
     </div>
     <div class="box">
         <div class="text-box">
@@ -83,17 +83,18 @@
 <section>
     <div class="box">
         <div class="text-box">
-            <h2>업적관리</h2>
+            <h2>모핀이 꾸미기</h2>
             <div class="subtitle">
-                자산 관리... 해야 하는건 아는데 귀찮아...<br>
-                핀메이트가 재미있게 해드릴게요!<br>
-                업적 시스템으로 게임처럼 재미있게 <br>자산 관리를 시작해 보세요.
+                포인트를 어디 쓰냐구요?<br>
+                아이템과 포인트를 뽑아 귀여운 모핀이를 꾸며보세요.<br>
+                성취감으로 자산 관리가 재미있어 질 거예요.
             </div>
             <a href="{{url('/users/login')}}" class="common-btn">사용해보기</a>
         </div>
     </div>
     <div class="box ">
-        <img src="{{ asset('/img/section1.jpg') }}" alt="">
+        <img src="{{ asset('/img/mainitem.png') }}" alt="">
+
     </div>
 </section>
 <section>
