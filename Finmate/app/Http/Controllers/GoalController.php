@@ -15,7 +15,7 @@ class GoalController extends Controller
 {
     public function index($id)
     {   
-
+        
         $current_user_id = auth()->user()->userid;
         if ($current_user_id != $id) {
             return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
@@ -86,39 +86,7 @@ class GoalController extends Controller
         $data['created_at'] = now();    
         DB::table('goals')->insert($data); // request 받은값을 등록해줍니다
     
-        $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->where('completed_at', null)->get();
-        $result1 = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->where('completed_at','>','0000-00-00')->get();
-        if (count($results) > 0){
-
-            
-            foreach ($results as $result) {
-                $startdate = $result->startperiod;
-                $enddate = $result->endperiod;
-                $income = DB::table('transactions as tran')
-                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-                ->where('ass.userid', $id)
-                ->where('tran.type', '0')
-                ->whereBetween('tran.trantime', [ $startdate, $enddate])
-                ->sum('tran.amount');
-        
-                $outcome = DB::table('transactions as tran')
-                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-                ->where('ass.userid', $id)
-                ->where('tran.type', '1')
-                ->whereBetween('tran.trantime', [ $startdate, $enddate])
-                ->sum('tran.amount');
-
-                if ($income - $outcome >= $result->amount) {
-                    DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
-
-                }
-                $goalint[] = $income-$outcome ;
-                }
-            return view('goal')->with('data', $results)->with('goalint',$goalint)->with('data1',$result1);
-        }
-        else{
-            return view('goal')->with('data', $results)->with('data1',$result1);
-        }
+        return redirect()->route('goal.index', ['userid' => $id]);
     }
 
 
@@ -144,42 +112,7 @@ class GoalController extends Controller
 
     $upinfo->update($updatedData); //request 받은값을 업데이트 해줍니다
 
-    $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->where('completed_at', null)->get();
-    $result1 = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->where('completed_at','>','0000-00-00')->get();
-    // $idsearch = DB::table('users')->where('userid', $id)->first();/********0623 del ***/ userid 로 통일
-    // $userid = $idsearch->userid;  /********0623 del ***/ userid 로 통일
-    
-    if (count($results) > 0){
-
-            
-        foreach ($results as $result) {
-            $startdate = $result->startperiod;
-            $enddate = $result->endperiod;
-            $income = DB::table('transactions as tran')
-            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-            ->where('ass.userid', $id)
-            ->where('tran.type', '0')
-            ->whereBetween('tran.trantime', [ $startdate, $enddate])
-            ->sum('tran.amount');
-    
-            $outcome = DB::table('transactions as tran')
-            ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-            ->where('ass.userid', $id)
-            ->where('tran.type', '1')
-            ->whereBetween('tran.trantime', [ $startdate, $enddate])
-            ->sum('tran.amount');
-
-            if ($income - $outcome >= $result->amount) {
-                DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
-
-            }
-            $goalint[] = $income-$outcome ;
-            }
-        return view('goal')->with('data', $results)->with('goalint',$goalint)->with('data1',$result1);
-    }
-    else{
-        return view('goal')->with('data', $results)->with('data1',$result1);
-    }
+    return redirect()->route('goal.index', ['userid' => $id]);
 }
 
 
@@ -192,44 +125,9 @@ public function delete($id, Request $Req){
             $delinfo -> update([
             'deleted_at' => now()
         ]);
-
-
-        $results = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->where('completed_at', null)->get();
-        $result1 = DB::table('goals')->where('userid', $id)->where('deleted_at', null)->where('completed_at','>','0000-00-00')->get();
-        // $idsearch = DB::table('users')->where('userid', $id)->first();/********0623 del ***/ userid 로 통일
-        // $userid = $idsearch->userid;  /********0623 del ***/ userid 로 통일
         
-        if (count($results) > 0){
+        return redirect()->route('goal.index', ['userid' => $id]);
 
-            
-            foreach ($results as $result) {
-                $startdate = $result->startperiod;
-                $enddate = $result->endperiod;
-                $income = DB::table('transactions as tran')
-                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-                ->where('ass.userid', $id)
-                ->where('tran.type', '0')
-                ->whereBetween('tran.trantime', [ $startdate, $enddate])
-                ->sum('tran.amount');
-        
-                $outcome = DB::table('transactions as tran')
-                ->join('assets as ass', 'tran.assetno', '=', 'ass.assetno')
-                ->where('ass.userid', $id)
-                ->where('tran.type', '1')
-                ->whereBetween('tran.trantime', [ $startdate, $enddate])
-                ->sum('tran.amount');
-
-                if ($income - $outcome >= $result->amount) {
-                    DB::table('goals')->where('goalno', $result->goalno)->update(['completed_at' => now()]);
-
-                }
-                $goalint[] = $income-$outcome ;
-                }
-            return view('goal')->with('data', $results)->with('goalint',$goalint)->with('data1',$result1);
-        }
-        else{
-            return view('goal')->with('data', $results)->with('data1',$result1);
-        }
 
 }
 
