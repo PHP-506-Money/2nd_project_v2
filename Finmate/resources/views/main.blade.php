@@ -31,7 +31,7 @@
 </section>
 <section>
     <div class="box">
-        <img src="{{ asset('/img/character.png') }}" alt="">
+        <img class="str" src="{{ asset('/img/character.png') }}" alt="">
 
 
     </div>
