@@ -59,7 +59,7 @@ function validateInput(input) {
     // 비밀번호 유효성 체크
     if (input.id === 'password') {
     const password = input.value.trim();
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&+])(?=.{8,12})/;
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*+])(?=.{8,12})/;
         if (!regex.test(password)) {
             showErrorMessage(input, '영문, 숫자, 특수문자 1개씩 포함하여 8~12자 입력해주세요.');
             return false;
