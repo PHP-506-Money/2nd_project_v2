@@ -2,6 +2,7 @@
 const idSpan = document.getElementById('errMsgId');
 let apiData = null;
 
+// 아이디 중복체크
 function checkDuplicateButton() {
     console.log('start'); // 콘솔로그로 함수가 호출되는지 찍기.
     const id = document.getElementById('id');
