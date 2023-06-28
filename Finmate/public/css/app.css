@@ -1,12 +1,24 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
 :root {
     --main-color: #1C3879;
     --sub-color: #FFFBF0;
     --btn-color: #607EAA;
     --active-color: #FF7676;
 }
-
-*{margin: 0; padding: 0; box-sizing: border-box;
-scroll-behavior: smooth;}
 
 ul, ol, li {
     list-style: none;
@@ -430,26 +442,14 @@ section .bottombanner img {
     z-index: 1;
 }
 
-.receive-reward-button:disabled.yet-to-achieve::after {
-    content: " 달성전비활성 ";
-    background-color: var(--btn-color);
-    position: absolute;
-    left: 13px;
-    top: 13px;
-    font-size: 10px;
-    z-index: 1;
-}
 
 .receive-reward-button:disabled.received::after {
-    content: " 이미받은보상 ";
-    background-color: var(--btn-color);
-    position: absolute;
-    left: 13px;
-    top: 13px;
-    font-size: 10px;
-    z-index: 1;
+    content: " - 보상후 - ";
 }
 
+.receive-reward-button:disabled.yet-to-achieve::after {
+    content: " - 달성전 - ";
+}
 .button:hover {
     background-color: var(--active-color);
 }
