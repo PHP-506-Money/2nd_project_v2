@@ -49,51 +49,58 @@
 
 
     <table class="assetTable">
-        <tr>
-            <th>자산명</th>
-            <th>거래구분</th>
-            <th>카테고리</th>
-            <th>거래금액</th>
-            <th>거래일시</th>
-        </tr>
-        @foreach($transactions as $tran)
-        <tr data-month="{{ substr($tran->trantime, 0, 7) }}">
-            <td>{{$tran->assetname}}</td>
-            @if($tran->type == '0')
-            <td>입금</td>
-            @else
-            <td>출금</td>
-            @endif
-            <td>{{$tran->payee}}</td>
-            @if($tran->type == '0')
-            <td>수입</td>
+        <thead>
+            <tr>
+                <th>자산명</th>
+                <th>거래구분</th>
+                <th>거래처</th>
+                <th>카테고리</th>
+                <th>거래금액</th>
+                <th>거래일시</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($transactions as $tran)
+            <tr data-month="{{ substr($tran->trantime, 0, 7) }}">
+                <td>{{$tran->assetname}}</td>
+                @if($tran->type == '0')
+                <td>입금</td>
+                @else
+                <td>출금</td>
+                @endif
+                <td>{{$tran->payee}}</td>
+                @if($tran->type == '0')
+                <td>수입</td>
+                @else
+                <td>{{$tran->name}}</td>
+                @endif
 
-            @else
-            <td>{{$tran->name}}</td>
+                @if($tran->type == '0')
+                <td>{{number_format($tran->amount)}}원</td>
+                @else
+                <td>-{{number_format($tran->amount)}}원</td>
+                @endif
 
-            @endif
+                <td>{{$tran->trantime}}</td>
+            </tr>
+            @endforeach
+        </tbody>
 
-            @if($tran->type == '0')
-            <td>{{number_format($tran->amount)}}원</td>
-            @else
-            <td>-{{number_format($tran->amount)}}원</td>
-            @endif
-
-            <td>{{$tran->trantime}}</td>
-        </tr>
-        @endforeach
     </table>
 </div>
 
 <script>
+
+    function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     const currentMonthElem = document.getElementById("current-month");
     const monthlyIncomeElem = document.getElementById("monthly-income");
     const monthlyExpenseElem = document.getElementById("monthly-expense");
     const previousMonthBtn = document.getElementById("previous-month-btn");
     const nextMonthBtn = document.getElementById("next-month-btn");
-    const allRows = document.querySelectorAll(".listbox tr");
-
+    const allRows = document.querySelectorAll(".listbox tbody tr");
     const monthlyIncome = JSON.parse('@json($monthly_income)'.replace(/&quot;/g, '\"'));
     const monthlyExpense = JSON.parse('@json($monthly_expense)'.replace(/&quot;/g, '\"'));
 
@@ -103,16 +110,16 @@
     currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth;
 
     const updateMonthElem = () => {
-        const monthStr = `${currentYear}-${currentMonth}`;
-        currentMonthElem.textContent = monthStr;
-        showByMonth(monthStr);
-        monthlyIncomeElem.textContent = monthlyIncome[monthStr] || 0;
-        monthlyExpenseElem.textContent = monthlyExpense[monthStr] || 0;
+    const monthStr = `${currentYear}-${currentMonth}`;
+    currentMonthElem.textContent = monthStr;
+    showByMonth(monthStr);
+    monthlyIncomeElem.textContent = numberWithCommas(monthlyIncome[monthStr] || 0);
+    monthlyExpenseElem.textContent = numberWithCommas(monthlyExpense[monthStr] || 0);
     };
 
     const showByMonth = (month) => {
         allRows.forEach((row) => {
-            if (row.dataset.month === month) row.style.display = "flex";
+            if (row.dataset.month === month) row.style.display = "table-row";
             else row.style.display = "none";
         });
     }; 

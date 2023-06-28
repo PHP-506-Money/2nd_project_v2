@@ -4,42 +4,36 @@
 
 @section('header', 'GOAL')
 @section('contents')
+
 @include('layout.errorsvalidate')
+    <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
 <h1>나의 목표</h1>
 
-<form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post">
+<form action="{{ route('goal.insert',[auth()->user()->userid]) }}" method="post" class="listbox2">
     @method('POST')
     @csrf
-    <div class="form-group">
         <label for="title">목표</label>
-        <input type="text" class="form-control" name="title" id="title" required placeholder="목표">
-    </div>
+        <input type="text" class="" name="title" id="title" required placeholder="목표" value="{{ old('title')}}">
 
-    <div class="form-group">
         <label for="amount">금액</label>
-        <input type="number" min="100000" max="1000000000" class="form-control" name="amount" id="amount" required placeholder="목표">
-    </div>
+        <input type="number" min="100000" max="1000000000" class="" name="amount" id="amount" required placeholder="목표금액" value="{{ old('amount')}}">
 
-    <div class="form-group">
         <label for="startperiod">시작일자</label>
-        <input type="date" class="form-control" name="startperiod" id="startperiod" required>
-    </div>
+        <input type="date" class="" name="startperiod" id="startperiod" required value="{{ old('startperiod')}}">
 
-    <div class="form-group">
         <label for="endperiod">목표일</label>
-        <input type="date" class="form-control" name="endperiod" id="endperiod" required>
-    </div>
+        <input type="date" class="" name="endperiod" id="endperiod" required value="{{ old('endperiod')}}" >
 
-    <button type="submit" class="btn btn-primary">목표 생성하기</button>
+    <button type="submit" class="button">목표 생성하기</button>
 </form>
 <br><br>
-<h2>목록</h2>
+<h2>진행 목록</h2>
 
 @php
 $num = 0;
 @endphp
 
-<div class="listbox1" style="background-color: #FFFBF0;">
+<div class="listbox1">
     @if(isset($data))
     <table class="table">
         <thead>
@@ -55,7 +49,8 @@ $num = 0;
             </tr>
         </thead>
         <tbody>
-            @foreach($data as $goal)
+        @foreach($data as $goal)
+            
             <tr>
                 <td>{{ $goal->title }}</td>
                 <td>{{ $goal->amount }}</td>
@@ -64,17 +59,19 @@ $num = 0;
                 <td>{{ number_format($goalint[$num]) }}</td>
                 <td>{{ ceil(($goalint[$num]/$goal->amount)*100).'%' }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="toggleForm({{ $goal->goalno }})">수정</button>
+                    <button type="button" class="button" onclick="toggleForm({{ $goal->goalno }})">수정</button>
                 </td>
                 <td>
                     <form action="{{ route('goal.delete',[auth()->user()->userid]) }}" method="post">
                         @csrf
                         @method('post')
                         <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
-                        <button type="submit" class="btn btn-danger">삭제</button>
+                        <button type="submit" class="button">삭제</button>
                     </form>
                 </td>
             </tr>
+
+
             <tr>
                 <td colspan="8">
                     <form action="{{ route('goal.update',[auth()->user()->userid]) }}" method="post" id="form_{{ $goal->goalno }}" style="display: none;">
@@ -82,28 +79,28 @@ $num = 0;
                         @method('post')
                         <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
 
-                        <div class="form-group">
+                        <div class="">
                             <label for="title">목표</label>
-                            <input type="text" class="form-control" name="title" id="title" required placeholder="목표" value="{{ $goal->title }}">
+                            <input type="text" class="" name="title" id="title" required placeholder="목표" value="{{ $goal->title }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="">
                             <label for="amount">금액</label>
-                            <input type="number" min="100000" max="1000000000" class="form-control" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
+                            <input type="number" min="100000" max="1000000000" class="" name="amount" id="amount" required placeholder="목표" value="{{ $goal->amount }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="">
                             <label for="startperiod">시작일자</label>
-                            <input type="date" class="form-control" name="startperiod" id="startperiod" required value="{{ $goal->startperiod }}">
+                            <input type="date" class="" name="startperiod" id="startperiod" required value="{{ $goal->startperiod }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="">
                             <label for="endperiod">목표일</label>
-                            <input type="date" class="form-control" name="endperiod" id="endperiod" required value="{{ $goal->endperiod }}">
+                            <input type="date" class="" name="endperiod" id="endperiod" required value="{{ $goal->endperiod }}">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">수정</button>
-                        <button type="button" class="btn btn-secondary" onclick="cancelForm({{ $goal->goalno }})">취소</button>
+                        <button type="submit" class="button">수정</button>
+                        <button type="button" class="button" onclick="cancelForm({{ $goal->goalno }})">취소</button>
                     </form>
                 </td>
             </tr>
@@ -115,7 +112,39 @@ $num = 0;
     </table>
     @endif
 </div>
-
+    <h2>달성 목록</h2>
+    @if(isset($data1))
+    <table class = "table">
+        <thead>
+            <tr>
+                <th>목표</th>
+                <th>목표금액</th>
+                <th>시작일자</th>
+                <th>마감일자</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($data1 as $goal)
+            
+            <tr>
+                <td>{{ $goal->title }}</td>
+                <td>{{ $goal->amount }}</td>
+                <td>{{ $goal->startperiod }}</td>
+                <td>{{ $goal->endperiod }}</td>
+                <td>
+                    <form action="{{ route('goal.delete',[auth()->user()->userid]) }}" method="post">
+                        @csrf
+                        @method('post')
+                        <input type="hidden" name="goalno" value="{{ $goal->goalno }}">
+                        <button type="submit" class="button">삭제</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @endif
 <script>
     function toggleForm(goalno) {
         var formId = 'form_' + goalno;
@@ -141,4 +170,5 @@ $num = 0;
         view.style.display = 'block';
     }
 </script>
+
 @endsection

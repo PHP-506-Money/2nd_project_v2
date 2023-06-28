@@ -75,7 +75,6 @@ header {
     margin-top: 20px;
     display: inline-flex;
     position: relative;
-    
     max-width: 100%;
     background-color: var(--main-color);
     padding: 0 20px;
@@ -121,8 +120,6 @@ header {
     flex-direction: column;
 }
 
-
-
 .nav-item {
     color: var(--sub-color);
     padding: 20px;
@@ -160,8 +157,6 @@ header {
 .nav-item:not(.is-active):hover {
     color: var(--active-color);
 }
-
-
 
 .nav-indicator {
     position: absolute;
@@ -320,8 +315,8 @@ section .bottombanner img {
     text-align: center;
     background-color: var(--sub-color);
     color: var(--main-color);
-    width: 60vw;
-    height: 70vh;
+    width: 1000px;
+    height: 800px;
     margin-bottom: 50px;
 }
 
@@ -342,6 +337,9 @@ section .bottombanner img {
 .scriptCalendar>tbody>tr>td {
     width: 50px;
     height: 50px;
+    vertical-align: top;
+    padding-top: 10px;
+    box-sizing: border-box;
 }
 
 .scriptCalendar>tbody>tr>td:hover {
@@ -373,7 +371,7 @@ section .bottombanner img {
     text-align: center;
 }
 
-.assetTable tbody {
+.assetTable tbody, .assetTable thead {
     width: 100%;
     flex-direction: column;
 }
@@ -381,7 +379,7 @@ section .bottombanner img {
 .assetTable tr, .assetTable th, .assetTable td {
     padding: 10px;
     box-sizing: border-box;
-    min-width: 185px;
+    min-width: 200px;
     text-align: left;
 }
 
