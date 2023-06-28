@@ -18,6 +18,9 @@ use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Asset;
 use App\Models\Transaction;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +39,7 @@ use App\Models\Transaction;
 Route::middleware(['guest'])->group(function () {
     
     Route::get('/', function () {
-        return view('main');
+        return redirect('/main');
     });
 
     Route::get('/main', function () {
@@ -62,7 +65,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
-        return view('assets.index');
+        return Redirect('/assets'.'/'.auth()->user()->userid);
     });
     // Users
     Route::get('/users/logout', [UserController::class, 'logout'])->name('users.logout');

@@ -287,6 +287,10 @@ section .box img {
     height: 100%;
 }
 
+section .box img.str {
+    height: 70%;
+}
+
 section .bottombanner {
     width: 100%;
 }

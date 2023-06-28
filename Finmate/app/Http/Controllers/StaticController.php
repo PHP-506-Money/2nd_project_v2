@@ -17,7 +17,7 @@ class StaticController extends Controller
 
         $current_user_id = auth()->user()->userid;
         if ($current_user_id != $userid) {
-            return redirect('/unauthorized-access'); // 잘못된 접근 페이지로 리다이렉트
+            return redirect('/unauthorized-access');
         }
 
         // 현재 년도
