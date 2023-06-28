@@ -56,6 +56,8 @@
                 <img class="item-img" src="{{ asset('/img/tea.png') }}">
             @elseif($value === '야구배트')
                 <img class="item-img" src="{{ asset('/img/bat.png') }}">
+            @elseif($value === '아잉눈')
+                <img class="item-img" src="{{ asset('/img/eyeing.png') }}">
             @endif
             <span class="item-name">{{ $value }}</span>
         </div>

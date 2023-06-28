@@ -21,6 +21,7 @@
                     <img id="charitem6" class="noneimg" src="{{ asset('/img/wing.png') }}" alt="" >
                     <img id="charitem7" class="noneimg" src="{{ asset('/img/tea.png') }}" alt="" >
                     <img id="charitem8" class="noneimg" src="{{ asset('/img/bat.png') }}" alt="" >
+                    <img id="charitem9" class="noneimg" src="{{ asset('/img/eyeing.png') }}" alt="" >
                 </div>
                 <div class="moffin">
                     @foreach ($data as $user)
@@ -79,6 +80,8 @@
                     <button class="itembtn"   onclick="toggleitem7()" > <img src="{{ asset('/img/tea.png') }}"  class = "itemimg"> </button>
                 @elseif($value === '야구배트')
                     <button class="itembtn"   onclick="toggleitem8()" > <img src="{{ asset('/img/bat.png') }}"  class = "itemimg"> </button>
+                @elseif($value === '아잉눈')
+                    <button class="itembtn"   onclick="toggleitem9()" > <img src="{{ asset('/img/eyeing.png') }}"  class = "itemimg"> </button>
                 @endif    
             @endforeach
         </div>

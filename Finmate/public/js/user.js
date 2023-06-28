@@ -229,3 +229,11 @@ function toggleitem1() {
         charitem8.style.display = 'none';
     }
 }
+    function toggleitem9() {
+    var charitem9 = document.getElementById('charitem9');
+    if (charitem9.style.display === 'none') {
+        charitem9.style.display = 'block';
+    } else {
+        charitem9.style.display = 'none';
+    }
+}
