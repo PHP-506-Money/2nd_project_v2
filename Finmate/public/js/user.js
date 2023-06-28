@@ -221,3 +221,11 @@ function toggleitem1() {
         charitem7.style.display = 'none';
     }
 }
+    function toggleitem8() {
+    var charitem8 = document.getElementById('charitem8');
+    if (charitem8.style.display === 'none') {
+        charitem8.style.display = 'block';
+    } else {
+        charitem8.style.display = 'none';
+    }
+}
