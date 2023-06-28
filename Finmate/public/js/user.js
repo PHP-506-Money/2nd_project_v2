@@ -1,3 +1,4 @@
+// 회원가입 페이지
 // ID 체크 변수
 const idSpan = document.getElementById('errMsgId');
 let apiData = null;
@@ -33,6 +34,116 @@ function checkDuplicateButton() {
         .catch(error=>alert(error.message));
 }
 
+// 유효성 체크 함수
+function validateInput(input) {
+    // 이름 유효성 체크
+    if (input.id === 'name') {
+    const name = input.value.trim();
+    const regex = /^[가-힣a-zA-Z]{2,20}$/;
+        if (!regex.test(name)) {
+            showErrorMessage(input, '한글, 영문 2~20자 사이로 입력해주세요.');
+            return false;
+        }
+    }
+
+    // 아이디 유효성 체크
+    if (input.id === 'id') {
+    const id = input.value.trim();
+    const regex = /^[a-zA-Z0-9]{4,12}$/;
+        if (!regex.test(id)) {
+            showErrorMessage(input, '영문, 숫자 4~12자 사이로 입력해주세요.');
+            return false;
+        }
+    }
+
+    // 비밀번호 유효성 체크
+    if (input.id === 'password') {
+    const password = input.value.trim();
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&+])(?=.{8,12})/;
+        if (!regex.test(password)) {
+            showErrorMessage(input, '영문, 숫자, 특수문자 1개씩 포함하여 8~12자 입력해주세요.');
+            return false;
+        }
+    }
+
+    // 비밀번호 확인 유효성 체크
+    if (input.id === 'passwordchk') {
+    const password = document.getElementById('password').value.trim();
+    const passwordchk = input.value.trim();
+        if (password !== passwordchk) {
+            showErrorMessage(input, '비밀번호와 동일하게 입력해주세요.');
+            return false;
+        }
+    }
+
+    // 이메일 유효성 체크
+    if (input.id === 'email') {
+    const email = input.value.trim();
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(email)) {
+            showErrorMessage(input, '유효한 이메일 주소를 입력해주세요.');
+            return false;
+        }
+    }
+
+    // 휴대폰 번호 유효성 체크
+    if (input.id === 'phone') {
+    const phone = input.value.trim();
+    const regex = /^\d{3}-\d{3,4}-\d{4}$/;
+        if (!regex.test(phone)) {
+            showErrorMessage(input, '유효한 휴대폰 번호를 입력해주세요. (예: 010-1234-5678)');
+            return false;
+        } else {
+            showErrorMessage(input); // 유효한 비밀번호인 경우 에러 메시지 제거
+        }
+    }
+
+    hideErrorMessage(input);
+    return true;
+}
+    
+// 에러 메시지 표시 함수
+function showErrorMessage(input, message) {
+    const parent = input.parentElement;
+    const errMsgId = parent.querySelector('#errMsgId');
+    errMsgId.textContent = message;
+    errMsgId.style.display = 'block';
+    input.classList.add('error');
+}
+
+// 에러 메시지 숨기기 함수
+function hideErrorMessage(input) {
+    const parent = input.parentElement;
+    const errMsgId = parent.querySelector('#errMsgId');
+    errMsgId.textContent = '';
+    errMsgId.style.display = 'none';
+    input.classList.remove('error');
+}
+
+// 입력 필드에 입력값이 변경될 때마다 유효성 체크
+const form = document.getElementById('form');
+const inputs = Array.from(form.querySelectorAll('input'));
+inputs.forEach((input) => {
+input.addEventListener('input', () => {
+    validateInput(input);
+    });
+});
+
+// 폼 전송 이벤트 핸들러
+form.addEventListener('submit', (event) => {
+let isValid = true;
+inputs.forEach((input) => {
+    if (!validateInput(input)) {
+    isValid = false;
+    }
+});
+
+if (!isValid) {
+    event.preventDefault();
+    }
+});
+
+// 프로필 페이지
 function btnClick(){
     alert('추후 도입 예정입니다.');
 }
