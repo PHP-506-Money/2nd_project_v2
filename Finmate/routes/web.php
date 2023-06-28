@@ -88,6 +88,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/achievements', [AchievementController::class, 'index'])->name('achievements.index');
     Route::get('/checkAchievements', [AchievementController::class, 'checkAchievements'])->name('achievements.checkAchievements');
     Route::put('/achievements/{achievementId}/reward', [AchievementController::class, 'receiveAchievementReward'])->name('achievements.reward');
+
+        //목표
+    Route::get('/goal/{userid}', [GoalController::class,'index'])->name('goal.index');
+    Route::post('/goal/insert/{userid}', [GoalController::class, 'insert'])->name('goal.insert');
+    Route::post('/goal/update/{userid}', [GoalController::class, 'update'])->name('goal.update');
+    Route::post('/goal/delete/{userid}', [GoalController::class, 'delete'])->name('goal.delete');
+
+    //모핀
+    Route::get('/mofin/{userid}', [MofinController::class,'index'])->name('mofin.index');
+    Route::post('/mofin/post/{userid}', [MofinController::class, 'point'])->name('mofin.point');
+    Route::post('/mofin/item/{userno}', [MofinController::class,'item'])->name('mofin.item');
+
+    //랭크
+    Route::get('/rank/{userid}', [RankController::class,'index'])->name('rank.index');
+    Route::get('/users/profile/{userid}', [UserController::class, 'profile'])->name('users.profile');
+    Route::post('/users/profilepost', [UserController::class, 'profilepost'])->name('users.profile.post');
 });
 
 Route::get('/unauthorized-access', function () {
@@ -107,19 +123,3 @@ Route::put('/budget/up',[BudgetController::class, 'edit'])->name('budget.put');
 
 // 통계
 Route::get('/static/{userid}' , [StaticController::class, 'static'])->name('static.get');
-
-//목표
-Route::get('/goal/{userid}', [GoalController::class,'index'])->name('goal.index');
-Route::post('/goal/insert/{userid}', [GoalController::class, 'insert'])->name('goal.insert');
-Route::post('/goal/update/{userid}', [GoalController::class, 'update'])->name('goal.update');
-Route::post('/goal/delete/{userid}', [GoalController::class, 'delete'])->name('goal.delete');
-
-//모핀
-Route::get('/mofin/{userid}', [MofinController::class,'index'])->name('mofin.index');
-Route::post('/mofin/post/{userid}', [MofinController::class, 'point'])->name('mofin.point');
-Route::post('/mofin/item/{userno}', [MofinController::class,'item'])->name('mofin.item');
-
-//랭크
-Route::get('/rank/{userid}', [RankController::class,'index'])->name('rank.index');
-Route::get('/users/profile/{userid}', [UserController::class, 'profile'])->name('users.profile');
-Route::post('/users/profilepost', [UserController::class, 'profilepost'])->name('users.profile.post');
