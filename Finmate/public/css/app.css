@@ -442,26 +442,14 @@ section .bottombanner img {
     z-index: 1;
 }
 
-.receive-reward-button:disabled.yet-to-achieve::after {
-    content: " 달성전비활성 ";
-    background-color: var(--btn-color);
-    position: absolute;
-    left: 13px;
-    top: 13px;
-    font-size: 10px;
-    z-index: 1;
-}
 
 .receive-reward-button:disabled.received::after {
-    content: " 이미받은보상 ";
-    background-color: var(--btn-color);
-    position: absolute;
-    left: 13px;
-    top: 13px;
-    font-size: 10px;
-    z-index: 1;
+    content: " - 보상후 - ";
 }
 
+.receive-reward-button:disabled.yet-to-achieve::after {
+    content: " - 달성전 - ";
+}
 .button:hover {
     background-color: var(--active-color);
 }
