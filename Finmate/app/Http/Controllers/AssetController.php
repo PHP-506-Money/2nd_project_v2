@@ -37,7 +37,7 @@ class AssetController extends Controller
     public function store(Request $req)
     {
         if (Session::get('linkingInProgress', false)) {
-            return redirect('/link')->with('warning', '이미 연동 프로세스가 진행 중입니다. 기다려주세요.');
+            return redirect('/link')->with('warning', '연동에 실패했습니다. 버튼은 한번만 눌러주세요.');
         }
 
         Session::put('linkingInProgress', true);
