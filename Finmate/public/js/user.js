@@ -236,6 +236,15 @@ function toggleitem1() {
         charitem9.style.display = 'none';
     }
 }
+    function toggleitem10() {
+    var charitem10 = document.getElementById('charitem10');
+    if (charitem10.style.display === 'none') {
+        charitem10.style.display = 'block';
+    } else {
+        charitem10.style.display = 'none';
+    }
+}
+
     function history_back(){
         history.back();
     }
