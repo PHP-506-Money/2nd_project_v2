@@ -183,11 +183,11 @@ class UserController extends Controller
         }
 
         // 비밀번호 변경을 요청한 사용자와 현재 인증된 사용자가 일치하는지 확인
-        if ($user->userid != $req->id) {
-            // 다른 사용자의 비밀번호 변경을 시도한 경우, 예외 처리 또는 적절한 경고 메시지 출력
-            $error = '<div class="error">! 권한이 없습니다.</div>';
-            return redirect()->route('users.login')->with('error', $error);
-        }
+        // if ($user->userid != $req->id) {
+        //     // 다른 사용자의 비밀번호 변경을 시도한 경우, 예외 처리 또는 적절한 경고 메시지 출력
+        //     $error = '<div class="error">! 권한이 없습니다.</div>';
+        //     return redirect()->route('users.login')->with('error', $error);
+        // }
 
         $data = ['userpw' => Hash::make($req->password)];
         $user->update($data);
