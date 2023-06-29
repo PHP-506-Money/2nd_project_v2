@@ -75,7 +75,7 @@
 
     
     <li id="tab3" class="btnCon"><a class="btn" href="#tab3">아이템뽑기왕</a>
-       <div class="tabCon">
+        <div class="tabCon">
         <h2>아이템뽑기왕</h2>
         <table>
             <thead>
@@ -102,9 +102,9 @@
             </tbody>
         </table>
         </div>
-      
+
     </li>
-  </ul>
+</ul>
 </div>
 
 <script>location.href = "#tab1";
