@@ -149,41 +149,45 @@ class UserController extends Controller
         // 일치하는 사용자가 없을 때
         if(!$user) {
             $error = '<div class="error">! 사용자 정보가 일치하지 않습니다.</div>';
-            return redirect()->route('users.findpw')->with('error', $error);
+            return redirect()->route('users.login')->with('error', $error);
         }
 
-        session(['userid' => true]); // 세션에 userid 저장
-
-        return redirect()->route('users.updatepw');
+        $userid = $user->userid;
+        return redirect()->route('users.updatepw',['userid' => $userid]);
     }
 
-    function updatepw(Request $req) {
-        $user = User::find($req->session()->get('userid')); // 세션에서 userid를 가져와 사용자 객체 조회
-        return view('updatepw', compact('user'))->with('data', $user);
+    function updatepw(Request $req, User $user) { // 사용자 객체를 주입받음
+        return view('updatepw', compact('user'))->with('data',$user); // user 변수를 compact 함수로 전달
     }
 
     function updatepwpost(Request $req) {
+        // Log::debug('유효성체크');
+        // 유효성 체크
         $req->validate([
             'password' => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*+)(?=.*[0-9]).{8,12}$/'
         ]);
 
-        $user = User::find($req->session()->get('userid'));
-
+        $userid = $req->id;
+        $user = User::where('userid', $userid)->first();
+    
         // 사용자 인증 여부 확인
         if (!$user) {
+            // 사용자가 인증되지 않은 경우, 로그인 페이지로 이동 또는 예외 처리
             $error = '<div class="error">! 가입되어 있지 않은 사용자입니다.</div>';
             return redirect()->route('users.login')->with('error', $error);
         }
 
         // 비밀번호 변경을 요청한 사용자와 현재 인증된 사용자가 일치하는지 확인
-        // if ($user->userid != $req->id || $user->id != $req->session()->get('userid')) {
-        //     $error = '<div class="error">! 권한이 없습니다.</div>';
-        //     return redirect()->route('users.login')->with('error', $error);
-        // }
+        if ($user->userid != $req->id) {
+            // 다른 사용자의 비밀번호 변경을 시도한 경우, 예외 처리 또는 적절한 경고 메시지 출력
+            $error = '<div class="error">! 권한이 없습니다.</div>';
+            return redirect()->route('users.login')->with('error', $error);
+        }
 
         $data = ['userpw' => Hash::make($req->password)];
         $user->update($data);
-
+    
+        // 비밀번호 변경 완료. 로그인 페이지로 이동
         $success = '<div class="success">✓ Success!<br>비밀번호 변경을 완료 했습니다.<br>변경한 비밀번호로 로그인 해주십시오.</div>';
         return redirect()
             ->route('users.login')

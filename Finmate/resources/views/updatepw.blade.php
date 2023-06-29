@@ -12,7 +12,7 @@
     <form id="table" action="{{route('users.updatepw.post')}}" method="post">
         @csrf
             @if ($user)
-                <input type="hidden" name="id" value="{{ session('userid') }}">
+                <input type="hidden" name="id" value="{{$_GET['userid']}}">
                 <div class="label5">
                     <label for="password">변경할 비밀번호</label>
                     <input type="password" name="password" id="password" required>
