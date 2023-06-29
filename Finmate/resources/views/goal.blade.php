@@ -13,16 +13,16 @@
     @method('POST')
     @csrf
         <label for="title">목표</label>
-        <input type="text" class="" name="title" id="title" required placeholder="목표" value="{{ old('title')}}">
+        <input type="text" class="" name="title" id="title" required placeholder="목표" >
 
         <label for="amount">금액</label>
-        <input type="number" min="100000" max="1000000000" class="" name="amount" id="amount" required placeholder="목표금액" value="{{ old('amount')}}">
+        <input type="number" min="100000" max="1000000000" class="" name="amount" id="amount" required placeholder="목표금액">
 
         <label for="startperiod">시작일자</label>
-        <input type="date" class="" name="startperiod" id="startperiod" required value="{{ old('startperiod')}}">
+        <input type="date" class="" name="startperiod" id="startperiod" required>
 
         <label for="endperiod">목표일</label>
-        <input type="date" class="" name="endperiod" id="endperiod" required value="{{ old('endperiod')}}" >
+        <input type="date" class="" name="endperiod" id="endperiod" required >
 
         <button type="button" class="button" onclick="debouncedSubmitForm()">목표 생성하기</button>
 </form>
