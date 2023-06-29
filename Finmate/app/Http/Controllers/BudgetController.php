@@ -99,7 +99,7 @@ class BudgetController extends Controller
         $user = auth()->user()->userid;
 
         $req->validate([
-            'budgetprice' => 'required|integer|between:1000,100000000'
+            'budgetprice' => 'required|integer|between:100000,100000000'
         ]);
 
         // 현재 date를 가져온다.
@@ -114,7 +114,7 @@ class BudgetController extends Controller
         $user = auth()->user()->userid;
 
         $req->validate([
-            'budgetprice' => 'required|integer|between:1000,100000000'
+            'budgetprice' => 'required|integer|between:100000,100000000'
         ]);
 
         $date = Carbon::now();

@@ -7,7 +7,7 @@
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
     <link rel="stylesheet" href="{{ asset('/css/hj.css')  }}" >
-    <div>{!!session()->has('success') ? session('success') : ""!!}</div>
+    <div class="success">{!!session()->has('success') ? session('success') : ""!!}</div>
     @include('layout.errorsvalidate')
     <div class="profile">{{-- 모핀 프로필 시작 --}}
         <form id="myinfo" name="myinfo" action="{{route('users.profile.post')}}" method="post">
@@ -44,6 +44,9 @@
                     <div class="bottom3"></div>
         </form>
     </div>
+        <div>
+        <input type="button" value="돌아가기" onclick="history_back()">
+        </div>
                 {{-- 현재 로그인한 사용자의 경우 --}}
                 @else
                     <div id="info">

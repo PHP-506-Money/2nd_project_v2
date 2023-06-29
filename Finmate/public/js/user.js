@@ -236,3 +236,6 @@ function toggleitem1() {
         charitem9.style.display = 'none';
     }
 }
+    function history_back(){
+        history.back();
+    }
