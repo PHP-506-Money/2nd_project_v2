@@ -153,11 +153,16 @@ class UserController extends Controller
         }
 
         $userid = $user->userid;
-        return redirect()->route('users.updatepw',['userid' => $userid]);
+        Session::put(['userid' => $userid], true);
+        return redirect()->route('users.updatepw');
     }
 
-    function updatepw(Request $req, User $user) { // 사용자 객체를 주입받음
-        return view('updatepw', compact('user'))->with('data',$user); // user 변수를 compact 함수로 전달
+    function updatepw(Request $req) { // 사용자 객체를 주입받음
+
+        $userid = Session::get('userid');;
+        $user = User::where('userid', $userid)->first();
+
+        return view('updatepw')->with('user' , $user); // user 변수를 compact 함수로 전달
     }
 
     function updatepwpost(Request $req) {
@@ -167,7 +172,7 @@ class UserController extends Controller
             'password' => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*+)(?=.*[0-9]).{8,12}$/'
         ]);
 
-        $userid = $req->id;
+        $userid = Session::get('userid');;
         $user = User::where('userid', $userid)->first();
     
         // 사용자 인증 여부 확인
