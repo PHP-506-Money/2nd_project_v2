@@ -44,6 +44,9 @@
                     <div class="bottom3"></div>
         </form>
     </div>
+        <div>
+        <input type="button" value="돌아가기" onclick="history_back()">
+        </div>
                 {{-- 현재 로그인한 사용자의 경우 --}}
                 @else
                     <div id="info">
