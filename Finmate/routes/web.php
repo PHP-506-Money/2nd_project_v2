@@ -119,6 +119,10 @@ Route::get('/unauthorized-access', function () {
     return view('errors.unauthorized');
 });
 
+Route::get('/main2', function () {
+    return view('main2');
+});
+
 Route::fallback(function() {
     return response()->view('errors.404', [], 404);
 });

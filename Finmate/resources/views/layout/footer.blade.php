@@ -1,9 +1,8 @@
 
 <div id="go-to-top">
-    <a href="#"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
-
-
-</div>
+    <a href="javascript:void(0);" onclick="scrollToTop();"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+  </div>
+  
 
 <footer>
 <div class="footer-top">
@@ -30,6 +29,14 @@
     <p>&copy; All Rights Reserved</p>
 </div>
 </footer>
+<script>
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+    </script>
 
 
 
