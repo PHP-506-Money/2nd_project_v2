@@ -63,18 +63,6 @@
     </div>
     
     {{-- 모핀 프로필 종료 --}}
-       <form>
-                        <input type="text" name="idx" id="idx" placeholder="아이디를 입력해보세요">
-                        <input type="button" value="검색" onclick="document.location.href=getvalue()"/>
-                    </form>
-
-                        <script>
-                    function getvalue(){
-                    var idx = document.getElementById('idx').value;
-                    var urll = idx ;
-                    return urll;
-                    }
-                    </script>
     <div class="container">
         <div class="title">
             <h3> 내 아이템 목록(클릭시 장착/해제)</h3>
