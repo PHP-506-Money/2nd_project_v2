@@ -37,4 +37,9 @@ class RankController extends Controller
         return view('rank')->with('pointrank',$pointrank)->with('loginrank',$loginrank)->with('itemdrawrank',$itemdrawrank);
 
     }
+
+    // public function search(Request $req){
+
+    //     $usersearch = DB::table('users') 
+    // }
 }

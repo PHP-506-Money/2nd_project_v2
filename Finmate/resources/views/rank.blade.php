@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{{ asset('/css/hj.css') }}">
 
 <h5>(닉네임클릭시 클릭한 회원의 모핀이를 구경할수있습니다!)</h5>
+
 <br><br>
 <div class="tabmenu">
     <ul>
