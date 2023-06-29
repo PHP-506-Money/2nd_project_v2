@@ -149,7 +149,7 @@ class UserController extends Controller
         // 일치하는 사용자가 없을 때
         if(!$user) {
             $error = '<div class="error">! 사용자 정보가 일치하지 않습니다.</div>';
-            return redirect()->route('users.login')->with('error', $error);
+            return redirect()->route('users.findpw')->with('error', $error);
         }
 
         session(['userid' => true]); // 세션에 userid 저장
