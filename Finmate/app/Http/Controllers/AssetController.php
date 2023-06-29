@@ -13,6 +13,7 @@ use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 
 class AssetController extends Controller
 {
@@ -33,7 +34,14 @@ class AssetController extends Controller
         return view('link');
     }
 
-    Public function store(Request $req){
+    public function store(Request $req)
+    {
+        if (Session::get('linkingInProgress', false)) {
+            return redirect('/link')->with('warning', '이미 연동 프로세스가 진행 중입니다. 기다려주세요.');
+        }
+
+        Session::put('linkingInProgress', true);
+
         $user = auth()->user();
         if($user->userid == $req->input('id') && Hash::check($req->input('password'), $user->userpw ) && $user->username == $req->input('name') && $user->phone == $req->input('phone')){
         //더미 데이터 추가 
@@ -75,6 +83,8 @@ class AssetController extends Controller
                 $transaction->char = $payeeChars[array_rand($payeeChars)];
                 $transaction->save();
             }
+
+            Session::put('linkingInProgress', false);
 
             Return redirect('/link')->with('success','연동에 성공했습니다. 창을 닫고 새로고침 해주세요.');
         } else {

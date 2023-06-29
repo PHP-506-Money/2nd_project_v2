@@ -20,6 +20,9 @@
         @elseif(session()->has('success'))
         <br>
         <div class="message">{{session('success')}}</div>
+        @elseif(session()->has('warning'))
+        <br>
+        <div class="message">{{session('warning')}}</div>
         @endif
         <article>
             <dl>
