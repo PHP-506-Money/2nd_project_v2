@@ -62,7 +62,7 @@ class UserController extends Controller
             ,'id'           => 'unique:users,userid|regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만. DB users 테이블의 userid가 있는지 여부 체크
             ,'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*+])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
             ,'email'        => 'email:rfc,dns,filter|unique:users,useremail' // 이메일 유효성체크
-            ,'phone'        => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/' // 휴대폰번호 유효성체크
+            ,'phone'        => 'regex:/^01[016789]-[^0][0-9]{3,4}-[0-9]{4}$/' // 휴대폰번호 유효성체크
             ,'moffintype'   => 'required' // 모핀이 체크여부 확인
         ]);
 
@@ -254,7 +254,7 @@ class UserController extends Controller
             ,'id'           => 'regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만.
             ,'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*+])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
             ,'email'        => 'email:rfc,dns,filter' // 이메일 유효성체크
-            ,'phone'        => 'regex:/^01[016789]-?[^0][0-9]{3,4}-?[0-9]{4}$/' // 휴대폰번호 유효성체크
+            ,'phone'        => 'regex:/^01[016789]-[^0][0-9]{3,4}-[0-9]{4}$/' // 휴대폰번호 유효성체크
         ]);
 
         $result = User::where('userid', $id)->first();
