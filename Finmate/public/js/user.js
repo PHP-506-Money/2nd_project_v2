@@ -1,11 +1,10 @@
 // 회원가입 페이지
 // ID 체크 변수
-const idSpan = document.getElementById('errMsgId');
+const idSpan = document.getElementById('errMsg');
 let apiData = null;
 
 // 아이디 중복체크
 function checkDuplicateButton() {
-    console.log('start'); // 콘솔로그로 함수가 호출되는지 찍기.
     const id = document.getElementById('id');
     const url = "registration/"+id.value;
     if (id.value === '') { 

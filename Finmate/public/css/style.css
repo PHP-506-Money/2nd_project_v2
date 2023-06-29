@@ -109,6 +109,13 @@ span:hover + p.arrow_box {
     margin-bottom: 30px;
 }
 
+#errMsg {
+    text-align: center;
+    font-size: small;
+    color: red;
+    margin-top: 3px;
+}
+
 #errMsgId {
     text-align: center;
     font-size: small;

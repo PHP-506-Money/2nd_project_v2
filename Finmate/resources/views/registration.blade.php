@@ -14,6 +14,7 @@
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="한글, 영문 2~20자 사이로 입력해주세요." onfocus="this.placeholder = ''" onblur="this.placeholder = '한글, 영문 2~20자 사이로 입력해주세요.'" autocomplete="off" required>
                 <div id="errMsgId"></div>
+                <div id="errMsg"></div>
             </div>
             <div class="label2">
                 <label for="id">아이디</label>
