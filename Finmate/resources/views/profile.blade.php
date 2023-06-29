@@ -39,16 +39,13 @@
                 </div>
                 {{-- 다른 사용자의 프로필 조회 --}}
                 @if ($userid !== $id)
-
                     <div id="info">
                         {{ $user->username }} 님의 {{ $user->moffinname }}
                     </div>
                     <div class="bottom3"></div>
         </form>
     </div>
-        <div>
-        <input type="button" value="돌아가기" onclick="history_back()">
-        </div>
+        <div><input type="button" value="돌아가기" onclick="history_back()"></div>
                 {{-- 현재 로그인한 사용자의 경우 --}}
                 @else
                     <div id="info">
@@ -58,23 +55,10 @@
                         <button type="button" class="button" id="btn" onclick="moffinnameChan();">모핀이명 변경</button>
                         <button type="button" class="button" id="btn" onclick="btnClick();">공유하기</button>
                     </div>
-                @endif
         </form>
     </div>
-    
+                @endif
     {{-- 모핀 프로필 종료 --}}
-       <form>
-                        <input type="text" name="idx" id="idx" placeholder="아이디를 입력해보세요">
-                        <input type="button" value="검색" onclick="document.location.href=getvalue()"/>
-                    </form>
-
-                        <script>
-                    function getvalue(){
-                    var idx = document.getElementById('idx').value;
-                    var urll = idx ;
-                    return urll;
-                    }
-                    </script>
     <div class="container">
         <div class="title">
             <h3> 내 아이템 목록(클릭시 장착/해제)</h3>
