@@ -39,7 +39,7 @@ class AssetController extends Controller
         $user = auth()->user();
         $checkCount = Asset::select('*')->where('userid', $user->userid)->count();
         if($checkCount > 0){
-            return response()->json(['success' => false, 'successError' => '이미 연동된 유저입니다.']);
+            return response()->json(['success' => false, 'successError' , 'error' => '이미 연동된 유저입니다.']);
         }
         if($user->userid == $req->input('id') && Hash::check($req->input('password'), $user->userpw ) && $user->username == $req->input('name') && $user->phone == $req->input('phone')){
         //더미 데이터 추가 
