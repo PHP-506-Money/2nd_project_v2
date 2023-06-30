@@ -252,6 +252,14 @@ function toggleitem11() {
         charitem11.style.display = 'none';
     }
 }
+function toggleitem12() {
+    var charitem12 = document.getElementById('charitem12');
+    if (charitem12.style.display === 'none') {
+        charitem12.style.display = 'block';
+    } else {
+        charitem12.style.display = 'none';
+    }
+}
 
     function history_back(){
         history.back();

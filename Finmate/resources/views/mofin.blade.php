@@ -62,6 +62,8 @@
                 <img class="item-img" src="{{ asset('/img/notebook.png') }}">
             @elseif($value === '한복')
                 <img class="item-img" src="{{ asset('/img/hanbok.png') }}">
+            @elseif($value === '한복바지')
+                <img class="item-img" src="{{ asset('/img/hanbok.png') }}">
             @endif
             <span class="item-name">{{ $value }}</span>
         </div>
