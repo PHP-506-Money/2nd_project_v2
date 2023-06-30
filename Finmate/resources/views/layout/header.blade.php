@@ -38,7 +38,10 @@
             </div>
             <a href="{{ url('/goal'.'/' . auth()->user()->userid) }}" class="nav-item {{ Request::is('goal/*') ? 'is-active' : '' }}" active-color="#FF7676">목표</a>
             <a href="{{ url('/rank'.'/' . auth()->user()->userid) }}" class="nav-item {{ Request::is('rank/*') ? 'is-active' : '' }}" active-color="#FF7676">랭킹</a>
-            <a href="{{ url('/budget'.'/' . auth()->user()->userid) }}" class="nav-item {{ Request::is('budget/*') ? 'is-active' : '' }}" active-color="#FF7676">예산</a>
+            <a href="{{ url('/budget'.'/' . auth()->user()->userid) }}" class="nav-item {{ Request::is('budget/*') || Request::is('budgetset') || Request::is('budget') ? 'is-active' : '' }}" active-color="#FF7676">예산</a>
+
+
+
             <a href="{{ url('/static'.'/' . auth()->user()->userid) }}" class="nav-item {{ Request::is('static/*') ? 'is-active' : '' }}" active-color="#FF7676">통계</a>
             <a href="{{ url('/achievements') }}" class="nav-item {{ Request::is('achievements') ? 'is-active' : '' }}" active-color="#FF7676">업적</a>
             <span class="nav-indicator"></span>
