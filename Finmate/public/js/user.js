@@ -244,6 +244,30 @@ function toggleitem1() {
         charitem10.style.display = 'none';
     }
 }
+function toggleitem11() {
+    var charitem11 = document.getElementById('charitem11');
+    if (charitem11.style.display === 'none') {
+        charitem11.style.display = 'block';
+    } else {
+        charitem11.style.display = 'none';
+    }
+}
+function toggleitem12() {
+    var charitem12 = document.getElementById('charitem12');
+    if (charitem12.style.display === 'none') {
+        charitem12.style.display = 'block';
+    } else {
+        charitem12.style.display = 'none';
+    }
+}
+function toggleitem13() {
+    var charitem13 = document.getElementById('charitem13');
+    if (charitem13.style.display === 'none') {
+        charitem13.style.display = 'block';
+    } else {
+        charitem13.style.display = 'none';
+    }
+}
 
     function history_back(){
         history.back();
