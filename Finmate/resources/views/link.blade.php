@@ -81,12 +81,50 @@
         </article>
         <article>
             <dl>
-                <button class="button min" type="submit">동의 및 정보 제공</button>
+                <button class="button min" id="linkButton" type="button">동의 및 정보 제공</button>
                 <button class="button min" type="reset">취소 및 재입력</button>
             </dl>
         </article>
     </form>
 </body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    document.getElementById('linkButton').addEventListener('click', function() {
+        const name = document.getElementById('name').value;
+        const id = document.getElementById('id').value;
+        const password = document.getElementById('password').value;
+        const phone = document.getElementById('phone').value;
+
+        axios.post('{{route('assets.store.post')}}', {
+                    name: name
+                    , id: id
+                    , password: password
+                    , phone: phone
+                    , _token: '{{csrf_token()}}'
+                })
+            .then(function(response) {
+                if (response.data.success) {
+                    alert('연동에 성공했습니다.');
+                    window.opener.location.reload();
+                    window.close();
+                } else if(response.data.successError){
+                    window.opener.location.reload();
+                    window.close();
+                    alert('연동에 실패했습니다. 버튼은 한번만 눌러주세요.');
+                } else {
+                    alert(response.data.error);
+                }
+            })
+            .catch(function(error) {
+                alert('연동에 실패했습니다. 버튼은 한번만 눌러주세요.'); // 필요한 경우 에러 메시지를 더 자세하게 표시할 수 있습니다.
+
+            });
+    });
+
+</script>
+
+
 </html>
 
 

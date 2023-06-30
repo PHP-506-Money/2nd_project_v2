@@ -36,13 +36,11 @@ class AssetController extends Controller
 
     public function store(Request $req)
     {
-        if (Session::get('linkingInProgress', false)) {
-            return redirect('/link')->with('warning', '연동에 실패했습니다. 버튼은 한번만 눌러주세요.');
-        }
-
-        Session::put('linkingInProgress', true);
-
         $user = auth()->user();
+        $checkCount = Asset::select('*')->where('userid', $user->userid)->count();
+        if($checkCount > 0){
+            return response()->json(['success' => false, 'successError' => '이미 연동된 유저입니다.']);
+        }
         if($user->userid == $req->input('id') && Hash::check($req->input('password'), $user->userpw ) && $user->username == $req->input('name') && $user->phone == $req->input('phone')){
         //더미 데이터 추가 
         $assetCount = Asset::count();
@@ -84,11 +82,20 @@ class AssetController extends Controller
                 $transaction->save();
             }
 
-            Session::put('linkingInProgress', false);
-
-            Return redirect('/link')->with('success','연동에 성공했습니다. 창을 닫고 새로고침 해주세요.');
+            return response()->json(['success' => true, 'success' => '연동에 성공했습니다.']);            
         } else {
-            Return redirect('/link')->with('error','연동에 실패했습니다. 사용자 정보를 다시 확인해 주세요.');
+            if($user->userid !== $req->input('id')){
+                return response()->json(['success' => false, 'error' => '아이디가 등록된 유저 아이디와 일치하지 않습니다.']);
+            }else if(!Hash::check($req->input('password'), $user->userpw)){
+                return response()->json(['success' => false, 'error' => '비밀번호가 등록된 유저 비밀번호와 일치하지 않습니다.']);
+            }else if ($user->username !== $req->input('name')) {
+                return response()->json(['success' => false, 'error' => '이름이 등록된 유저 이름과 일치하지 않습니다.']);
+            }else if ($user->phone !== $req->input('phone')) {
+                return response()->json(['success' => false, 'error' => '전화번호가 등록된 전화번호와 일치하지 않습니다.']);
+            }else{
+                return response()->json(['success' => false, 'error' => '연동에 실패했습니다. 사용자 정보를 다시 확인해 주세요.']);
+            }
+            
         }
     }
 }
