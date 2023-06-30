@@ -12,15 +12,12 @@
 
     @if(count($assets) === 0)
 
-    <a class="button" onclick="openPopup()">연동하기</a>
+    <button class="button" onclick="openPopup()">연동하기</button>
     <script>
         function openPopup() {
-            window.open('/link','linkAccount', 'width=600,height=700');
-            }
-
+        window.open('/link', 'linkAccount', 'width=600,height=700');
+        }
     </script>
-
-
 
     <table class="assetTable">
         <tr>
