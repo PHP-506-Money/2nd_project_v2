@@ -244,6 +244,14 @@ function toggleitem1() {
         charitem10.style.display = 'none';
     }
 }
+function toggleitem11() {
+    var charitem11 = document.getElementById('charitem11');
+    if (charitem11.style.display === 'none') {
+        charitem11.style.display = 'block';
+    } else {
+        charitem11.style.display = 'none';
+    }
+}
 
     function history_back(){
         history.back();
