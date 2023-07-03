@@ -19,7 +19,8 @@
                 모핀이가 일일 예산을 계산해줄게요!</div>
 
 
-            <a href="#" class="common-btn">사용해보기</a>
+            <a href="{{ route('users.login') }}" class="common-btn">사용해보기</a>
+
 
         </div>
     </div>
