@@ -58,7 +58,7 @@
                 {{-- 현재 로그인한 사용자의 경우 --}}
                 @else
                     <div id="info">
-                        {{ $user->username }} 님의 <textarea name="moffinname" id="moffinname" cols="10" rows="1" placeholder="한글, 영어 1~20자 입력" onfocus="this.placeholder = ''" onblur="this.placeholder = '한글, 영어 1~20자 입력'" required>{{ $user->moffinname }}</textarea>
+                        {{ $user->username }} 님의 <textarea name="moffinname" id="moffinname" cols="10" rows="1" placeholder="한글, 영어 1~6자 입력" onfocus="this.placeholder = ''" onblur="this.placeholder = '한글, 영어 1~20자 입력'" required>{{ $user->moffinname }}</textarea>
                     </div>
                     <div class="bottom2">
                         <button type="button" class="button" id="btn" onclick="moffinnameChan();">모핀이명 변경</button>
