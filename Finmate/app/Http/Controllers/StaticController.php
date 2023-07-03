@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +20,15 @@ class StaticController extends Controller
         if ($current_user_id != $userid) {
             return redirect('/unauthorized-access');
         }
+
+        // $assetchk = DB::select(" select count(*) as count from assets where userid = ? " , [$userid]);
+        // $assetchk = DB::select(" select count(*) as count from assets where userid = ? " , [$userid]);
+        $assetchk = DB::table('assets')->where('userid', $userid)->count();
+        if($assetchk === 0){
+            return view('static',[
+                'assetchk' => $assetchk]);
+        }
+        // var_dump($assetchk);
 
         // 현재 년도
         $currentYear = date('Y');
@@ -74,27 +84,38 @@ class StaticController extends Controller
         $resultSum = intval($monthEXSum[0]->consumption);
 
         // 지출별 퍼센트를 계산하여 배열로 만들어주기
-        if(isset($catExpenses)){
+        if(!empty($catExpenses)){
             foreach($catExpenses as $data){
                 $catPrice = $data->consumption;
                 $catPercent[]= intval(round(($catPrice/$resultSum)*100));
         }}
 
-        if(isset($catPercent)){
-            return view('static', [
-                'currentYear' => $currentYear,
-                'mmonth' => $currentMonth,
-                'year' => $currentYear
-                ])
-                ->with('monthrc',$monthRCStatic)
-                ->with('catdata',$catExpenses)
-                ->with('monthex',$monthEXStatic)
-                ->with('dayex',$dayEXStatic)
-                ->with('percent',$catPercent);
+        if(isset($catPercent) && $assetchk !== 0){
+        return view('static', [
+            'currentYear' => $currentYear,
+            'mmonth' => $currentMonth,
+            'year' => $currentYear,
+            'assetchk' => $assetchk
+            ])
+            ->with('monthrc',$monthRCStatic)
+            ->with('catdata',$catExpenses)
+            ->with('monthex',$monthEXStatic)
+            ->with('dayex',$dayEXStatic)
+            ->with('percent',$catPercent);
             }
             else{
-                return view('static');
+                return view('static', [
+                    'currentYear' => $currentYear,
+                    'mmonth' => $currentMonth,
+                    'year' => $currentYear,
+                    'assetchk' => $assetchk
+                    ])
+                    ->with('monthrc',$monthRCStatic)
+                    ->with('catdata',$catExpenses)
+                    ->with('monthex',$monthEXStatic)
+                    ->with('dayex',$dayEXStatic);
+                    }
         }
 
-    }
+    // }
 }

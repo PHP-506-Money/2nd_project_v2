@@ -24,5 +24,30 @@
             <a href="{{route('users.findpw')}}" id="down">비밀번호 찾기</a>
             <a href="{{route('users.registration')}}" id="down">회원가입</a>
         </div>
+        {{-- <a href="javascript:kakaoLogin();"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR14h3LQGAX4fTgXPCZdfghlOB3AgQkodSA7-Cx83nXzAXJrsN9tWGybsMmu0vm-oHSHQ&usqp=CAU" alt=""></a>
+        <script src="https://developers.kakao.com./sdk/js/kakao.js"></script>
+        <script>
+            //js key
+        	//4699cc71bdf057335511bc15da234da1
+            window.Kakao.init("4699cc71bdf057335511bc15da234da1");
+
+            function kakaoLogin(){
+                window.Kakao.Auth.login({
+                    scope:'profile_nickname, account_email, gender',
+                    success: function(authObj){
+                        console.log(authObj);
+                        window.Kakao.API.request({
+                            url:'/v2/user/me',
+                            success: res => {
+                                const kakao_account = res.kakao_account;
+                                console.log(kakao_account);
+                            }
+                        })
+                    }
+                });
+
+            }
+                
+        </script> --}}
     </form>
 @endsection

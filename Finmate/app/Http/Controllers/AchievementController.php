@@ -16,18 +16,18 @@ use Illuminate\Support\Facades\DB;
 class AchievementController extends Controller
 {
 
-    public function initializeAchievements()
+    public function initializeAchievements() //이니셜 업적 삽입 함수
     {
-        $user = Auth::user();
-        $achievements = Achievement::all();
-        $achievementCount = $achievements->count();
+        $user = Auth::user(); //유저 가져오기
+        $achievements = Achievement::all(); // 업적 가져오기
+        $achievementCount = $achievements->count(); // 업적 갯수 체크
 
-        for ($i=1; $i <= $achievementCount ; $i++) {
+        for ($i=1; $i <= $achievementCount ; $i++) { // 업적 갯수 만큼 업적유저 디비쪽에 유저아이디 삽입
             $achieve_user = AchieveUser::where('userid', $user->userid)
                 ->where('achievementsid', $i)
-                ->first();
+                ->first(); 
 
-            // If an entry does not exist, create one
+            // 업적유저쪽에 유저 아이디가 없는 경우 생성
             if (!$achieve_user) {
                 $achieve_user = new AchieveUser();
                 $achieve_user->userid = $user->userid;
@@ -42,15 +42,15 @@ class AchievementController extends Controller
     {
         $achievements = Achievement::all();
         $user = Auth::user();
-        // Check if the user has already accessed achievements
+        // 유저가 이미 업적 페이지를 방문 한 적이 있는지 체크
         $hasInitializedAchievements = AchieveUser::where('userid', $user->userid)->exists();
 
-        // Call initializeAchievements() if it's the user's first time accessing achievements
+        // 업적 페이지 최조 조회 체크해서 이니셜 업적 함수를 불러옴
         if (!$hasInitializedAchievements) {
-            $this->initializeAchievements();
+            $this->initializeAchievements(); 
         }
 
-        $this->checkAchievements();
+        $this->checkAchievements(); //업적확인 함수 불러오기
 
         return view('achievements', compact('achievements'));
     }
@@ -75,18 +75,18 @@ class AchievementController extends Controller
 
         $userprogress = Auth::user();
         $progress = 0;
-        switch ($achievement->id) {
+        switch ($achievement->id) { //업적 아이디 불러와서 카운트랑 업적 요구사항으로 프로그래스 확인
             case 1:
-                $progress = ($userprogress->login_count / 10) * 100;
+                $progress = ($userprogress->login_count / $achievement->requires) * 100;
                 break;
             case 2:
-                $progress = ($userprogress->point_draw_count / 10) * 100;
+                $progress = ($userprogress->point_draw_count / $achievement->requires) * 100;
                 break;
             case 3:
-                $progress = ($userprogress->item_draw_count / 10) * 100;
+                $progress = ($userprogress->item_draw_count / $achievement->requires) * 100;
                 break;
             case 4:
-                $progress = ($userprogress->history_check_count / 10) * 100;
+                $progress = ($userprogress->history_check_count / $achievement->requires) * 100;
                 break;
         }
 
@@ -97,7 +97,7 @@ class AchievementController extends Controller
 
 
         $achieve_users = DB::table('achieve_users')
-        ->where('userid', $user)
+            ->where('userid', $user)
             ->where('achievementsid', $achievement->id)
             ->first();
 
@@ -111,7 +111,7 @@ class AchievementController extends Controller
             return response()->json(['error' => '이미 보상을 받았습니다.'], 400);
         }
 
-        // Get achievement points
+        // 업적 포인트 가져오기
         $points = $achievement->points;
 
         // Check if the user has an achievements record
