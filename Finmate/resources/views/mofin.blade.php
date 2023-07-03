@@ -2,7 +2,7 @@
 
 @section('title', 'mofin')
 
-@section('header', 'MY MOFIN')
+@section('header', 'DRAWING')
 
 @section('contents')
 

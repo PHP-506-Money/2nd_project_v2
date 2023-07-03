@@ -2,7 +2,7 @@
 
 @section('title', 'Myinfo')
 
-@section('header', 'MYINFO TO FINMATE')
+@section('header', 'MY MOFIN')
 
 @section('contents')
     <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
