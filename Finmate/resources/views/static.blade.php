@@ -10,7 +10,7 @@
 
 @section('contents')
 
-    @if(empty($catdata))
+    @if($assetchk === 0)
     <div id="myModal" class="modal">
         <div class="modal_content">
                     <p ><span><b><span> 고객님 </span></b></span></p>
@@ -54,28 +54,31 @@
             <div class="line"></div>
 
             <h3>{{$mmonth}}월 카테고리별 지출 내역</h3>
-            <div class = "chartDo">
-
-            <div class ="categoryChart">
-                <canvas id="categoryChart" ></canvas>
-                <div class = "allcategoryChart">
-                    <div class ="percent">
-                        @foreach($percent as $data)
-                            <p>{{$data}}%</p>
-                        @endforeach
+            @if(empty($catdata))
+                <div class = "chartDo">
+                <div>해당 월의 지출이 없습니다.</div>
+            @else
+                    <div class ="categoryChart">
+                        <canvas id="categoryChart" ></canvas>
+                        <div class = "allcategoryChart">
+                            <div class ="percent">
+                                @foreach($percent as $data)
+                                    <p>{{$data}}%</p>
+                                @endforeach
+                            </div>
+                        
+                            <div class="catdetail">
+                                @foreach($catdata as $data)
+                                    <p class="catname">{{$data->category}}</p>
+                                    <p class = "catprice">{{number_format($data->consumption)}}원</p>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
-                
-                    <div class="catdetail">
-                        @foreach($catdata as $data)
-                            <p class="catname">{{$data->category}}</p>
-                            <p class = "catprice">{{number_format($data->consumption)}}원</p>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </article>
+                </article>
 
-        <p class="maxEx">최대 지출 카테고리  : {{$catdata[0]->category}}</p>
+                <p class="maxEx">최대 지출 카테고리  : {{$catdata[0]->category}}</p>
+            @endif
 
 
         <script>
