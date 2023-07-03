@@ -37,6 +37,12 @@
                             <img src="{{ asset('/img/penguin3.png') }}" alt="">
                         @elseif ($user->moffintype == 3)
                             <img src="{{ asset('/img/panda3.png') }}" alt="">
+                        @elseif ($user->moffintype == 4)
+                            <img src="{{ asset('/img/moffin4.png') }}" alt="">
+                        @elseif ($user->moffintype == 5)
+                            <img src="{{ asset('/img/moffin5.png') }}" alt="">
+                        @elseif ($user->moffintype == 6)
+                            <img src="{{ asset('/img/moffin6.png') }}" alt="">
                         @endif
                     @endforeach
                 </div>
