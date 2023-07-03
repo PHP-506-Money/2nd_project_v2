@@ -13,30 +13,30 @@
         <form id="myinfo" name="myinfo" action="{{route('users.profile.post')}}" method="post">
             @csrf
                 <div class="charitem">
-                    <img id="charitem1" class="noneimg" src="{{ asset('/img/sunglasses.png') }}" alt="">
-                    <img id="charitem2" class="noneimg" src="{{ asset('/img/sword.png') }}" alt="" >
-                    <img id="charitem3" class="noneimg" src="{{ asset('/img/safe.png') }}" alt="" >
-                    <img id="charitem4" class="noneimg" src="{{ asset('/img/air.png') }}" alt=""   >
-                    <img id="charitem5" class="noneimg" src="{{ asset('/img/idcard.png') }}" alt="" >
-                    <img id="charitem6" class="noneimg" src="{{ asset('/img/wing.png') }}" alt="" >
-                    <img id="charitem7" class="noneimg" src="{{ asset('/img/tea.png') }}" alt="" >
-                    <img id="charitem8" class="noneimg" src="{{ asset('/img/bat.png') }}" alt="" >
-                    <img id="charitem9" class="noneimg" src="{{ asset('/img/eyeing.png') }}" alt="" >
-                    <img id="charitem10" class="noneimg" src="{{ asset('/img/notebook.png') }}" alt="" >
-                    <img id="charitem11" class="noneimg" src="{{ asset('/img/hanbok.png') }}" alt="" >
-                    <img id="charitem12" class="noneimg" src="{{ asset('/img/hanbokbaji.png') }}" alt="" >
-                    <img id="charitem13" class="noneimg" src="{{ asset('/img/kindcloth.png') }}" alt="" >
+                    <img id="charitem1" class="noneimg" src="{{ asset('/img/sunglasses.png') }}" style ="z-index : 50 ;">
+                    <img id="charitem2" class="noneimg" src="{{ asset('/img/sword.png') }}" >
+                    <img id="charitem3" class="noneimg" src="{{ asset('/img/safe.png') }}" >
+                    <img id="charitem4" class="noneimg" src="{{ asset('/img/air.png') }}"   >
+                    <img id="charitem5" class="noneimg" src="{{ asset('/img/idcard.png') }}" style ="z-index : 49 ;" >
+                    <img id="charitem6" class="noneimg" src="{{ asset('/img/wing.png') }}" >
+                    <img id="charitem7" class="noneimg" src="{{ asset('/img/tea.png') }}" >
+                    <img id="charitem8" class="noneimg" src="{{ asset('/img/bat.png') }}" >
+                    <img id="charitem9" class="noneimg" src="{{ asset('/img/eyeing.png') }}" >
+                    <img id="charitem10" class="noneimg" src="{{ asset('/img/notebook.png') }}" >
+                    <img id="charitem11" class="noneimg" src="{{ asset('/img/hanbok.png') }}" >
+                    <img id="charitem12" class="noneimg" src="{{ asset('/img/hanbokbaji.png') }}" >
+                    <img id="charitem13" class="noneimg" src="{{ asset('/img/kindcloth.png') }}" >
                 </div>
                 <div class="moffin">
                     @foreach ($data as $user)
                         @if ($user->moffintype == 0)
-                            <img src="{{ asset('/img/moffin2.png') }}" alt="">
+                            <img src="{{ asset('/img/moffin2.png') }}">
                         @elseif ($user->moffintype == 1)
-                            <img src="{{ asset('/img/rabbit3.png') }}" alt="">
+                            <img src="{{ asset('/img/rabbit3.png') }}">
                         @elseif ($user->moffintype == 2)
-                            <img src="{{ asset('/img/penguin3.png') }}" alt="">
+                            <img src="{{ asset('/img/penguin3.png') }}">
                         @elseif ($user->moffintype == 3)
-                            <img src="{{ asset('/img/panda3.png') }}" alt="">
+                            <img src="{{ asset('/img/panda3.png') }}">
                         @endif
                     @endforeach
                 </div>
@@ -88,9 +88,9 @@
                     <button class="itembtn"   onclick="toggleitem9()" > <img src="{{ asset('/img/eyeing.png') }}"  class = "itemimg"> </button>
                 @elseif($value === '노트북')
                     <button class="itembtn"   onclick="toggleitem10()" > <img src="{{ asset('/img/notebook.png') }}"  class = "itemimg"> </button>
-                @elseif($value === '한복')
+                @elseif($value === '여성한복')
                     <button class="itembtn"   onclick="toggleitem11()" > <img src="{{ asset('/img/hanbok.png') }}"  class = "itemimg"> </button>
-                @elseif($value === '한복바지')
+                @elseif($value === '남성한복')
                     <button class="itembtn"   onclick="toggleitem12()" > <img src="{{ asset('/img/hanbokbaji.png') }}"  class = "itemimg"> </button>
                 @elseif($value === '유아복')
                     <button class="itembtn"   onclick="toggleitem13()" > <img src="{{ asset('/img/kindcloth.png') }}"  class = "itemimg"> </button>
