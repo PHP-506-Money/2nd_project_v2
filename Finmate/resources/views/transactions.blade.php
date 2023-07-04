@@ -249,11 +249,11 @@ currentMonth = currentMonth < 10 ? '0' + currentMonth : currentMonth; updateMont
             }
 
             // @param 평일 전월일과 익월일의 데이터 날짜변경
-            else {
+            {{-- else {
                 let exceptDay = new Date(doMonth.getFullYear(), doMonth.getMonth(), day);
                 column.innerText = autoLeftPad(exceptDay.getDate(), 2);
                 column.style.color = "#A9A9A9";
-            }
+            } --}}
 
             // @brief   전월, 명월 음영처리
             // @details 현재년과 선택 년도가 같은경우
