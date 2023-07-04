@@ -58,7 +58,7 @@ class UserController extends Controller
     function registrationpost(Request $req) {
         //유효성 체크
         $req->validate([ // validate는 자동으로 리다이렉트 해줌.
-            'name'          => 'regex:/^[a-zA-Z가-힣]{2,20}$/' // regex:정규식. 한글, 영어만 글자 수 2~20
+            'name'          => 'regex:/^[a-zA-Z가-힣]{2,20}$/u' // regex:정규식. 한글, 영어만 글자 수 2~20
             ,'id'           => 'unique:users,userid|regex:/^[a-zA-Z0-9]{4,12}$/' //4~12자 영문, 숫자만. DB users 테이블의 userid가 있는지 여부 체크
             ,'password'     => 'same:passwordchk|regex:/^(?=.*[a-zA-Z])(?=.*[~!@#$%^&*+])(?=.*[0-9]).{8,12}$/' //8~12자 영문 숫자 특수문자(~#%*!@^) 최소 하나씩 무조건 포함
             ,'email'        => 'email:rfc,dns,filter|unique:users,useremail' // 이메일 유효성체크
