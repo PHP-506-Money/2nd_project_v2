@@ -48,9 +48,9 @@ main{
     margin-top: 30px;
     margin-bottom: 30px;
 }
-p{
+/* p{
     color : var(--main-color);
-}
+} */
 
 .monthBudget > p {
     color : var(--sub-color);
@@ -146,12 +146,13 @@ button:hover {
 .chartDo{
     width: 400px;
     height: 400px;
+    margin-left: -40px;
 }
 
 .categoryChart{
     display: flex;
     flex-direction: row;
-    margin-left: 50px;
+    margin-left: 0;
 }
 
 .catdetail{

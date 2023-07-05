@@ -21,14 +21,11 @@ class StaticController extends Controller
             return redirect('/unauthorized-access');
         }
 
-        // $assetchk = DB::select(" select count(*) as count from assets where userid = ? " , [$userid]);
-        // $assetchk = DB::select(" select count(*) as count from assets where userid = ? " , [$userid]);
         $assetchk = DB::table('assets')->where('userid', $userid)->count();
         if($assetchk === 0){
             return view('static',[
                 'assetchk' => $assetchk]);
         }
-        // var_dump($assetchk);
 
         // 현재 년도
         $currentYear = date('Y');

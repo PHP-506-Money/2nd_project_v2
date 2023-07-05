@@ -50,14 +50,14 @@
         <div class = "chartBar">
         <canvas id="monthChart" ></canvas>
         </div>
-        <article>
             <div class="line"></div>
 
             <h3>{{$mmonth}}월 카테고리별 지출 내역</h3>
             @if(empty($catdata))
-                <div class = "chartDo">
                 <div>해당 월의 지출이 없습니다.</div>
             @else
+            <article>
+                <div class = "chartDo">
                     <div class ="categoryChart">
                         <canvas id="categoryChart" ></canvas>
                         <div class = "allcategoryChart">
