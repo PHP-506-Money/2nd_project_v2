@@ -1,5 +1,5 @@
 # 2nd_project_v2
-![핀메이트](https://github.com/PHP-506-Money/2nd_project_v2/assets/126547900/9292cda4-ec81-4d21-84fa-62dd8a5dc6a0)
+![핀메이트](https://github.com/PHP-506-Money/2nd_project_v2/assets/126547900/8eaeb02c-747f-40c8-9ed9-f12070bfe5b5)
 ![image](https://github.com/PHP-506-Money/2nd_project_v2/assets/126547900/c6f7ba59-70d0-4147-a5c3-d6f89b2d4d3b)
 
 ### 제작과정
