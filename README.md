@@ -6,6 +6,5 @@
 <p>팀원 : 신은영, 김진아, 노수빈, 최혁재 총 4명</p>
 <p>주제 : 동기부여형 자산관리 서비스</p>
 
-PPT : https://www.canva.com/design/DAFnEcnBGaU/K_kCQ6fQAn2AzgaaI5ULEA/edit?utm_content=DAFnEcnBGaU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-<br><br>
-jira : https://php-506-money.atlassian.net/jira/software/projects/MV/boards/3/timeline?shared=&atlOrigin=eyJpIjoiNmNhMTRiYjRlYzQ5NDFkNmExMjk4NmRlNDY5YzdlNjgiLCJwIjoiaiJ9
+<p>PPT : https://www.canva.com/design/DAFnEcnBGaU/K_kCQ6fQAn2AzgaaI5ULEA/edit?utm_content=DAFnEcnBGaU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton</p>
+<p>jira : https://php-506-money.atlassian.net/jira/software/projects/MV/boards/3/timeline?shared=&atlOrigin=eyJpIjoiNmNhMTRiYjRlYzQ5NDFkNmExMjk4NmRlNDY5YzdlNjgiLCJwIjoiaiJ9</p>
