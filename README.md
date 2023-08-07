@@ -17,4 +17,4 @@ __View&Event__  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-s
 [PPT](https://www.canva.com/design/DAFnEcnBGaU/K_kCQ6fQAn2AzgaaI5ULEA/edit?utm_content=DAFnEcnBGaU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ### 협업툴
-[jira](https://php-506-money.atlassian.net/jira/software/projects/MV/boards/3/timeline?shared=&atlOrigin=eyJpIjoiNmNhMTRiYjRlYzQ5NDFkNmExMjk4NmRlNDY5YzdlNjgiLCJwIjoiaiJ9)
+[Jira](https://php-506-money.atlassian.net/jira/software/projects/MON/boards/2/timeline?shared=&atlOrigin=eyJpIjoiNzhkMDA0OWI4YmVkNGQ3ZThiMWU1Mzg4OWRmZGI3MTciLCJwIjoiaiJ9)
